@@ -1,0 +1,44 @@
+---
+title: Conexão bancária
+description: Como conectar uma conta pelo Pluggy, o que uma sincronização faz e nunca toca, e como ler o histórico de sincronização.
+---
+
+A **conexão bancária** liga uma conta real ao finangui através do [Pluggy](https://pluggy.ai), um agregador de Open Finance, para que os lançamentos apareçam automaticamente em vez de serem importados à mão. Depois de conectada, a conta funciona como qualquer outra [conta](/docs/features/accounts) — mesmo saldo, mesma lista de lançamentos — só que ela se mantém atualizada por conta própria.
+
+## Cadastrando suas próprias credenciais do Pluggy
+
+Antes de conectar qualquer banco, você precisa cadastrar suas próprias credenciais de aplicação do Pluggy em **Configurações** (settings), no card **Integração bancária (Pluggy)** (bank integration). O finangui não vem com um provedor compartilhado: cada usuário cria sua própria aplicação no painel do Pluggy e informa aqui o Client ID e o Client Secret dela. O secret é criptografado e nunca é mostrado de novo, nem para você mesmo — trocar as credenciais significa colar o secret de novo do zero.
+
+Salvar já testa as credenciais junto ao Pluggy antes de gravá-las. Sem nenhuma credencial cadastrada (ou se a que está cadastrada parar de funcionar), as funcionalidades de banco ficam desligadas no resto do app, e o finangui te leva de volta a esse mesmo card em Configurações para resolver.
+
+## Conectando uma conta
+
+A partir de **Contas** (accounts), **Conectar banco** (connect bank) abre o próprio widget do Pluggy: você escolhe seu banco, faz login por ele, e escolhe quais contas daquele banco trazer. De volta no finangui, cada conta que o Pluggy devolveu é vinculada — ou a uma conta nova que o finangui cria, ou a uma conta manual compatível que você já tinha (assim o histórico existente não se perde; um lançamento manual que corresponde a um que vem do banco passa a ser reconhecido automaticamente em vez de duplicado).
+
+## O que uma sincronização faz
+
+Uma sincronização traz lançamentos novos pelo mesmo caminho de uma [importação](/docs/features/imports) de arquivo — a mesma detecção de duplicata, casamento de parcela e categorização automática se aplicam. A categoria que vem do banco só é usada como último recurso, depois que uma regra correspondente e o seu próprio histórico de categorização já tiveram a chance primeiro.
+
+<Callout type="info">
+  Toda sincronização também revisita os lançamentos que já buscou nos últimos 40 dias, mais ou menos, para captar uma mudança de status (pendente passando a lançado), uma descrição atualizada, ou uma fatura reatribuída que o banco reporta depois. Ela nunca sobrescreve a data, o valor ou a categoria de um lançamento por aqui, e nunca reatribui uma fatura que você escolheu à mão ou um pagamento que o finangui já reconheceu como quitação de uma fatura.
+</Callout>
+
+## Precisando reconectar
+
+Uma conexão pode, de vez em quando, precisar que você faça login de novo do lado do banco — por exemplo, se ela expirou ou o banco revogou o acesso. O finangui chama esse status de **Reconectar** (reconnect) na conexão, e mostra um aviso sobre o qual você pode agir direto.
+
+<Callout type="warn">
+  Isso dispara uma notificação na hora, em vez de esperar o resumo diário seguinte — a conexão precisa que você aja antes de conseguir sincronizar de novo.
+</Callout>
+
+## Histórico de sincronização
+
+Cada conexão tem uma tela de **Histórico** (history), acessível pelo menu dela, listando toda sincronização que já rodou: o que a disparou, se teve sucesso, teve avisos ou falhou, e quantos lançamentos ela adicionou ou atualizou. O detalhe de uma sincronização mostra os lançamentos que ela de fato adicionou, mantidos ali mesmo que um deles seja apagado depois. **Sincronizar agora** (sync now), disponível tanto na conexão quanto na tela de histórico, dispara uma sincronização na hora em vez de esperar a próxima agendada.
+
+## Desconectando
+
+Desconectar um banco não apaga nada: as contas dele simplesmente voltam a ser contas manuais, mantendo todo o histórico de lançamentos. Você continua podendo editá-las e usá-las normalmente — elas só deixam de se atualizar por conta própria.
+
+## A direção sempre vem do banco
+
+A direção de um lançamento (entrada ou saída) vem do tipo que o próprio banco informa para ele, nunca do sinal do valor. Isso importa porque o valor de um cartão de crédito pode vir invertido do que você esperaria — por isso confiar na direção em vez de um sinal mantém o lançamento correto independentemente do tipo de conta.

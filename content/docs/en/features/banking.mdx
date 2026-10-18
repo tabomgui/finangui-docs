@@ -1,0 +1,44 @@
+---
+title: Banking
+description: Connecting a bank account through Pluggy, what a sync does and doesn't touch, and how to read sync history.
+---
+
+**Banking** connects a real bank account to finangui through [Pluggy](https://pluggy.ai), an Open Finance aggregator, so transactions show up automatically instead of being imported by hand. Once an account is connected, it works like any other [account](/docs/features/accounts) — same balance, same transaction list — it just stays up to date on its own.
+
+## Registering your own Pluggy credentials
+
+Before connecting any bank, you need your own Pluggy application credentials registered in **Configurações** (Settings), under the **Integração bancária (Pluggy)** (Bank integration) card. finangui doesn't ship with a shared provider: each user creates their own application on Pluggy's dashboard and enters its Client ID and Client Secret here. The secret is encrypted and never shown again, even to you — changing credentials means pasting it in fresh.
+
+Saving tests the credentials against Pluggy before storing them. If no credentials are registered yet (or the ones on file stop working), banking features are turned off everywhere else in the app, and finangui routes you back to this same Settings card to fix it.
+
+## Connecting an account
+
+From **Contas** (Accounts), **Conectar banco** (Connect bank) opens Pluggy's own widget: you pick your bank, log in through it, and choose which of your accounts at that bank to bring in. Back in finangui, each account Pluggy returned gets linked — either to a new account it creates for you, or to a matching manual account you already had (so existing history isn't lost; a manual entry that matches one coming from the bank is then recognized automatically instead of duplicated).
+
+## What a sync does
+
+A sync brings in new transactions through the same pipeline as a file [import](/docs/features/imports) — the same duplicate detection, installment matching, and automatic categorization apply. Provider-supplied categories are only used as a last resort, after a matching rule and your own categorization history have both had a chance first.
+
+<Callout type="info">
+  Every sync also revisits roughly the last 40 days of transactions it already fetched, to catch a status change (pending becoming posted), a description update, or an invoice reassignment the bank reports after the fact. It never overwrites a transaction's date, amount, or category this way, and it never reassigns an invoice you picked by hand or a payment finangui already recognized as settling one.
+</Callout>
+
+## Needing reauthorization
+
+A connection can occasionally need you to log in again at the bank's side — for example, if it expired or the bank revoked access. finangui calls this status **Reconectar** (Reconnect) on the connection, and surfaces it as a banner you can act on directly.
+
+<Callout type="warn">
+  This fires a notification right away, rather than waiting for the next daily digest — it needs you to act before the connection can sync again.
+</Callout>
+
+## Sync history
+
+Each connection has a **Histórico** (History) screen, reachable from its menu, listing every sync that has run: what triggered it, whether it succeeded, had warnings, or failed, and how many transactions it added or updated. A run's detail shows the actual transactions it added, kept even if one of them is later deleted. **Sincronizar agora** (Sync now), available both from the connection and from its history screen, triggers a sync on demand instead of waiting for the next scheduled one.
+
+## Disconnecting
+
+Disconnecting a bank doesn't delete anything: its accounts simply become manual accounts again, keeping their full transaction history. You can still edit or use them exactly as before — they just stop updating on their own.
+
+## Direction is always read from the bank
+
+A transaction's direction (money in or out) comes from the type the bank itself reports for it, never from the sign of the amount. This matters because a credit card's amounts can be inverted from what you'd expect — so relying on direction instead of a sign keeps it correct regardless of account type.
