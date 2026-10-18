@@ -1,0 +1,28 @@
+---
+title: Configuração
+description: Referência das variáveis de ambiente do backend que importam numa instância de produção já no ar.
+---
+
+Esta página é uma referência das variáveis em `backend/.env` depois que uma instância já está rodando — veja [Instalação](/docs/getting-started/installation) para a configuração inicial que cria esse arquivo.
+
+## Variáveis essenciais
+
+- `APP_KEY` — a chave de criptografia da instância inteira. Sessões e toda coluna criptografada (em especial o `client_secret` da Pluggy guardado por usuário, veja abaixo) dependem dela. Gerada uma vez durante a instalação e feita para nunca mudar depois; veja [Backup](/docs/self-hosting/backup) para entender por que perdê-la é irreversível.
+- `DB_PASSWORD` — a senha do Postgres. O `docker-compose.prod.yml` lê essa variável (junto com `DB_DATABASE`/`DB_USERNAME`, que já vêm `finangui` por padrão) desse mesmo arquivo para provisionar o serviço `db`, e recusa subir se ela estiver vazia.
+
+## Configuração de domínio
+
+`APP_URL`, `FRONTEND_URL`, `SESSION_DOMAIN`, `SANCTUM_STATEFUL_DOMAINS` e, se o "Entrar com o Google" estiver em uso, `GOOGLE_REDIRECT_URI` precisam todos apontar para o mesmo domínio — a [exigência de mesmo domínio](/docs/getting-started/installation) já coberta em Instalação. Trocar de domínio depois significa atualizar todas essas variáveis juntas, além do redirect URI no Google Cloud Console, se esse método de login estiver em uso.
+
+## Rede / proxy
+
+- `TRUSTED_PROXIES` — as faixas de IP/CIDR do proxy que termina TLS na frente da instância (Caddy, Cloudflare Tunnel ou similar). O padrão já cobre um proxy rodando na mesma rede Docker (faixas privadas RFC1918); só troque isto se o proxy estiver fora dessa rede.
+- `FINANGUI_BIND` / `FINANGUI_PORT` — não são variáveis do backend, e sim do nível do compose: controlam em que endereço e porta o serviço `web` (nginx, servindo o SPA já buildado) escuta. Por padrão são `127.0.0.1:8080`, então o proxy reverso precisa rodar no mesmo host para alcançá-lo, a menos que você mude esses valores.
+
+## Google OAuth (opcional)
+
+`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` e `GOOGLE_REDIRECT_URI` habilitam o botão "Entrar com o Google". Deixe-os vazios para manter esse botão desligado; o redirect URI precisa bater exatamente com o cadastrado no Google Cloud Console e, como já mencionado, usar o mesmo domínio de tudo o mais.
+
+<Callout type="info">
+  As credenciais bancárias (Pluggy) **não** são uma variável de ambiente. Cada usuário cadastra seu próprio Client ID e Secret da Pluggy dentro do app, em **Configurações** (Settings) — veja [Integração bancária](/docs/features/banking). É o único item relacionado ao tema desta página que não mora em `backend/.env`.
+</Callout>
