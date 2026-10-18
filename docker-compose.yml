@@ -1,0 +1,8 @@
+# Docs site. Runs next to the finangui stack on the same host, on its own port.
+# A tunnel or reverse proxy maps docs-finangui.hengen.com.br to this port.
+services:
+  docs:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${DOCS_PORT:-8082}:3000"
