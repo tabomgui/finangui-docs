@@ -25,7 +25,7 @@ cat finangui-20260101.sql | docker compose -f docker-compose.prod.yml --env-file
 
 ## `backend/.env`, em especial o `APP_KEY`
 
-O `backend/.env` também precisa entrar no backup — principalmente pelo `APP_KEY`. O Laravel usa essa chave para criptografar algumas colunas do banco, incluindo o `client_id`/`client_secret` da Pluggy que cada usuário cadastra em [Configurações](/docs/features/banking).
+O `backend/.env` também precisa entrar no backup — principalmente pelo `APP_KEY`. O Laravel usa essa chave para criptografar algumas colunas do banco, incluindo o `client_id`/`client_secret` da Pluggy que cada usuário cadastra em [Configurações](/docs/features/banking) (Settings).
 
 <Callout type="warn">
   Se o `APP_KEY` se perder, todo valor criptografado com ele fica permanentemente ilegível — não só difícil de recuperar, mas matematicamente impossível sem a chave original. Restaurar um dump do banco com um `APP_KEY` diferente (ou ausente) daquele que criptografou os dados traz de volta linhas que a instância não consegue mais decifrar, como as credenciais da Pluggy já cadastradas; essas conexões bancárias precisariam ser recadastradas do zero. Guarde o `APP_KEY` junto com o dump do banco (mas num backup separado dele).
