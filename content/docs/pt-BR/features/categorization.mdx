@@ -11,7 +11,7 @@ Todo lançamento no finangui termina com uma categoria, mas a maioria nunca prec
 
 Qual dessas três decidiu (ou uma escolha manual sua), o campo `categorized_by` do lançamento guarda qual foi: `manual`, `history`, `pluggy` ou `rule:{id}` de uma regra específica. Pernas de transferência nunca são tocadas por regra nem por histórico — ficam de fora por completo.
 
-O que nenhuma das três fontes automáticas resolve é exatamente o que se acumula para você limpar na mão — é para isso que existe a tela **Categorizar**.
+O que nenhuma das três fontes automáticas resolve é exatamente o que se acumula para você limpar na mão — é para isso que existe a tela **Categorizar** (Categorize).
 
 ## O que entra na tela Categorizar
 
@@ -57,7 +57,7 @@ Confirme a aplicação. Os lançamentos selecionados recebem a categoria escolhi
 
 ## A regra criada ao aplicar
 
-Por padrão, aplicar uma categoria também cria uma regra para que os próximos lançamentos parecidos sejam categorizados do mesmo jeito automaticamente — uma alternativa por grupo marcado, cada uma no formato "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção. A regra recebe o nome "`<grupo>` → `<categoria>`", e depois aparece na tela **Regras** como qualquer outra regra.
+Por padrão, aplicar uma categoria também cria uma regra para que os próximos lançamentos parecidos sejam categorizados do mesmo jeito automaticamente — uma alternativa por grupo marcado, cada uma no formato "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção. A regra recebe o nome "`<grupo>` → `<categoria>`", e depois aparece na tela **Regras** (Rules) como qualquer outra regra.
 
 O bloco também mostra quantos *outros* pendentes a regra já casa, com um checkbox para aplicá-la a eles também na hora — isso roda de forma síncrona, na mesma transação de banco da aplicação da categoria, então se a regra falhar ao gravar, nada é aplicado também.
 
@@ -65,4 +65,4 @@ O bloco também mostra quantos *outros* pendentes a regra já casa, com um check
   O interruptor da regra vem desligado por padrão quando só parte de um grupo foi marcada — geralmente isso indica uma exceção que você não quer generalizar numa regra. O interruptor também fica indisponível acima de 19 grupos selecionados de uma vez (o backend limita uma regra a 20 condições no total, e a regra padrão gasta uma com a direção, sobrando 19 para grupos). A última escolha do interruptor é lembrada para a próxima vez.
 </Callout>
 
-Se o formato padrão não é o que você quer, **Personalizar** abre um editor no mesmo formato da tela Regras — alternativas "Se"/"Ou se", cada uma com suas próprias condições, com contagem de casamentos ao vivo — e **Voltar ao padrão** descarta a personalização e volta para a regra gerada automaticamente.
+Se o formato padrão não é o que você quer, **Personalizar** (Customize) abre um editor no mesmo formato da tela Regras — alternativas "Se"/"Ou se", cada uma com suas próprias condições, com contagem de casamentos ao vivo — e **Voltar ao padrão** (Back to default) descarta a personalização e volta para a regra gerada automaticamente.
