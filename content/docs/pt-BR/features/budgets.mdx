@@ -1,0 +1,34 @@
+---
+title: Orçamento
+description: Como o finangui acompanha um limite mensal de gasto por categoria de despesa, com exceções pontuais por mês e categorias pai e filha.
+---
+
+Um orçamento é um limite mensal de gasto que você define numa categoria, para ver de uma olhada o quanto já gastou dele conforme o mês passa. Na tela **Orçamento** (budget), **Orçar categoria** (budget a category) abre um formulário para cadastrar um.
+
+## O que pode ser orçado
+
+Um orçamento só vale para uma categoria de despesa — nunca uma categoria de receita, nem uma categoria de transferência — e a categoria não pode estar arquivada. O seletor de categoria do formulário só oferece categorias elegíveis.
+
+## Um padrão para todos os meses
+
+Ao orçar uma categoria, o valor informado se torna o padrão: ele vale para todo mês a partir daí, a menos que aquele mês específico tenha sua própria exceção (veja abaixo). Você pode editar ou remover o padrão a qualquer momento pela linha da categoria no Orçamento.
+
+## Uma exceção pontual para um único mês
+
+O interruptor **Vale para** (applies to) do formulário deixa escolher entre **Todos os meses** (all months) — o padrão descrito acima — e uma segunda opção com o nome do mês que você está vendo (por exemplo, **Só outubro**, "only october"). Escolher a opção do mês define um valor que sobrescreve o padrão só naquele mês; todo outro mês continua usando o padrão. Uma categoria com exceção ativa naquele mês mostra o selo **Só este mês** (only this month) na sua linha da lista.
+
+<Callout type="info">
+  Ativar **Sem orçamento só neste mês** (no budget just this month) em vez de informar um valor cancela o orçamento daquele mês específico só nele — o gasto dele aparece como fora do orçamento naquele mês — sem apagar o padrão usado pelos outros meses, nem a própria exceção.
+</Callout>
+
+## Orçando uma categoria pai e uma filha juntas
+
+Orçar uma categoria pai cobre o pai e todas as suas subcategorias de uma vez — o gasto em qualquer categoria filha conta automaticamente para o limite do pai, mesmo que a filha em si nunca tenha sido orçada. Uma subcategoria ainda pode ter seu próprio limite separado além disso; quando tem, o gasto dela conta tanto para o próprio limite quanto para o do pai.
+
+Os totais gerais no topo da tela — **Orçado** / **Gasto** / **Restante** (budgeted / spent / remaining) — nunca contam o gasto de uma filha em dobro: quando pai e filha estão orçados no mesmo mês, os valores da filha já entram nos números do pai, então ficam de fora dos totais combinados mostrados ali.
+
+## Gasto, restante e progresso
+
+A linha de cada categoria orçada mostra o quanto já foi gasto do limite, com uma barra de progresso e um percentual. O gasto é líquido — uma saída na categoria menos qualquer entrada de volta nela, como um estorno — e nunca aparece como um número negativo. Quando o gasto passa do limite, o rótulo "restam" da linha muda para "excedeu", mostrando o valor que passou do orçamento no lugar.
+
+O gasto em categorias que não foram orçadas aparece separado, abaixo da lista, como **Fora do orçamento** (outside the budget).
