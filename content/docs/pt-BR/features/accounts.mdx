@@ -1,0 +1,38 @@
+---
+title: Contas
+description: Conta corrente, poupança, dinheiro e cartão de crédito, e como o finangui calcula o saldo que você vê em cada uma.
+---
+
+Uma conta no finangui é qualquer lugar onde o dinheiro fica ou passa: uma **Conta corrente** (checking account) do banco, uma **Poupança** (savings account), **Dinheiro** (cash) que você tem em mãos, ou um **Cartão de crédito** (credit card). Todo lançamento que você registra ou importa pertence a uma conta, e o saldo de toda conta é sempre calculado pelo backend a partir do saldo inicial mais os lançamentos — nunca digitado à mão e nunca calculado no frontend.
+
+As contas ficam em **Contas** (Accounts), acessível pela navegação principal. Uma conta manual (sem vínculo com banco) pode ser criada, editada, arquivada ou excluída ali; uma conta vinculada por **Banking** aparece agrupada sob a sua conexão, e também pode ser editada (nome, cor, ícone, campos de cartão), só não desconectada por essa tela.
+
+## Como o saldo é calculado
+
+O saldo de uma conta é **o saldo inicial mais todo lançamento lançado (`posted`) até um determinado dia** — por padrão, hoje, no fuso horário do app. Isso vale em todo lugar onde um saldo aparece: o painel da **Início** (Home), a lista de contas, o progresso das metas e os cartões de conexão bancária todos usam o saldo de hoje.
+
+Esse "até hoje" importa para lançamentos com data futura: se você registra uma transação datada para amanhã ou mais adiante, ela já existe e aparece no histórico da conta, mas não entra no saldo que você vê até aquela data chegar de fato.
+
+<Callout type="info">
+  Uma conta conectada a um banco funciona de um jeito diferente dessa regra padrão — veja abaixo.
+</Callout>
+
+## Conta conectada a um banco: o saldo ancora no banco
+
+Para uma conta vinculada por **Banking** (que não seja cartão), o saldo mostrado não é simplesmente saldo inicial mais lançamentos. Em vez disso, ele ancora no saldo que o próprio banco informou na última sincronização, e só soma a diferença dos lançamentos datados depois daquele dia de sincronização.
+
+<Callout type="info">
+  Isso significa que um lançamento manual com data no dia da última sincronização ou antes não move o saldo da conta — não até a próxima sincronização acontecer. O número do próprio banco já "venceu" para aquele período: o finangui assume que o banco já contabilizou tudo até o dia em que informou o saldo pela última vez, então adicionar um lançamento dentro dessa janela não dobraria o valor, ele simplesmente seria absorvido de forma silenciosa na sincronização seguinte. Lançamentos datados depois do dia da sincronização movem o saldo normalmente.
+</Callout>
+
+Por causa dessa ancoragem, o saldo mostrado para uma conta conectada pode, de vez em quando, parecer destoar do que você esperaria só lendo a lista de lançamentos. Para esse caso, o finangui mostra uma linha secundária ao lado do saldo, chamada **Pelos lançamentos** (By the entries): esse é o saldo calculado puramente pelo seu próprio razão, sempre referente a hoje, sem nenhuma ancoragem no banco. É só informativo — uma forma de comparar e notar uma divergência — e nunca é o número usado como saldo real da conta em nenhum outro lugar do app.
+
+## Conta de cartão de crédito: sempre o razão completo
+
+Uma conta de **Cartão de crédito** (credit card) não usa o corte "até hoje" de forma alguma: o saldo dela é sempre o razão histórico completo — saldo inicial mais todo lançamento lançado (`posted`) não ignorado já registrado nela, sem limite de data. Isso reflete que o saldo de um cartão de crédito é, na prática, uma dívida em andamento, não uma fotografia de um momento.
+
+Totais de fatura, vencimento, pagamentos e uso do limite são uma camada separada, por cima do saldo da conta, coberta na página [Cartões](/docs/features/cards).
+
+## A dívida de cartão não entra no total da Início
+
+O saldo total mostrado no painel da **Início** (Home) soma todas as contas que não são de cartão; contas de cartão de crédito são excluídas desse total. A dívida de cartão aparece separadamente, no card de Cartões ("Faturas") do painel, em vez de ser abatida do saldo geral.
