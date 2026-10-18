@@ -1,0 +1,57 @@
+---
+title: Recorrências
+description: Como o finangui modela uma despesa ou receita que se repete, e mantém os lançamentos previstos alinhados com o que de fato é lançado.
+---
+
+Uma recorrência é uma despesa ou receita que se repete numa periodicidade — aluguel, salário, uma assinatura. Em vez de lançar a mesma coisa todo mês na mão, você cadastra uma vez e o finangui mantém um lançamento previsto no calendário com antecedência, para você ver chegando antes dele de fato ser efetivado.
+
+## Criando uma recorrência
+
+<Tabs items={['Do zero', 'A partir de um lançamento']}>
+<Tab value="Do zero">
+Na tela **Recorrências** (recurrences), **Nova recorrência** (new recurrence) abre um formulário com conta, descrição, valor, categoria, direção (despesa ou receita) e a periodicidade — frequência (semanal, mensal ou anual), intervalo, data de início e um fim opcional. Uma recorrência mensal também pede o dia do mês, com padrão sendo o dia da data de início.
+
+Um campo opcional deixa você digitar um texto que identifica a despesa ou receita no extrato do banco, para ajudar o finangui a casar com o lançamento real depois, caso a descrição do próprio banco venha diferente.
+</Tab>
+<Tab value="A partir de um lançamento">
+Ao lançar uma transação comum, o interruptor **Repetir** (repeat) cria uma recorrência a partir da mesma conta, descrição, valor e categoria desse lançamento, pedindo só a frequência. Ele só fica disponível ao criar um lançamento novo sem parcelamento — não ao editar um já existente, e não numa compra parcelada, que já tem seu próprio calendário de cobranças futuras.
+</Tab>
+</Tabs>
+
+## Lançamentos previstos
+
+Depois que a recorrência existe, o finangui mantém os próximos lançamentos previstos gerados automaticamente — todo dia, e também na hora sempre que você cria ou edita a recorrência — sem você precisar fazer isso sozinho. Você nunca verá um lançamento previsto duplicado para a mesma data; cada data é gerada uma única vez.
+
+Algumas travas evitam que a geração alcance muito o passado ou o futuro indevidamente:
+
+- Um lançamento previsto nunca é gerado para uma data com mais de 6 dias no passado — o suficiente para ainda casar com um lançamento real que já aconteceu, mas não além disso.
+- Numa conta de cartão de crédito, um lançamento previsto nunca é datado antes de hoje — uma fatura que já fechou não reabre.
+
+## Casando com o lançamento real
+
+Quando o lançamento real aparece — digitado à mão, importado de um extrato ou sincronizado do banco —, o finangui procura um lançamento previsto a que ele pode pertencer, pelo valor (dentro de aproximadamente ±10%) e pela data (próxima do dia esperado). Ao encontrar, confirma essa previsão com os dados do lançamento real, em vez de criar um lançamento separado e sem relação.
+
+## Previstos atrasados
+
+Se a data de um lançamento previsto já passou e nada casou com ele, ele aparece como atrasado. O card **Pendências** (pending items) da Início mostra quantos estão esperando, abrindo um diálogo em que cada um oferece:
+
+- **Aconteceu** (it happened), que abre um formulário pequeno para confirmar — com valor e data já preenchidos pela previsão, ajustáveis se aconteceu um pouco diferente do esperado.
+- **Não aconteceu** (didn't happen), que pula na hora, sem confirmação extra. A recorrência continua gerando as próximas previstas de qualquer forma.
+
+## Editando uma recorrência
+
+Mudanças simples de campo — conta, descrição, valor, categoria e o texto de identificação no extrato — só valem para a frente, para os lançamentos previstos com data de hoje em diante. Os previstos já no passado ficam como estavam.
+
+Mudar a própria periodicidade (frequência, intervalo, dia, data de início ou fim) ou pausar a recorrência (pelo menu da linha, **Pausar** / **Reativar** — pause / resume) é mais disruptivo: isso exclui os previstos recentes — os últimos dias, mais qualquer um que não caiba mais na nova periodicidade — e regera a partir daí.
+
+## Pulando uma data
+
+Marcar um previsto como **Não aconteceu** pula aquela data específica.
+
+<Callout type="info">
+  Uma data pulada é lembrada para sempre. Mesmo que você mude depois a periodicidade da recorrência, pause ou reative, aquela data nunca é gerada de novo.
+</Callout>
+
+## Categorização
+
+Lançamentos previstos ficam fora da categorização automática — regras e histórico nunca os tocam. Um previsto só ganha categoria depois de confirmado como lançamento real, pelas mesmas fontes automáticas descritas em [Categorização](/docs/features/categorization).
