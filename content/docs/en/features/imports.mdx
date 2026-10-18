@@ -1,0 +1,64 @@
+---
+title: Imports
+description: How to upload a bank statement file, review exactly what finangui will do with each line before anything is saved, and revert an import if needed.
+---
+
+The **Importar extrato** (Import statement) screen (`/importar`) brings a bank statement file into finangui. Nothing from the file is saved the moment you pick it — you always get a preview of what finangui is about to do with every line first, and you decide what to keep before anything is written.
+
+## Supported formats
+
+<Tabs items={['Inter', 'Nubank', 'C6', 'OFX']}>
+<Tab value="Inter">
+CSV export of an Inter checking account statement. Pick **Inter (conta)** as the format, or let finangui detect it automatically.
+</Tab>
+<Tab value="Nubank">
+Nubank has two separate CSV formats, because a checking account and a credit card export different columns: **Nubank (conta)** for a checking account statement, and **Nubank (cartão)** (Nubank card) for a credit card statement. Pick whichever matches the file you exported, or let finangui detect it.
+</Tab>
+<Tab value="C6">
+CSV export of a C6 checking account statement. Pick **C6 (conta)** as the format, or let finangui detect it automatically.
+</Tab>
+<Tab value="OFX">
+A generic OFX file — the format most banks offer regardless of account type, when a dedicated CSV format above isn't available. Pick **OFX**, or let finangui detect it automatically.
+</Tab>
+</Tabs>
+
+In every case, export the statement from your bank's own app or site for the account and period you want, then upload that file here. You don't have to pick the format yourself: leaving the selector on **Detectar automaticamente** (detect automatically) lets finangui figure out the format from the file's own content.
+
+## Uploading a file
+
+Choose the **Conta** (Account) the statement belongs to and the file itself. The file can be a `.csv`, `.ofx`, or `.txt` export, up to 2 MB — a bigger file is rejected before upload even starts, so there's no need to split anything by hand first.
+
+Submitting takes you straight to the **Prévia da importação** (Import preview) screen; nothing has been saved yet.
+
+## Preview before anything is saved
+
+The preview lists every line from the file and what finangui intends to do with it — a label on each row tells you which:
+
+- **Nova** (New) — an entry finangui doesn't have yet. This is what most lines in a typical import look like.
+- **Já importada** (Already imported) — this exact line was already brought in before (finangui recognizes it by the bank's own reference for that line). It changes nothing, so it can't be deselected — importing it again would be a no-op anyway.
+- **Atualiza** (Updates) — an entry finangui already has, but this line carries newer details for it (for example, a pending entry the bank now reports with its final status). It updates the existing entry instead of creating a second one.
+- **Substitui parcela prevista** (Replaces projected installment) — matches an installment finangui had already projected for an installment plan you created. The projected line is replaced by the real one from the statement. This match works by the plan and the installment number, regardless of whether the projected installment is still just projected or already posted — so even the first installment of a manual purchase, which posts immediately, still matches correctly.
+- **Casa com lançamento manual** (Matches manual entry) — matches something you already entered by hand, or a credit card statement payment you already recorded. Instead of creating a duplicate, finangui adopts that existing entry, filling in the bank's reference and any other detail the file brings.
+- **Confirma pendente** (Confirms pending) — matches an entry finangui already has but hadn't confirmed yet; the imported line takes its place rather than creating a new one.
+
+Every row you can act on has a checkbox, checked by default — uncheck anything you don't want brought in. **Já importada** rows have no checkbox, since there's nothing to opt out of. An installment row also shows which installment number it is out of the total, and a row finangui can already suggest a category for shows that suggestion inline (more on that below).
+
+Lines the file itself couldn't be read as valid entries show up separately, with the reason, instead of silently disappearing.
+
+## Confirming
+
+The button at the bottom is labeled with exactly how many entries you kept checked (for example, "Importar 12 lançamentos"). Confirming re-checks the same matching described above from scratch, rather than trusting what the preview showed earlier — time may have passed since you opened it, and something could have changed (another import, a manual edit, a bank sync). The whole batch is committed as a single unit: either every entry you kept selected is created, updated, or matched, or none of it is.
+
+If you'd rather not import anything at all, **Cancelar** (Cancel) discards the whole batch instead.
+
+## Reverting an import
+
+Only the most recently completed import batch for a given account can be reverted — once you confirm a newer import on that same account, the previous one can no longer be undone. From the **Importações recentes** (Recent imports) card, a batch that's still revertible offers **Reverter** (Revert): it deletes every entry the import created, and restores any entry it matched or updated back to what it held right before the import ran.
+
+<Callout type="warn">
+  If you edited one of those same fields by hand after the import — fixed a description, moved an entry to a different category, and so on — reverting overwrites that edit too, back to whatever the field held at the moment the import ran. Revert restores the snapshot it saved then; it doesn't try to merge in anything you changed afterward.
+</Callout>
+
+## Categorization and transfers
+
+Imported entries go through the exact same automatic categorization as any entry you create by hand — a matching rule first, then your categorization history — before being left uncategorized if neither applies; see [Categorization](/docs/features/categorization) for how that works. Right after a batch is confirmed, finangui also runs its usual transfer detection over the newly added entries, linking clear matches automatically and turning the rest into suggestions; see [Transfers](/docs/features/transfers).

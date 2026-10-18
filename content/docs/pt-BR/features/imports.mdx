@@ -1,0 +1,64 @@
+---
+title: Importação
+description: Como enviar um arquivo de extrato bancário, revisar exatamente o que o finangui vai fazer com cada linha antes de qualquer gravação, e reverter uma importação se precisar.
+---
+
+A tela **Importar extrato** (import statement) (`/importar`) traz um arquivo de extrato bancário para dentro do finangui. Nada do arquivo é gravado no momento em que você o escolhe — você sempre vê antes uma prévia do que o finangui está prestes a fazer com cada linha, e decide o que manter antes de qualquer coisa ser escrita.
+
+## Formatos suportados
+
+<Tabs items={['Inter', 'Nubank', 'C6', 'OFX']}>
+<Tab value="Inter">
+Exportação em CSV de um extrato de conta do Inter. Escolha **Inter (conta)** como formato, ou deixe o finangui detectar automaticamente.
+</Tab>
+<Tab value="Nubank">
+O Nubank tem dois formatos de CSV separados, porque uma conta corrente e um cartão de crédito exportam colunas diferentes: **Nubank (conta)** para o extrato da conta, e **Nubank (cartão)** (Nubank card) para a fatura do cartão. Escolha o que corresponde ao arquivo que você exportou, ou deixe o finangui detectar.
+</Tab>
+<Tab value="C6">
+Exportação em CSV de um extrato de conta do C6. Escolha **C6 (conta)** como formato, ou deixe o finangui detectar automaticamente.
+</Tab>
+<Tab value="OFX">
+Um arquivo OFX genérico — o formato que a maioria dos bancos oferece independentemente do tipo de conta, quando não existe um formato de CSV dedicado como os acima. Escolha **OFX**, ou deixe o finangui detectar automaticamente.
+</Tab>
+</Tabs>
+
+Em todo caso, exporte o extrato no próprio app ou site do seu banco, para a conta e o período que você quer, e depois envie esse arquivo aqui. Você não precisa escolher o formato você mesmo: deixando o seletor em **Detectar automaticamente** (detect automatically), o finangui descobre o formato pelo próprio conteúdo do arquivo.
+
+## Enviando um arquivo
+
+Escolha a **Conta** (account) a que o extrato pertence e o arquivo em si. O arquivo pode ser uma exportação `.csv`, `.ofx` ou `.txt`, de até 2 MB — um arquivo maior é rejeitado antes mesmo do envio, sem precisar dividir nada à mão primeiro.
+
+Enviar leva direto para a tela **Prévia da importação** (import preview); nada foi gravado ainda.
+
+## Prévia antes de qualquer gravação
+
+A prévia lista cada linha do arquivo e o que o finangui pretende fazer com ela — um rótulo em cada linha indica qual:
+
+- **Nova** (new) — um lançamento que o finangui ainda não tem. É a cara da maioria das linhas numa importação típica.
+- **Já importada** (already imported) — essa linha exata já foi trazida antes (o finangui reconhece pela referência própria do banco para aquela linha). Não muda nada, por isso não pode ser desmarcada — importar de novo seria inócuo de qualquer forma.
+- **Atualiza** (updates) — um lançamento que o finangui já tem, mas essa linha traz detalhes mais novos para ele (por exemplo, um lançamento pendente que o banco agora informa com o status final). Atualiza o lançamento existente em vez de criar um segundo.
+- **Substitui parcela prevista** (replaces projected installment) — casa com uma parcela que o finangui já tinha previsto para um parcelamento que você criou. A linha prevista é substituída pela linha real do extrato. Esse casamento funciona pelo parcelamento e pelo número da parcela, não importa se a parcela prevista ainda está só prevista ou já foi lançada — por isso até a primeira parcela de uma compra manual, que já nasce lançada, ainda casa corretamente.
+- **Casa com lançamento manual** (matches manual entry) — casa com algo que você já lançou à mão, ou com um pagamento de fatura de cartão que você já tinha registrado. Em vez de criar uma duplicata, o finangui adota esse lançamento existente, completando com a referência do banco e qualquer outro detalhe que o arquivo traga.
+- **Confirma pendente** (confirms pending) — casa com um lançamento que o finangui já tem mas ainda não tinha confirmado; a linha importada toma o lugar dele em vez de criar um novo.
+
+Toda linha sobre a qual você pode agir tem uma caixa de marcação, marcada por padrão — desmarque o que não quiser trazer. Linhas **Já importada** não têm caixa de marcação, já que não há nada para deixar de fazer. Uma linha de parcela também mostra qual o número dela dentro do total, e uma linha para a qual o finangui já consegue sugerir uma categoria mostra essa sugestão ali mesmo (mais sobre isso abaixo).
+
+Linhas que o próprio arquivo não conseguiu ler como lançamentos válidos aparecem separadamente, com o motivo, em vez de simplesmente desaparecer.
+
+## Confirmando
+
+O botão no rodapé é rotulado com exatamente quantos lançamentos você manteve marcados (por exemplo, "Importar 12 lançamentos"). Confirmar reavalia do zero o mesmo casamento descrito acima, em vez de confiar no que a prévia mostrou antes — pode ter passado tempo desde que você abriu a prévia, e algo pode ter mudado (outra importação, uma edição manual, uma sincronização bancária). O lote inteiro é confirmado como uma única unidade: ou todo lançamento que você manteve selecionado é criado, atualizado ou casado, ou nenhum é.
+
+Se preferir não importar nada, **Cancelar** (cancel) descarta o lote inteiro em vez disso.
+
+## Revertendo uma importação
+
+Só a importação mais recente já confirmada de cada conta pode ser revertida — depois que você confirma uma importação mais nova na mesma conta, a anterior não pode mais ser desfeita. No card **Importações recentes** (recent imports), uma importação que ainda pode ser revertida oferece **Reverter** (revert): exclui todo lançamento que a importação criou, e restaura qualquer lançamento que ela casou ou atualizou para o que ele tinha exatamente antes da importação rodar.
+
+<Callout type="warn">
+  Se você editou à mão algum desses mesmos campos depois da importação — corrigiu uma descrição, trocou a categoria de um lançamento, e assim por diante — reverter sobrescreve essa edição também, de volta ao que o campo tinha no momento em que a importação rodou. Reverter restaura o retrato que foi guardado naquele momento; não tenta juntar nada que você mudou depois.
+</Callout>
+
+## Categorização e transferências
+
+Lançamentos importados passam pela mesma categorização automática que qualquer lançamento criado à mão — primeiro uma regra correspondente, depois o seu histórico de categorização — antes de ficar sem categoria caso nenhuma das duas se aplique; veja [Categorização](/docs/features/categorization) para entender como isso funciona. Logo depois que um lote é confirmado, o finangui também roda a detecção de transferências de sempre sobre os lançamentos recém-criados, ligando sozinho os pares claros e transformando o resto em sugestões; veja [Transferências](/docs/features/transfers).
