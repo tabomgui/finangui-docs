@@ -1,0 +1,61 @@
+---
+title: Cards
+description: How finangui tracks credit card statements, payments, installment purchases and the limit you have left to spend.
+---
+
+A **Cartão de crédito** (credit card) is an account like any other in finangui — it can be a manual card or one linked through [Banking](/docs/features/banking) — and it uses the same account balance rules covered on the [Accounts](/docs/features/accounts) page: always the full historical ledger, with no "as of today" cutoff. This page covers what's specific to cards: the statement (invoice) sitting on top of that ledger, payments, installment purchases and limit usage.
+
+## Statements open, close and come due on their own
+
+Every card purchase is assigned to a statement automatically, the moment you create or edit the transaction (or a transfer touching the card) — you never pick a statement by hand for a regular purchase.
+
+The closing and due dates you see on a statement aren't something you need to keep in sync yourself. For a card connected through Banking, finangui re-checks the card's closing and due day on every sync, based on whichever day is most common among the bank's three most recent statements, and applies that going forward.
+
+<Callout type="info">
+  A statement that's already been recorded never gets its dates rewritten after the fact. This matters most for an older statement where the bank doesn't report a closing date at all: finangui keeps the closing date exactly as it was already recorded and only adjusts the due date — and only when doing so still makes sense (it won't move the due date earlier than the closing date).
+</Callout>
+
+You can also edit a statement's closing date, due date and the bank's reported total by hand, from **Editar datas** (edit dates) on the statement screen. Doing this only changes the statement's own recorded dates — it never moves a transaction to a different statement.
+
+## Total, reported total and computed total
+
+A statement's **Total da fatura** (statement total), **Pago** (paid) and **Restante** (remaining) amounts are always computed, never numbers you type in directly.
+
+Once a statement closes, if the bank itself reports a total for it, that's the number shown as the headline **Total da fatura**. Alongside it, finangui always keeps its own computed total — outflows minus refunds, excluding any payment — to compare against what the bank reported.
+
+| Status | Shown as | Meaning |
+|---|---|---|
+| `open` | **Aberta** | Still open; new purchases can still land on it. |
+| `closed` | **Fechada** | Cycle ended; waiting for payment by the due date. |
+| `partial` | **Paga em parte** | Some payment registered, but there's still a remaining balance. |
+| `paid` | **Paga** | Fully settled. |
+
+Next to the due date, finangui also shows a countdown such as "Vence em 3 dias" (due in 3 days), "Vence hoje" (due today) or "Venceu há 2 dias" (overdue by 2 days). If a statement's due date has passed and it isn't fully paid, its status badge switches to **Vencida** (overdue) instead of showing the status above.
+
+<Callout type="info">
+  When the bank's reported total and finangui's own computed total disagree, a divergence warning appears on the statement comparing both numbers. But if the statement's billing cycle starts before the oldest transaction finangui has synced from the bank for that account, no warning shows up — instead you'll see a neutral note saying the local total is incomplete. That's a different situation from a real divergence: there's nothing wrong, finangui simply doesn't have every purchase from that cycle to total up (Open Finance typically shares only about the last 12 months of history), so comparing the two numbers wouldn't be meaningful.
+</Callout>
+
+## Paying a statement is a transfer, never an expense
+
+Paying a card statement (**Pagar fatura**) always registers as a transfer from one of your accounts to the card — it's never logged as an expense with a category.
+
+finangui recognizes a credit on the card as a payment in a few ways: it's one leg of a transfer, it matches a payment the bank itself reported for that statement, or its description matches a known bank payment pattern. However it's recognized, a payment never reduces the statement's total — it's set aside separately and only counts under **Pago** (paid). In the transaction list it shows with its own banknote icon and the label **Pagamento** (payment) instead of a category.
+
+If the bank reports the exact same payment twice, the duplicate is automatically marked **Ignorada** (ignored), with the reason shown right there in the list so it's clear why it isn't being counted.
+
+Any other credit on the card — a refund from a returned purchase, for example — is not treated as a payment. It reduces the statement's total the normal way, the same as a refund would on any other account.
+
+A payment you've recognized or corrected by hand stays that way: finangui won't let a later bank sync undo your manual choice.
+
+## Installment purchases
+
+When you log an installment purchase, the account, amount, date and installment type of each individual installment are locked once that installment exists — they can't be edited afterward. The purchase's description and category can still be changed, but only for installments that haven't posted yet; ones already posted keep what they had, and once none are left to come, the category can't change at all either.
+
+Deleting any single installment from the plan deletes the whole plan, not just that one occurrence. Canceling a plan is different: it only removes the installments that are still projected (not yet posted) — the ones already posted stay exactly as they are.
+
+## Limit used and available
+
+The used and available limit shown on a card come straight from the bank itself when the card is connected through [Banking](/docs/features/banking) and synced. Otherwise, finangui calculates them locally from the registered credit limit and the card's own transactions.
+
+Either way, future installments that haven't posted yet are shown as a separate **Parcelas futuras** (future installments) amount, next to — but not counted into — the used limit, since they haven't actually been charged yet.

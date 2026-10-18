@@ -1,0 +1,61 @@
+---
+title: Cartões
+description: Como o finangui acompanha faturas de cartão de crédito, pagamentos, compras parceladas e o limite disponível.
+---
+
+Um **Cartão de crédito** (credit card) é uma conta como qualquer outra no finangui — pode ser um cartão manual ou um vinculado por [Banking](/docs/features/banking) — e segue as mesmas regras de saldo de conta descritas na página de [Contas](/docs/features/accounts): sempre o razão histórico completo, sem corte "até hoje". Esta página cobre o que é específico do cartão: a fatura por cima desse razão, pagamentos, compras parceladas e uso do limite.
+
+## A fatura abre, fecha e vence por conta própria
+
+Toda compra no cartão é atribuída a uma fatura automaticamente, no momento em que você cria ou edita a transação (ou uma transferência que envolve o cartão) — você nunca escolhe uma fatura à mão para uma compra comum.
+
+As datas de fechamento e vencimento que aparecem numa fatura não são algo que você precisa manter sincronizado manualmente. Para um cartão conectado por Banking, o finangui reconfere o dia de fechamento e de vencimento do cartão a cada sincronização, com base no dia mais comum entre as três faturas mais recentes informadas pelo banco, e passa a usar esse dia dali em diante.
+
+<Callout type="info">
+  Uma fatura que já foi gravada nunca tem suas datas reescritas depois do fato. Isso importa principalmente numa fatura antiga para a qual o banco não informa data de fechamento nenhuma: o finangui mantém o fechamento exatamente como já estava gravado e só ajusta o vencimento — e só quando isso ainda faz sentido (o ajuste nunca deixa o vencimento antes do fechamento).
+</Callout>
+
+Você também pode editar à mão a data de fechamento, o vencimento e o total informado pelo banco de uma fatura, em **Editar datas** (edit dates) na tela da fatura. Isso só muda as datas gravadas da própria fatura — nunca move uma transação para outra fatura.
+
+## Total, total informado pelo banco e total calculado
+
+O **Total da fatura** (statement total), o **Pago** (paid) e o **Restante** (remaining) de uma fatura são sempre calculados, nunca valores digitados diretamente.
+
+Depois que uma fatura fecha, se o próprio banco informa um total para ela, esse é o número mostrado como o **Total da fatura** em destaque. Ao lado, o finangui sempre mantém seu próprio total calculado — saídas menos estornos, sem contar pagamento — para comparar com o que o banco informou.
+
+| Status | Aparece como | Significado |
+|---|---|---|
+| `open` | **Aberta** | Ainda aberta; novas compras ainda podem entrar nela. |
+| `closed` | **Fechada** | Ciclo encerrado; aguardando pagamento até o vencimento. |
+| `partial` | **Paga em parte** | Já tem algum pagamento registrado, mas ainda resta saldo. |
+| `paid` | **Paga** | Totalmente quitada. |
+
+Ao lado do vencimento, o finangui também mostra uma contagem como "Vence em 3 dias", "Vence hoje" ou "Venceu há 2 dias". Se o vencimento de uma fatura já passou e ela ainda não está totalmente paga, o selo de status troca para **Vencida** (overdue) em vez de mostrar o status acima.
+
+<Callout type="info">
+  Quando o total informado pelo banco e o total calculado pelo finangui não coincidem, aparece um aviso de divergência na fatura comparando os dois números. Mas se o ciclo da fatura começa antes do lançamento mais antigo que o finangui já sincronizou do banco para aquela conta, nenhum aviso aparece — em vez disso você vê uma nota neutra dizendo que o total local está incompleto. É uma situação diferente de uma divergência de verdade: não há nada errado, o finangui simplesmente não tem todas as compras daquele ciclo para somar (o Open Finance costuma compartilhar só os últimos 12 meses de histórico), então comparar os dois números não faria sentido.
+</Callout>
+
+## Pagar a fatura é uma transferência, nunca uma despesa
+
+Pagar uma fatura (**Pagar fatura**) sempre é registrado como uma transferência de uma das suas contas para o cartão — nunca é lançado como uma despesa com categoria.
+
+O finangui reconhece um crédito no cartão como pagamento de algumas formas: é uma perna de uma transferência, casa com um pagamento que o próprio banco informou para aquela fatura, ou a descrição bate com um padrão conhecido de pagamento de banco. Seja como for reconhecido, um pagamento nunca reduz o total da fatura — ele fica separado e conta só em **Pago** (paid). Na lista de transações ele aparece com ícone próprio de cédula e o rótulo **Pagamento** (payment) em vez de uma categoria.
+
+Se o banco informa o mesmo pagamento duas vezes, a duplicata é marcada automaticamente como **Ignorada** (ignored), com o motivo exibido ali mesmo na lista, para deixar claro por que ela não está sendo contada.
+
+Qualquer outro crédito no cartão — um estorno de uma compra devolvida, por exemplo — não é tratado como pagamento. Ele reduz o total da fatura normalmente, do mesmo jeito que um estorno reduziria em qualquer outra conta.
+
+Um pagamento que você reconheceu ou corrigiu à mão permanece assim: o finangui não deixa uma sincronização seguinte desfazer essa escolha manual.
+
+## Compras parceladas
+
+Ao lançar uma compra parcelada, a conta, o valor, a data e o tipo de cada parcela individual ficam travados depois que a parcela existe — não podem mais ser editados. A descrição e a categoria da compra ainda podem ser alteradas, mas só para as parcelas que ainda não foram lançadas; as que já foram lançadas mantêm o que tinham, e quando não resta nenhuma parcela futura, a categoria também não pode mais mudar.
+
+Excluir qualquer parcela individual da lista exclui o parcelamento inteiro, não só aquela ocorrência. Cancelar um parcelamento é diferente: exclui só as parcelas ainda projetadas (não lançadas) — as já lançadas permanecem exatamente como estão.
+
+## Limite usado e disponível
+
+O limite usado e disponível mostrados num cartão vêm direto do banco quando o cartão está conectado por [Banking](/docs/features/banking) e sincronizado. Caso contrário, o finangui calcula os dois localmente, a partir do limite cadastrado e dos lançamentos do próprio cartão.
+
+De qualquer forma, as parcelas futuras que ainda não foram lançadas aparecem como um valor separado de **Parcelas futuras** (future installments), ao lado do limite usado — mas sem entrar nele, já que ainda não foram efetivamente cobradas.
