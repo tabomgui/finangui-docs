@@ -1,0 +1,100 @@
+---
+title: Development
+description: Run finangui locally with Docker for development, and the make targets that cover the day-to-day workflow.
+---
+
+finangui is a Laravel 13 API backend with Postgres (`backend/`) and a React/Vite/TypeScript frontend (`frontend/`). Everything — database, backend, frontend, queue worker and scheduler — runs in Docker, driven through a `Makefile` at the repository root.
+
+## Requirements
+
+- Docker
+- Make
+
+## Starting the stack
+
+<Steps>
+<Step>
+### Create the backend env file
+
+```bash
+cp backend/.env.example backend/.env
+```
+</Step>
+
+<Step>
+### Start the containers
+
+```bash
+make up
+```
+
+This starts the database (`:5432`), the backend (`:8001`), the frontend (`:5174`), the queue worker and the scheduler. The backend and frontend ports can be overridden with `BACKEND_PORT` and `FRONTEND_PORT`.
+</Step>
+
+<Step>
+### Generate the app key
+
+```bash
+make art c="key:generate"
+```
+
+`make art` runs any `php artisan` command inside the backend container.
+</Step>
+
+<Step>
+### Migrate and seed a dev user
+
+```bash
+make fresh
+```
+
+This migrates the database from scratch and creates a development user: `dev@finangui.test` / `password`.
+</Step>
+</Steps>
+
+<Callout type="info">
+  Interactive API documentation (Scramble) is served at `http://localhost:8001/docs/api` — only while `APP_ENV=local`; the route is blocked in any other environment.
+</Callout>
+
+## Day-to-day make targets
+
+| Target | What it does |
+| --- | --- |
+| `make up` | Starts `db` (`:5432`), `backend` (`:8001`), `frontend` (`:5174`), the queue worker and the scheduler. |
+| `make art c="..."` | Runs a `php artisan` command inside the backend container, e.g. `make art c="key:generate"`. |
+| `make fresh` | Migrates the database from scratch and seeds a dev user (`dev@finangui.test` / `password`). |
+| `make test` | Runs the Pest test suite against the `finangui_test` database. |
+| `make lint` | Runs Pint and Larastan on the backend. |
+| `make openapi` | Generates the OpenAPI schema at `backend/storage/app/openapi.json`. |
+| `make types` | Regenerates the frontend's typed API client (`frontend/src/api/schema.d.ts`) from that OpenAPI schema. Run this after changing the API. |
+| `make front-check` | Runs the frontend's lint, typecheck and test suite. |
+
+<Callout type="warn">
+  `make test` runs against a separate `finangui_test` database, created by `docker/postgres/init.sql` the first time the `db-data` volume is initialized. If that volume already existed before `init.sql` gained this database, it won't be created automatically — either recreate the volume (`make down && docker compose down -v`, which destroys dev data) or create it by hand: `docker compose exec db createdb -U finangui finangui_test`.
+</Callout>
+
+## Rebuilding containers
+
+The frontend also runs as a container (already started by `make up`), but the editor and TypeScript tooling (type-checking, oxlint) need the dependencies installed on the host as well:
+
+```bash
+cd frontend && npm install
+```
+
+If `frontend/package.json` changes, the frontend image needs to be rebuilt — a restart alone won't pick it up:
+
+```bash
+docker compose build frontend && docker compose up -d -V frontend
+```
+
+The same applies to the backend when something under `docker/php/**` changes (e.g. `uploads.ini`, the `Dockerfile`):
+
+```bash
+docker compose build backend && docker compose up -d -V backend
+```
+
+## Contributing
+
+finangui is a public repository on GitHub. Contributions follow the standard flow: fork, branch, open a pull request.
+
+For the project's actual conventions — domain folder structure, the money-in-cents rule, TDD with Pest, and everything else that governs how code is written here — see the repository's own `CLAUDE.md` at the root of the project. It's the source of truth for those rules, and is kept up to date as the codebase evolves; duplicating it here would only drift out of sync.
