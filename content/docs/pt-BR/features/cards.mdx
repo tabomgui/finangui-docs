@@ -9,7 +9,7 @@ Um **Cartão de crédito** (credit card) é uma conta como qualquer outra no fin
 
 Toda compra no cartão é atribuída a uma fatura automaticamente, no momento em que você cria ou edita a transação (ou uma transferência que envolve o cartão) — você nunca escolhe uma fatura à mão para uma compra comum.
 
-As datas de fechamento e vencimento que aparecem numa fatura não são algo que você precisa manter sincronizado manualmente. Para um cartão conectado por Banking, o finangui reconfere o dia de fechamento e de vencimento do cartão a cada sincronização, com base no dia mais comum entre as três faturas mais recentes informadas pelo banco, e passa a usar esse dia dali em diante.
+As datas de fechamento e vencimento que aparecem numa fatura não são algo que você precisa manter sincronizado manualmente. Para um cartão conectado por **Banking**, o finangui reconfere o dia de fechamento e de vencimento do cartão a cada sincronização, com base no dia mais comum entre as três faturas mais recentes informadas pelo banco, e passa a usar esse dia dali em diante.
 
 <Callout type="info">
   Uma fatura que já foi gravada nunca tem suas datas reescritas depois do fato. Isso importa principalmente numa fatura antiga para a qual o banco não informa data de fechamento nenhuma: o finangui mantém o fechamento exatamente como já estava gravado e só ajusta o vencimento — e só quando isso ainda faz sentido (o ajuste nunca deixa o vencimento antes do fechamento).
