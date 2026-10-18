@@ -1,0 +1,28 @@
+---
+title: Reports
+description: How finangui's Relatórios screen shows monthly income-versus-expense evolution and spending compared between two periods.
+---
+
+The **Relatórios** (Reports) screen has two reports: **Evolução mensal** (Monthly evolution), a chart of income versus expense over time, and **Comparação por categoria** (Category comparison), a breakdown of spending by category between two periods you pick. Both only count entries that are actually yours to report on — a transfer between your own accounts, for instance, never shows up as income or expense here — and both are shown in your main currency.
+
+## Monthly evolution
+
+This chart plots income and expense side by side for each month in the selected range. A dropdown lets you choose the range: **Últimos 6 meses** (Last 6 months), **Últimos 12 meses** (Last 12 months), or **Ano atual** (Current year).
+
+## Category comparison
+
+This table compares how much you spent in each category across two periods, labeled **Período A** and **Período B** — each a month you step through independently with its own previous/next controls. For every category, you see the amount spent in A, the amount spent in B, and the difference between them, plus a total row at the bottom. A bigger spend in B is highlighted as worse (expense tone), a smaller one as better (income tone) — the comparison is always B minus A.
+
+A subcategory's spending is rolled up into its root (parent) category here — you don't get a separate line for every child category, just one combined figure for the category tree as a whole. Anything with no category at all is grouped into its own **Sem categoria** (No category) row, separate from every real category.
+
+## Purchase date or statement due date
+
+A toggle above both reports controls which date a transaction is grouped by: **Data da compra** (Purchase date) or **Vencimento da fatura** (Statement due date). It applies to both the monthly evolution chart and the category comparison table.
+
+<Callout type="info">
+  This toggle only changes anything for credit card purchases. Switching to **Vencimento da fatura** moves a card purchase to the month its linked statement is due in, which can be a different month than the purchase itself — for example, a card purchase made in late October might fall on a statement due in November, so it would show up under October with **Data da compra** but under November with **Vencimento da fatura**. Every other transaction (anything not on a credit card) stays on its own date regardless of which option is selected. See [Cards](/docs/features/cards) for how a purchase gets attached to a statement in the first place.
+</Callout>
+
+## Related to the Início spending breakdown
+
+The **Distribuição de gastos** (Spending breakdown) card on **Início** (Home) — the pie chart of spending by category for the current month — is built on the same underlying logic as these reports: one entry per subcategory with spending, plus a combined entry when the parent category itself has spending logged directly on it alongside its subcategories. It's a different, more compact presentation meant for a quick glance at the current month, but the numbers behind it and the numbers in Relatórios come from the same place.

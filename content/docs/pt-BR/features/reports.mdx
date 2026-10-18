@@ -1,0 +1,28 @@
+---
+title: Relatórios
+description: Como a tela de Relatórios do finangui mostra a evolução mensal de receita e despesa e o gasto comparado entre dois períodos.
+---
+
+A tela **Relatórios** (reports) tem dois relatórios: **Evolução mensal** (monthly evolution), um gráfico de receita e despesa ao longo do tempo, e **Comparação por categoria** (category comparison), um detalhamento do gasto por categoria entre dois períodos que você escolhe. Os dois contam só os lançamentos que de fato são seus para efeito de relatório — uma transferência entre suas próprias contas, por exemplo, nunca aparece como receita ou despesa aqui — e os dois são mostrados na sua moeda principal.
+
+## Evolução mensal
+
+Esse gráfico mostra receita e despesa lado a lado para cada mês do intervalo selecionado. Um seletor deixa escolher o intervalo: **Últimos 6 meses**, **Últimos 12 meses** ou **Ano atual**.
+
+## Comparação por categoria
+
+Essa tabela compara quanto você gastou em cada categoria entre dois períodos, rotulados **Período A** e **Período B** — cada um um mês que você navega de forma independente, com seus próprios controles de anterior/próximo. Para cada categoria, você vê o valor gasto no A, o valor gasto no B, e a diferença entre os dois, além de uma linha de total no fim. Um gasto maior no B aparece destacado como pior (tom de despesa), um menor como melhor (tom de receita) — a comparação é sempre B menos A.
+
+O gasto de uma subcategoria é somado na sua categoria-raiz (pai) aqui — você não recebe uma linha separada para cada categoria filha, só um valor combinado para a árvore de categoria como um todo. Tudo que não tem categoria nenhuma é agrupado numa linha própria, **Sem categoria** (no category), separada de toda categoria real.
+
+## Data da compra ou vencimento da fatura
+
+Um interruptor acima dos dois relatórios controla por qual data um lançamento é agrupado: **Data da compra** (purchase date) ou **Vencimento da fatura** (statement due date). Ele vale para os dois: o gráfico de evolução mensal e a tabela de comparação por categoria.
+
+<Callout type="info">
+  Esse interruptor só muda alguma coisa para compras no cartão de crédito. Trocar para **Vencimento da fatura** move uma compra no cartão para o mês em que a fatura ligada a ela vence, que pode ser um mês diferente do da própria compra — por exemplo, uma compra no cartão feita no fim de outubro pode cair numa fatura que vence em novembro, então ela apareceria em outubro com **Data da compra**, mas em novembro com **Vencimento da fatura**. Todo outro lançamento (qualquer coisa que não seja de cartão de crédito) continua na sua própria data, qualquer que seja a opção selecionada. Veja [Cartões](/docs/features/cards) para entender como uma compra é ligada a uma fatura.
+</Callout>
+
+## Relação com a distribuição de gastos do Início
+
+O card **Distribuição de gastos** (spending breakdown) no **Início** (home) — o gráfico de pizza de gasto por categoria do mês atual — é construído sobre a mesma lógica desses relatórios: uma entrada por subcategoria com gasto, mais uma entrada combinada quando a própria categoria pai tem gasto lançado direto nela além das subcategorias. É uma apresentação diferente, mais compacta, pensada para uma olhada rápida no mês atual, mas os números por trás dela e os números em Relatórios vêm do mesmo lugar.
