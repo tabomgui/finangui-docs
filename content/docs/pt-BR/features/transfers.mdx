@@ -1,0 +1,37 @@
+---
+title: Transferências
+description: Como o finangui detecta, sugere, liga e desliga transferências entre as suas próprias contas.
+---
+
+Uma transferência é dinheiro que se move entre duas contas suas — uma saída de uma conta e uma entrada em outra, ligadas como as duas pernas do mesmo movimento. Depois de ligadas, as duas pernas são tratadas como uma transferência, não como uma despesa e uma receita separadas: pernas ligadas nunca recebem categoria própria, e nunca são tocadas por regras de categorização nem pelo histórico.
+
+## Detecção automática
+
+O finangui procura transferências entre os lançamentos recém-adicionados ao final de cada importação e sincronização bancária, comparando candidatos com até 2 dias de diferença entre si. Também é possível pedir uma busca nos últimos 90 dias a qualquer momento, na tela **Transferências encontradas** (transfers found) (`/transferencias/sugestoes`), pelo botão **Procurar agora** (search now).
+
+Cada busca pontua pares candidatos pela proximidade de data, por uma pista na descrição ou no nome da outra conta, e por a entrada ter caído num cartão de crédito. Um par que casa de forma única e clara é ligado na hora, sem precisar de nada da sua parte. Qualquer coisa menos certa — mais de um candidato plausível, ou evidência não forte o bastante — vira sugestão em vez disso, esperando a sua confirmação, com no máximo duas sugestões candidatas guardadas por lançamento.
+
+## Revisando sugestões
+
+Sugestões pendentes aparecem na tela **Transferências encontradas**, e o card **Pendências** (pending) da Início linka para lá com uma contagem sempre que há pelo menos uma esperando. Cada sugestão mostra as duas pernas lado a lado — a saída e a entrada, com conta, data e valor — para você confirmar que é realmente o mesmo movimento antes de decidir.
+
+- **Juntar** (join) aceita a sugestão e liga as duas pernas como transferência.
+- **Não é transferência** (not a transfer) descarta a sugestão; os dois lançamentos continuam como estão, como lançamentos comuns.
+
+## Ligando dois lançamentos à mão
+
+Se o finangui não percebeu uma transferência de forma alguma — nada detectado, nada sugerido — ainda é possível ligar dois lançamentos existentes você mesmo. Selecione os dois na lista de transações e use **Juntar como transferência** (join as transfer); não é preciso descobrir antes qual é a saída e qual é a entrada — o finangui resolve isso pela direção de cada lançamento.
+
+## Desligando uma transferência
+
+Desfazer uma transferência pela tela de detalhe de qualquer uma das pernas (**Desfazer transferência**, undo transfer) separa as duas pernas: as duas voltam a ser lançamentos comuns, sem categoria.
+
+<Callout type="info">
+  O que acontece depois depende de como a transferência foi desligada. Se você pediu para desfazer explicitamente, o finangui lembra dessa escolha, para a detecção automática não ligar esse mesmo par sozinha de novo. Se o desligamento aconteceu automaticamente em vez disso — porque uma importação que criou uma das pernas foi revertida, ou porque lançamentos pendentes antigos do banco foram limpos — o finangui tenta recategorizar a perna que ficou sem categoria, do mesmo jeito que faria com um lançamento recém-importado: primeiro uma regra correspondente, depois o seu histórico de categorização.
+</Callout>
+
+## Excluindo uma perna que veio do banco
+
+Quando uma perna de uma transferência foi adicionada por uma sincronização bancária e você exclui a outra perna, o finangui não exclui as duas. Ele desliga o par primeiro — a perna que sobra volta a ser um lançamento comum — e só então exclui a que você pediu para remover. A mesma proteção vale ao reverter um lote de importação ou ao limpar lançamentos pendentes antigos do banco: uma perna ligada a outra nunca é excluída direto sem desligar antes.
+
+Veja também [Importação](/docs/features/imports), que dispara a detecção de transferências a cada lote confirmado, e [Conexão bancária](/docs/features/banking), que dispara a cada sincronização.
