@@ -1,0 +1,33 @@
+---
+title: Introduction
+description: finangui is a self-hosted personal finance manager with a Laravel + Postgres backend and a React frontend.
+---
+
+finangui is a self-hosted personal finance manager. The backend is a Laravel 13 API backed by Postgres, the frontend is React/Vite/TS, and everything runs in Docker. Money is always stored as integer cents, never as a float, and derived values such as balances and totals are always computed on the backend — never stored, never computed on the frontend.
+
+<Callout type="info">
+  The app interface is in Brazilian Portuguese. These docs keep the interface labels in their original form, in bold, with the English meaning in parentheses on first use. For example: **Configurações** (Settings).
+</Callout>
+
+## Features
+
+<Cards>
+  <Card title="Accounts" href="/docs/features/accounts" description="Checking, savings, cash and credit card accounts, with the balance always computed on the backend." />
+  <Card title="Cards" href="/docs/features/cards" description="Credit card statements with self-adjusting closing/due dates, bank-reported limits, installment purchases and payments as transfers." />
+  <Card title="Categorization" href="/docs/features/categorization" description="Group uncategorized entries by counterparty, categorize in bulk, and set up automatic rules with live preview and retroactive application." />
+  <Card title="Imports" href="/docs/features/imports" description="Import CSV or OFX statements with a preview of new, duplicate, adopted and installment entries before confirming, and revert a batch if needed." />
+  <Card title="Banking" href="/docs/features/banking" description="Connect a bank account and keep entries and card statements in sync automatically." />
+  <Card title="Transfers" href="/docs/features/transfers" description="Automatic detection and linking of transfers between your own accounts, with suggestions for ambiguous matches." />
+  <Card title="Recurrences" href="/docs/features/recurrences" description="Recurring entries like rent, salary and subscriptions, with projected occurrences generated and matched automatically." />
+  <Card title="Budgets" href="/docs/features/budgets" description="Monthly spending limits per expense category, with one-off exceptions and computed spent/remaining progress." />
+  <Card title="Goals" href="/docs/features/goals" description="Savings goals tied to an account or to manual contributions, with progress, target date and required monthly pace." />
+  <Card title="Reports" href="/docs/features/reports" description="Monthly income vs. expense evolution and category spending comparisons, by purchase date or statement due date." />
+  <Card title="Notifications" href="/docs/features/notifications" description="Alerts for invoices due soon, exceeded budgets, unconfirmed projected entries and bank reconnection requests." />
+</Cards>
+
+## Get started
+
+<Cards>
+  <Card title="Installation" href="/docs/getting-started/installation" description="Install finangui with Docker." />
+  <Card title="First launch" href="/docs/getting-started/first-launch" description="Create the first account and follow the first-run wizard." />
+</Cards>

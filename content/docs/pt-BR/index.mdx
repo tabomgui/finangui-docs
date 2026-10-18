@@ -1,0 +1,33 @@
+---
+title: Introdução
+description: finangui é um gerenciador financeiro pessoal self-hosted, com backend Laravel + Postgres e frontend React.
+---
+
+finangui é um gerenciador financeiro pessoal self-hosted. O backend é uma API Laravel 13 sobre Postgres, o frontend é React/Vite/TS, e tudo roda em Docker. Dinheiro é sempre guardado como centavos inteiros, nunca como float, e valores derivados como saldos e totais são sempre calculados no backend — nunca gravados, nunca calculados no frontend.
+
+<Callout type="info">
+  A interface do app é em português do Brasil. Esta documentação mantém os rótulos da interface na forma original, em negrito, com o significado em inglês entre parênteses na primeira aparição. Por exemplo: **Configurações** (Settings).
+</Callout>
+
+## Funcionalidades
+
+<Cards>
+  <Card title="Contas" href="/docs/features/accounts" description="Contas corrente, poupança, dinheiro e cartão de crédito, com o saldo sempre calculado no backend." />
+  <Card title="Cartões" href="/docs/features/cards" description="Faturas de cartão de crédito com fechamento/vencimento que se reajustam sozinhos, limite informado pelo banco, parcelamentos e pagamento como transferência." />
+  <Card title="Categorização" href="/docs/features/categorization" description="Agrupe lançamentos sem categoria por contraparte, categorize em lote e crie regras automáticas com prévia ao vivo e aplicação retroativa." />
+  <Card title="Importação" href="/docs/features/imports" description="Importe extratos CSV ou OFX com prévia de lançamentos novos, duplicados, adotados e parcelas antes de confirmar, com opção de desfazer o lote." />
+  <Card title="Conexão bancária" href="/docs/features/banking" description="Conecte uma conta bancária e mantenha lançamentos e faturas sincronizados automaticamente." />
+  <Card title="Transferências" href="/docs/features/transfers" description="Detecção e vínculo automático de transferências entre suas próprias contas, com sugestões para casos ambíguos." />
+  <Card title="Recorrências" href="/docs/features/recurrences" description="Lançamentos recorrentes como aluguel, salário e assinaturas, com ocorrências previstas geradas e casadas automaticamente." />
+  <Card title="Orçamento" href="/docs/features/budgets" description="Limite mensal por categoria de despesa, com exceção pontual e progresso de gasto/restante calculado." />
+  <Card title="Metas" href="/docs/features/goals" description="Metas vinculadas a uma conta ou por aportes manuais, com progresso, data-alvo e ritmo mensal necessário." />
+  <Card title="Relatórios" href="/docs/features/reports" description="Evolução mensal de receitas x despesas e comparação de gastos por categoria, por data de compra ou de vencimento da fatura." />
+  <Card title="Notificações" href="/docs/features/notifications" description="Avisos de fatura vencendo, orçamento estourado, lançamento previsto não confirmado e solicitação de reconexão bancária." />
+</Cards>
+
+## Comece por aqui
+
+<Cards>
+  <Card title="Instalação" href="/docs/getting-started/installation" description="Instale o finangui com Docker." />
+  <Card title="Primeiro acesso" href="/docs/getting-started/first-launch" description="Crie a primeira conta e siga o assistente de primeiro uso." />
+</Cards>
