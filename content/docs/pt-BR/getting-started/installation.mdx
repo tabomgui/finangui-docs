@@ -1,0 +1,83 @@
+---
+title: Instalação
+description: Hospede o finangui no seu próprio servidor com Docker Compose.
+---
+
+O finangui tem um arquivo Compose dedicado a produção (`docker-compose.prod.yml`) que sobe o backend, um worker de fila, um scheduler, o Postgres e um serviço nginx que serve o frontend já buildado e faz proxy de `/api`, `/sanctum` e `/up` para o backend — tudo atrás do mesmo domínio.
+
+<Callout type="info">
+  SPA e API precisam ficar sob o mesmo domínio em produção (`https://seu-dominio` servindo tanto o frontend quanto `/api`). `SESSION_DOMAIN`, `SANCTUM_STATEFUL_DOMAINS` e `GOOGLE_REDIRECT_URI` só funcionam corretamente nesse cenário.
+</Callout>
+
+## Requisitos
+
+- Docker Engine com o plugin Compose v2 (o subcomando `docker compose`, não o `docker-compose` standalone).
+- Um domínio e um proxy que termine TLS na frente do servidor (Caddy, Cloudflare Tunnel ou similar) — o serviço `web` incluso só publica em `127.0.0.1:8080` por padrão e não termina TLS por conta própria.
+
+<Steps>
+<Step>
+### Clone o repositório
+
+```bash
+git clone https://github.com/tabomgui/finangui.git
+cd finangui
+```
+</Step>
+
+<Step>
+### Crie o arquivo de ambiente do backend
+
+Copie o modelo de produção e preencha os valores marcados:
+
+```bash
+cp backend/.env.production.example backend/.env
+```
+
+No mínimo, defina em `backend/.env`:
+
+- `APP_KEY` — gere uma com:
+  ```bash
+  docker run --rm php:8.4-cli-alpine php -r 'echo "base64:".base64_encode(random_bytes(32));'
+  ```
+- `DB_PASSWORD` — uma senha real de banco de dados.
+- O domínio: `APP_URL`, `FRONTEND_URL`, `SESSION_DOMAIN`, `SANCTUM_STATEFUL_DOMAINS` (todos apontando para o mesmo domínio).
+- `TRUSTED_PROXIES`, se o proxy que termina TLS não estiver nas faixas privadas padrão.
+- Credenciais do Google OAuth, só se quiser o botão "Entrar com o Google".
+
+O arquivo Compose lê `APP_KEY` e `DB_PASSWORD` desse mesmo arquivo e recusa subir os containers se algum dos dois estiver vazio.
+</Step>
+
+<Step>
+### Suba a stack
+
+```bash
+docker compose -f docker-compose.prod.yml --env-file backend/.env up -d --build
+```
+
+Isso builda e sobe `db` (Postgres), `backend`, `worker` (`queue:work`), `scheduler` (`schedule:work`) e `web` (nginx servindo o SPA já buildado).
+</Step>
+
+<Step>
+### As migrations rodam automaticamente
+
+O comando de start do container `backend` já roda `php artisan migrate --force` (junto com `config:cache` e `route:cache`) a cada início, então não existe um passo separado de migration para rodar à mão depois do `up`.
+</Step>
+
+<Step>
+### Crie o primeiro usuário
+
+O cadastro público fica sempre desligado por padrão em produção (`REGISTRATION_ENABLED=false`), então o primeiro — e normalmente único — usuário é criado pela linha de comando:
+
+```bash
+docker compose -f docker-compose.prod.yml --env-file backend/.env exec backend php artisan user:create voce@exemplo.com --name="Você"
+```
+
+O comando pede a senha duas vezes (confirmação) e guarda o email sempre em minúsculas. Ele também já cria o conjunto padrão de categorias (categorias de despesa e receita, categorias de transferência) para esse usuário.
+</Step>
+</Steps>
+
+<Callout type="warn">
+  O finangui não expõe nenhum cadastro público por padrão — o endpoint `auth/register` existe, mas é bloqueado por `REGISTRATION_ENABLED`, que já vem `false` em `backend/.env.production.example` e deve continuar assim numa instância self-hosted. Ou seja, não existe o risco de "alguém se cadastrar antes de você": enquanto `REGISTRATION_ENABLED` ficar desligado, a fronteira real a proteger é o acesso ao backend e ao banco de dados (arquivo `.env`, volume do Postgres, acesso SSH ao servidor), não a interface web.
+</Callout>
+
+Por padrão o serviço `web` escuta só em `127.0.0.1:8080` (ajustável por `FINANGUI_BIND`/`FINANGUI_PORT`); o proxy que termina TLS precisa rodar no mesmo host para alcançá-lo.
