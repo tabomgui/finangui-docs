@@ -5,11 +5,11 @@ description: Conta corrente, poupança, dinheiro e cartão de crédito, e como o
 
 Uma conta no finangui é qualquer lugar onde o dinheiro fica ou passa: uma **Conta corrente** (checking account) do banco, uma **Poupança** (savings account), **Dinheiro** (cash) que você tem em mãos, ou um **Cartão de crédito** (credit card). Todo lançamento que você registra ou importa pertence a uma conta, e o saldo de toda conta é sempre calculado pelo backend a partir do saldo inicial mais os lançamentos — nunca digitado à mão e nunca calculado no frontend.
 
-As contas ficam em **Contas** (Accounts), acessível pela navegação principal. Uma conta manual (sem vínculo com banco) pode ser criada, editada, arquivada ou excluída ali; uma conta vinculada por **Banking** aparece agrupada sob a sua conexão, e também pode ser editada (nome, cor, ícone, campos de cartão), só não desconectada por essa tela.
+As contas ficam em **Contas** (Accounts), acessível pela navegação principal. Uma conta manual (sem vínculo com banco) pode ser criada, editada, arquivada ou excluída ali; uma conta vinculada por [Banking](/docs/features/banking) aparece agrupada sob a sua conexão, e também pode ser editada (nome, cor, ícone, campos de cartão), só não desconectada por essa tela.
 
 ## Como o saldo é calculado
 
-O saldo de uma conta é **o saldo inicial mais todo lançamento lançado (`posted`) até um determinado dia** — por padrão, hoje, no fuso horário do app. Isso vale em todo lugar onde um saldo aparece: o painel da **Início** (Home), a lista de contas, o progresso das metas e os cartões de conexão bancária todos usam o saldo de hoje.
+O saldo de uma conta é **o saldo inicial mais todo lançamento lançado (`posted`) não ignorado até um determinado dia** — por padrão, hoje, no fuso horário do app. Isso vale em todo lugar onde um saldo aparece: o painel da **Início** (Home), a lista de contas, o progresso das metas e os cartões de conexão bancária todos usam o saldo de hoje.
 
 Esse "até hoje" importa para lançamentos com data futura: se você registra uma transação datada para amanhã ou mais adiante, ela já existe e aparece no histórico da conta, mas não entra no saldo que você vê até aquela data chegar de fato.
 
