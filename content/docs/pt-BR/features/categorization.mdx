@@ -3,66 +3,44 @@ title: Categorização
 description: Como um lançamento ganha categoria automaticamente, e como a tela Categorizar limpa em bloco o acúmulo de lançamentos sem categoria.
 ---
 
-Todo lançamento no finangui termina com uma categoria, mas a maioria nunca precisa que alguém escolha na mão. O finangui tenta, nesta ordem, três fontes automáticas antes de qualquer coisa sobrar para você:
+Todo lançamento termina com uma categoria, mas a maioria nunca precisa que alguém escolha na mão. O finangui tenta, nesta ordem: uma **regra** que casa (uma condição sobre o valor sempre vê o valor da própria parcela, nunca o total da compra), depois uma **sugestão pelo histórico** quando nenhuma regra casa, e por fim a categoria informada pelo banco, casada por nome — só para lançamentos sincronizados por [Banking](/docs/features/banking). Qual dessas decidiu (ou uma escolha manual) fica gravado em `categorized_by`: `manual`, `history`, `pluggy` ou `rule:{id}`. Pernas de transferência nunca são tocadas por regra nem por histórico.
 
-1. **Uma regra que casa.** Se uma regra que você criou casa com o lançamento, a categoria dela (e a tag, se a regra definir uma) é aplicada. Regras são avaliadas ao vivo na prévia e também podem ser aplicadas retroativamente a lançamentos já existentes. Uma condição de regra sobre o valor sempre vê o valor da própria parcela, nunca o total da compra original.
-2. **Uma sugestão pelo histórico**, usada só quando nenhuma regra casa — o finangui olha como você categorizou lançamentos parecidos antes.
-3. **A categoria informada pelo próprio banco**, casada por nome, usada só quando nem regra nem histórico resolveram. Isso só vale para lançamentos sincronizados por [Banking](/docs/features/banking).
+O que nenhuma das três resolve se acumula na tela **Categorizar** (Categorize) — com atalho pelo card **Pendências** (Pending items) da Início e pela tela Transações, sempre que há pendentes.
 
-Qual dessas três decidiu (ou uma escolha manual sua), o campo `categorized_by` do lançamento guarda qual foi: `manual`, `history`, `pluggy` ou `rule:{id}` de uma regra específica. Pernas de transferência nunca são tocadas por regra nem por histórico — ficam de fora por completo.
-
-O que nenhuma das três fontes automáticas resolve é exatamente o que se acumula para você limpar na mão — é para isso que existe a tela **Categorizar** (Categorize).
+![A tela Categorizar](/screenshots/categorize.png)
 
 ## O que entra na tela Categorizar
 
-A tela **Categorizar** (`/categorizar`) existe para resolver de uma vez o volume de lançamentos sem categoria que aparece depois de uma importação ou do primeiro sync com o banco. Entram os lançamentos já efetivados de todas as contas, cartão de crédito incluído. Nunca entram:
-
-- Lançamentos previstos (ainda não efetivados)
-- Transferências
-- Lançamentos ignorados
-- Pagamentos de fatura
-- Lançamentos de contas arquivadas
-
-<Callout type="info">
-  O card **Pendências** (Pending items) da Início é o ponto de entrada mais comum: ele avisa quantos lançamentos estão sem categoria e em quantos grupos, com um atalho direto para a tela Categorizar. A tela Transações mostra o mesmo link sempre que há pendentes.
-</Callout>
+A tela `/categorizar` existe para resolver de uma vez o volume de lançamentos sem categoria que aparece depois de uma importação ou sync com o banco — lançamentos já efetivados de todas as contas, cartão de crédito incluído. Nunca entram lançamentos previstos, transferências, lançamentos ignorados, pagamentos de fatura ou lançamentos de contas arquivadas.
 
 ## Agrupados por contraparte
 
-Os lançamentos da tela Categorizar não aparecem um a um — ficam agrupados por contraparte. O finangui pega a descrição do banco, tira o prefixo do tipo de transação no início ("Pix enviado", "Compra no débito", "Resgate" e assim por diante) e um sufixo de cidade e país no final, e usa o que resta como nome do grupo. É por isso que um Pix enviado e um Pix recebido da mesma pessoa caem no mesmo grupo, em vez de dois grupos sem relação.
+Os lançamentos ficam agrupados por contraparte: o finangui tira o prefixo do tipo de transação no início da descrição do banco (ex.: "Pix enviado") e um sufixo de cidade e país no final, e agrupa pelo que resta — por isso um Pix enviado e um recebido da mesma pessoa caem no mesmo grupo. Cada grupo aparece como um card com a contagem de saídas/entradas e o total líquido.
 
-Cada grupo aparece como um card com a contagem de saídas e entradas e o total líquido.
+## Selecionando e aplicando
 
-## Selecionando o que categorizar
-
-- O checkbox no cabeçalho de um grupo seleciona todos os lançamentos daquele grupo de uma vez.
-- Abrir um grupo permite marcar lançamentos individuais.
-- Num grupo que mistura saídas e entradas, os atalhos **só saídas** e **só entradas** selecionam só os lançamentos de uma direção.
-- Dá para selecionar vários grupos ao mesmo tempo, não só um.
-- Um grupo de uma única direção com histórico de categorização parecido o suficiente mostra uma sugestão aplicável num clique, sem precisar passar pelo seletor de categoria.
-
-## Aplicando uma categoria
+O checkbox do cabeçalho seleciona o grupo inteiro; abrir o grupo permite marcar lançamentos individuais. Num grupo que mistura as duas direções, **só saídas**/**só entradas** selecionam só um lado, e vários grupos podem ser selecionados ao mesmo tempo. Um grupo de uma única direção com histórico forte o suficiente mostra uma sugestão aplicável num clique.
 
 <Steps>
 <Step>
-Com um ou mais lançamentos selecionados, a barra de ação no rodapé mostra a seleção e um seletor de categoria. Ele só oferece categorias de entrada ou só de saída por vez, de acordo com a direção do que foi selecionado — não dá para misturar as duas numa mesma aplicação.
+Com lançamentos selecionados, a barra de ação no rodapé mostra um seletor de categoria — só de entrada ou só de saída, de acordo com a direção da seleção.
 </Step>
 <Step>
-Se a categoria que você quer ainda não existe, digite o nome no seletor e escolha **Criar…** (Create…). Você pode criá-la como categoria principal ou, usando **Dentro de** (Inside), como subcategoria de uma já existente — ela já fica selecionada assim que criada.
+Para criar uma categoria nova, digite o nome e escolha **Criar…** (Create…), opcionalmente **Dentro de** (Inside) uma já existente, como subcategoria.
 </Step>
 <Step>
-Confirme a aplicação. Os lançamentos selecionados recebem a categoria escolhida na hora.
+Confirme. Os lançamentos selecionados recebem a categoria na hora.
 </Step>
 </Steps>
 
 ## A regra criada ao aplicar
 
-Por padrão, aplicar uma categoria também cria uma regra para que os próximos lançamentos parecidos sejam categorizados do mesmo jeito automaticamente — uma alternativa por grupo marcado, cada uma no formato "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção. A regra recebe o nome "`<grupo>` → `<categoria>`", e depois aparece na tela **Regras** (Rules) como qualquer outra regra.
+Por padrão, aplicar uma categoria também cria uma regra para que lançamentos parecidos futuros sejam categorizados do mesmo jeito — uma alternativa por grupo marcado, no formato "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção. A regra recebe o nome "`<grupo>` → `<categoria>`" e aparece depois na tela **Regras** (Rules). O bloco também mostra quantos outros pendentes a regra já casa, com um checkbox para aplicá-la a eles também, de forma síncrona na mesma transação da aplicação da categoria.
 
-O bloco também mostra quantos *outros* pendentes a regra já casa, com um checkbox para aplicá-la a eles também na hora — isso roda de forma síncrona, na mesma transação de banco da aplicação da categoria, então se a regra falhar ao gravar, nada é aplicado também.
+![A tela Regras](/screenshots/rules.png)
 
 <Callout type="info">
-  O interruptor da regra vem desligado por padrão quando só parte de um grupo foi marcada — geralmente isso indica uma exceção que você não quer generalizar numa regra. O interruptor também fica indisponível acima de 19 grupos selecionados de uma vez (o backend limita uma regra a 20 condições no total, e a regra padrão gasta uma com a direção, sobrando 19 para grupos). A última escolha do interruptor é lembrada para a próxima vez.
+  O interruptor da regra vem desligado por padrão quando só parte de um grupo foi marcada, e fica indisponível acima de 19 grupos selecionados (o backend limita uma regra a 20 condições no total).
 </Callout>
 
-Se o formato padrão não é o que você quer, **Personalizar** (Customize) abre um editor no mesmo formato da tela Regras — alternativas "Se"/"Ou se", cada uma com suas próprias condições, com contagem de casamentos ao vivo — e **Voltar ao padrão** (Back to default) descarta a personalização e volta para a regra gerada automaticamente.
+Se o formato padrão não é o que você quer, **Personalizar** (Customize) abre um editor completo de regra; **Voltar ao padrão** (Back to default) descarta e volta para a regra gerada.

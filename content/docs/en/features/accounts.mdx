@@ -3,36 +3,26 @@ title: Accounts
 description: Checking, savings, cash and credit card accounts, and how finangui computes the balance you see on each one.
 ---
 
-An account in finangui is anything money sits in or moves through: a bank **Conta corrente** (checking account), a **Poupança** (savings account), **Dinheiro** (cash you hold) or a **Cartão de crédito** (credit card). Every entry you log or import belongs to one account, and every account's balance is always computed by the backend from its opening balance plus its entries — never typed in by hand and never calculated in the frontend.
+An account in finangui is anything money sits in or moves through: a **Conta corrente** (checking account), **Poupança** (savings account), **Dinheiro** (cash) or **Cartão de crédito** (credit card). Every entry belongs to one account, and every balance is computed by the backend from opening balance plus entries — never typed in, never calculated in the frontend.
 
-Accounts live under **Contas** (Accounts), reached from the main navigation. A manual account (not linked to a bank) can be created, edited, archived or deleted there; an account linked through [Banking](/docs/features/banking) appears grouped under its connection instead, and can still be edited (name, color, icon, card fields), just not disconnected from that screen.
+Accounts live under **Contas** (Accounts). A manual account can be created, edited, archived or deleted there; an account linked through [Banking](/docs/features/banking) appears grouped under its connection, and can still be edited (name, color, icon, card fields), just not disconnected from that screen.
 
 ## How the balance is computed
 
-An account's balance is **opening balance plus every non-ignored posted entry up to a given day** — by default, today, in the app's timezone. This is true everywhere a balance shows up: the **Início** (Home) dashboard, the accounts list, goal progress and the bank connection cards all use today's balance.
-
-That "up to today" part matters for entries dated in the future: if you log a transaction dated tomorrow or later, it already exists and shows up in the account's history, but it doesn't move the balance you see until that date actually arrives.
+An account's balance is opening balance plus every non-ignored posted entry up to today (app timezone) — used everywhere a balance shows up: Início, the accounts list, goal progress and connection cards. An entry dated in the future already shows in the account's history, but doesn't move the balance until that date arrives.
 
 <Callout type="info">
-  A bank-connected account works differently from this default rule — see below.
+  A bank-connected account follows a different rule — see below.
 </Callout>
 
-## Bank-connected accounts: the balance anchors to the bank
+## Bank-connected accounts anchor to the bank
 
-For an account linked through **Banking** (not a credit card), the balance shown isn't just opening balance plus entries. Instead, it anchors to the balance the bank itself reported at the last sync, and only adds the difference from entries dated after that sync day.
+For an account linked through **Banking** (not a credit card), the balance anchors to what the bank reported at the last sync, adding only entries dated after that sync day. A manual entry dated on or before the last sync won't move the balance until the next sync runs. finangui also shows **Pelos lançamentos** (By the entries) next to it — the balance computed purely from your own ledger, as of today — for comparison only; it's never the number used as the account's real balance.
 
-<Callout type="info">
-  This means a manual entry you add with a date on or before the last sync day won't move the account's balance — not until the next sync happens. The bank's own number already "won" for that period: finangui assumes the bank already accounted for everything up to the day it last reported a balance, so adding an entry inside that window wouldn't just double it, it would get silently absorbed at the next sync anyway. Entries dated after the sync day do move the balance normally.
-</Callout>
+## Credit card accounts always use the full ledger
 
-Because of this anchoring, the balance shown for a connected account can occasionally look out of step with what you'd expect from just reading the entry list. For that case, finangui shows a secondary line next to the balance, labeled **Pelos lançamentos** (By the entries): this is the balance as computed purely from your own ledger, always as of today, with no anchoring to the bank. It's informational only — a way to compare and spot a divergence — and it is never the number used as the account's real balance anywhere else in the app.
-
-## Credit card accounts: always the full ledger
-
-A **Cartão de crédito** (credit card) account doesn't use the "up to today" cutoff at all: its balance is always the full historical ledger — opening balance plus every non-ignored posted entry ever recorded on it, with no date limit. This reflects that a credit card balance is really a running debt, not a point-in-time snapshot.
-
-Statement (invoice) totals, due dates, payments and limit usage are a separate layer on top of the account balance, covered on the [Cards](/docs/features/cards) page.
+A **Cartão de crédito** account has no "up to today" cutoff: its balance is always the full historical ledger, since a card balance is a running debt, not a snapshot. Statement totals, due dates, payments and limit usage are covered on the [Cards](/docs/features/cards) page.
 
 ## Credit card debt isn't in the Início total
 
-The total balance shown on the **Início** (Home) dashboard adds up all your non-card accounts; credit card accounts are excluded from it. Card debt is shown separately, on the Cards ("Faturas") card of the dashboard, instead of being netted into your overall balance.
+The Início total balance adds up all non-card accounts; card debt is shown separately, on the Cards ("Faturas") card, instead of netted into it.

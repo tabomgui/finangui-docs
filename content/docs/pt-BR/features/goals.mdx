@@ -5,31 +5,21 @@ description: Como o finangui acompanha o progresso de uma meta de economia, a pa
 
 Uma **Meta** (goal) é um objetivo de economia: um nome, um valor alvo e, opcionalmente, uma data-limite. Na tela **Metas** (goals), **Nova meta** (new goal) abre um formulário para cadastrar uma.
 
+![A tela Metas](/screenshots/goals.png)
+
 ## Duas formas de acompanhar o progresso
 
-Uma meta acompanha o progresso de uma de duas formas, e você escolhe qual delas na criação:
+Você escolhe uma das duas formas na criação, e elas são mutuamente exclusivas:
 
-- **Vinculada a uma conta** — ativar **Acompanhar saldo de uma conta** (track an account's balance) e escolher uma [conta](/docs/features/accounts) faz o progresso da meta ser exatamente o saldo atual dessa conta. O próprio formulário é explícito sobre a troca: o progresso passa a ser o saldo da conta, em vez da soma de aportes manuais.
-- **Sem vínculo, alimentada por aportes** — deixando esse interruptor desligado, o progresso passa a ser o total acumulado de **aportes** (contributions) que você registra à mão, pelo botão **Novo aporte** (new contribution) no card da meta. Um aporte pode ser um depósito ou, ativando **Retirada** (withdrawal) no mesmo formulário, um valor retirado.
+- **Vinculada a uma conta** — ativar **Acompanhar saldo de uma conta** (track an account's balance) faz o progresso ser exatamente o saldo dessa [conta](/docs/features/accounts), em vez da soma de aportes manuais.
+- **Sem vínculo** — o progresso passa a ser o total acumulado de **aportes** (contributions) registrados à mão pelo botão **Novo aporte** (new contribution), cada um um depósito ou, ativando **Retirada** (withdrawal), um valor retirado.
 
-Essas duas formas são mutuamente exclusivas: uma meta vinculada a uma conta nunca aceita um aporte manual.
+## Progresso e ritmo
 
-## Percentual e restante
-
-Cada meta mostra o progresso como um percentual e como um valor restante — o quanto falta até o valor alvo.
-
-<Callout type="info">
-  Quando o saldo de uma conta vinculada é negativo, o percentual fica travado em 0% em vez de ficar negativo — mas o valor restante continua refletindo a distância real, incluindo esse saldo negativo. Ele não é limitado para combinar com os 0% mostrados.
-</Callout>
-
-## Data-limite e ritmo mensal
-
-Uma meta pode opcionalmente ter uma data-limite. Quando tem, e a meta ainda não foi atingida, o finangui mostra quanto guardar por mês para alcançar o valor alvo até aquela data.
+Cada meta mostra o progresso como percentual e como valor restante; um saldo vinculado negativo trava o percentual em 0% sem limitar o valor restante. Uma data-limite opcional faz o finangui mostrar quanto guardar por mês para alcançá-la a tempo.
 
 ## Atingindo a meta
 
 <Callout type="info">
-  Uma meta é marcada como atingida na primeira vez que o progresso alcança o valor alvo — o card ganha o selo **Atingida** (achieved). Essa marca permanece: se o progresso cair de volta abaixo do alvo depois (o saldo da conta cai, ou uma retirada é registrada), a meta continua marcada como atingida. Não é um status recalculado ao vivo a cada visualização.
-
-  A única forma de desfazer é editar a meta e aumentar o valor alvo para um valor que o progresso atual não alcança mais — nesse momento a meta volta a não estar atingida.
+  Uma meta é marcada como **Atingida** (achieved) na primeira vez que o progresso alcança o valor alvo, e essa marca permanece mesmo que o progresso caia depois. A única forma de desfazer é editar a meta e aumentar o valor alvo além do progresso atual.
 </Callout>

@@ -5,6 +5,8 @@ description: finangui é um gerenciador financeiro pessoal self-hosted, com back
 
 finangui é um gerenciador financeiro pessoal self-hosted. O backend é uma API Laravel 13 sobre Postgres, o frontend é React/Vite/TS, e tudo roda em Docker. Dinheiro é sempre guardado como centavos inteiros, nunca como float, e valores derivados como saldos e totais são sempre calculados no backend — nunca gravados, nunca calculados no frontend.
 
+![Painel do finangui](/screenshots/dashboard.png)
+
 <Callout type="info">
   A interface do app é em português do Brasil. Esta documentação mantém os rótulos da interface na forma original, em negrito, com o significado em inglês entre parênteses na primeira aparição. Por exemplo: **Configurações** (Settings).
 </Callout>
@@ -23,11 +25,4 @@ finangui é um gerenciador financeiro pessoal self-hosted. O backend é uma API 
   <Card title="Metas" href="/docs/features/goals" description="Metas vinculadas a uma conta ou por aportes manuais, com progresso, data-alvo e ritmo mensal necessário." />
   <Card title="Relatórios" href="/docs/features/reports" description="Evolução mensal de receitas x despesas e comparação de gastos por categoria, por data de compra ou de vencimento da fatura." />
   <Card title="Notificações" href="/docs/features/notifications" description="Avisos de fatura vencendo, orçamento estourado, lançamento previsto não confirmado e solicitação de reconexão bancária." />
-</Cards>
-
-## Comece por aqui
-
-<Cards>
-  <Card title="Instalação" href="/docs/getting-started/installation" description="Instale o finangui com Docker." />
-  <Card title="Primeiro acesso" href="/docs/getting-started/first-launch" description="Faça o primeiro login e cadastre sua primeira conta." />
 </Cards>

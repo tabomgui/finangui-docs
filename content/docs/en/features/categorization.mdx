@@ -3,66 +3,44 @@ title: Categorization
 description: How transactions get a category automatically, and how the Categorizar screen clears a backlog of uncategorized entries in bulk.
 ---
 
-Every transaction in finangui ends up with a category, but most of them never need a human to pick one by hand. finangui tries, in order, three automatic sources before anything lands in your lap:
+Every transaction ends up with a category, but most never need a human to pick one by hand. finangui tries, in order: a matching **rule** (a condition on amount always looks at the installment's own amount, never the purchase total), then a **history-based suggestion** when no rule matches, then the bank's own reported category, matched by name — only for transactions synced through [Banking](/docs/features/banking). Whichever source decides it (or a manual choice) is recorded in `categorized_by`: `manual`, `history`, `pluggy`, or `rule:{id}`. Transfer legs are never touched by rules or history.
 
-1. **A matching rule.** If a rule you created matches the transaction, its category (and tag, if the rule sets one) is applied. Rules are evaluated live when you preview them and can also be applied retroactively to existing transactions. A rule condition on the amount always looks at the installment's own amount, never the original purchase total.
-2. **A history-based suggestion**, used only when no rule matches — finangui looks at how you categorized similar transactions before.
-3. **The bank's own reported category**, matched by name, used only when neither a rule nor history resolved it. This only applies to transactions synced through [Banking](/docs/features/banking).
+Whatever none of these resolve piles up on the **Categorizar** (Categorize) screen — linked from the **Pendências** (Pending items) card on Início and from Transações whenever there are pending entries.
 
-Whichever of these three decides it (or a manual choice you make yourself), the transaction's `categorized_by` field records which: `manual`, `history`, `pluggy`, or `rule:{id}` for a specific rule. Transfer legs are never touched by rules or history — they're excluded entirely.
-
-Whatever none of the three automatic sources resolve is exactly what piles up for you to clear by hand — that's what the **Categorizar** (Categorize) screen is for.
+![The Categorizar screen](/screenshots/categorize.png)
 
 ## What lands on Categorizar
 
-The **Categorizar** screen (`/categorizar`) exists to clear, all at once, the volume of uncategorized entries that shows up after an import or the first bank sync. It includes already-posted entries from every account, credit cards included. It never includes:
-
-- Projected entries (not yet posted)
-- Transfers
-- Ignored entries
-- Statement payments
-- Entries on archived accounts
-
-<Callout type="info">
-  The **Pendências** (Pending items) card on the Início dashboard is the usual entry point: it warns you how many entries are uncategorized and in how many groups, with a shortcut straight to Categorizar. The Transações (Transactions) screen shows the same link whenever there are pending entries.
-</Callout>
+`/categorizar` clears, all at once, the uncategorized entries left after an import or bank sync — already-posted entries from every account, credit cards included. It never includes projected entries, transfers, ignored entries, statement payments, or entries on archived accounts.
 
 ## Grouped by counterparty
 
-Entries on Categorizar aren't listed one by one — they're grouped by counterparty. finangui takes the bank's description, strips off the leading transaction-type prefix ("Pix enviado", "Compra no débito", "Resgate", and so on) and a trailing city-and-country suffix, and uses what's left as the group's name. That's why a Pix you sent and a Pix you received from the same person land in the same group instead of two unrelated ones.
+Entries are grouped by counterparty: finangui strips the bank description's leading transaction-type prefix (e.g. "Pix enviado") and a trailing city-and-country suffix, and groups by what's left — so a Pix sent and one received from the same person land in the same group. Each group shows as a card with its outflow/inflow counts and net total.
 
-Each group shows as a card with its outflow and inflow counts and its net total.
+## Selecting and applying
 
-## Selecting what to categorize
-
-- The checkbox on a group's header selects every entry in that group at once.
-- Opening a group lets you check individual entries instead.
-- On a group that mixes outflows and inflows, the **só saídas** (outflows only) and **só entradas** (inflows only) shortcuts select just the entries going one way.
-- You can select several groups at the same time, not just one.
-- A same-direction group with similar-enough categorization history shows a one-click suggestion you can apply immediately, without going through the category selector at all.
-
-## Applying a category
+A group's header checkbox selects everything in it; opening a group lets you check entries individually. On a group mixing both directions, **só saídas**/**só entradas** select just one way, and several groups can be selected at once. A same-direction group with strong-enough history shows a one-click suggestion.
 
 <Steps>
 <Step>
-With one or more entries selected, the footer action bar shows your selection and a category selector. It only offers inflow categories or only outflow categories at a time, depending on the direction of what you selected — you can't mix the two in a single apply.
+With entries selected, the footer action bar shows a category selector — inflow or outflow only, matching the direction of your selection.
 </Step>
 <Step>
-If the category you want doesn't exist yet, type its name in the selector and choose **Criar…** (Create…). You can create it as a top-level category or, using **Dentro de** (Inside), as a subcategory of an existing one — it's selected immediately once created.
+To create a new category, type its name and choose **Criar…** (Create…), optionally **Dentro de** (Inside) an existing one as a subcategory.
 </Step>
 <Step>
-Confirm the apply. The selected entries get the chosen category right away.
+Confirm. The selected entries get the category right away.
 </Step>
 </Steps>
 
 ## The rule created on apply
 
-By default, applying a category also creates a rule so future similar entries get categorized the same way automatically — one alternative per group you had checked, each shaped as "original description contains `<group name>`" AND "type equals" the direction of your selection. The rule is named "`<group>` → `<category>`", and it shows up on the **Regras** (Rules) screen afterward like any other rule.
+By default, applying a category also creates a rule so future similar entries get categorized the same way — one alternative per checked group, shaped as "original description contains `<group name>`" AND "type equals" your selection's direction. The rule is named "`<group>` → `<category>`" and shows up afterward on **Regras** (Rules). The block also shows how many other pending entries the rule already matches, with a checkbox to apply it to those too, synchronously in the same transaction as the category apply.
 
-The block also shows how many *other* pending entries the rule already matches, with a checkbox to apply it to those right away too — this runs synchronously, in the same database transaction as the category apply, so if the rule fails to save, nothing is applied either.
+![The Regras screen](/screenshots/rules.png)
 
 <Callout type="info">
-  The rule toggle comes off by default when you only checked part of a group — that usually means an exception you don't want generalized into a rule. The toggle also becomes unavailable once you've selected more than 19 groups at once (the backend caps a rule at 20 conditions in total, and the default rule spends one on the direction, leaving 19 for groups). Your last choice for the toggle is remembered for next time.
+  The rule toggle defaults off when you only checked part of a group, and becomes unavailable past 19 selected groups (the backend caps a rule at 20 conditions total).
 </Callout>
 
-If the default shape isn't what you want, **Personalizar** (Customize) opens an editor in the same shape as the Regras screen — If/Or if alternatives, each with its own conditions, with a live match count — and **Voltar ao padrão** (Back to default) discards your customization and returns to the generated rule.
+If the default shape isn't what you want, **Personalizar** (Customize) opens a full rule editor instead; **Voltar ao padrão** (Back to default) discards it.

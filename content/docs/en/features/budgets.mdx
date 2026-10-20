@@ -3,32 +3,22 @@ title: Budgets
 description: How finangui tracks a monthly spending limit per expense category, with one-off monthly exceptions and parent/child categories.
 ---
 
-A budget is a monthly spending limit you set on a category, so you can see at a glance how much you've already spent against it as the month goes on. On the **Orçamento** (Budget) screen, **Orçar categoria** (Budget a category) opens a form to set one up.
+A budget is a monthly spending limit you set on a category, so you can see at a glance how much you've already spent against it. On the **Orçamento** (Budget) screen, **Orçar categoria** (Budget a category) opens a form to set one up — only for a non-archived expense category, never income or transfer.
 
-## What can be budgeted
+![The Orçamento screen](/screenshots/budgets.png)
 
-A budget only applies to an expense category — never an income category, and never a transfer category — and the category can't be archived. The category picker in the budget form only offers categories that are eligible.
+## Default and monthly exceptions
 
-## A default limit for every month
-
-When you budget a category, the amount you set becomes its default: it applies to every month from then on, unless that particular month has its own exception (see below). You can edit or remove the default at any time from the category's row on Orçamento.
-
-## A one-off exception for a single month
-
-The **Vale para** (Applies to) toggle in the form lets you choose between **Todos os meses** (All months) — the default just described — and a second option named for the month you're currently viewing (for example, **Só outubro**, "Only October"). Choosing the month option sets an amount that overrides the default for that month alone; every other month keeps using the default. A category with an active exception for the month shows a **Só este mês** (Only this month) badge in its row on the list.
+The amount you set becomes the default, applying to every month unless that month has its own exception. The **Vale para** (Applies to) toggle lets you override the default for just the month you're viewing (e.g. **Só outubro**); a category with an active exception shows a **Só este mês** (Only this month) badge.
 
 <Callout type="info">
-  Turning on **Sem orçamento só neste mês** (No budget just this month) instead of entering an amount cancels the budget for that one month only — its spending shows up as unbudgeted for that month — without deleting the default used by every other month, and without deleting the exception itself.
+  Choosing **Sem orçamento só neste mês** (No budget just this month) instead of an amount cancels the budget for that one month only, without deleting the default or the exception itself.
 </Callout>
 
-## Budgeting a parent and a child category together
+## Parent and child categories
 
-Budgeting a parent category covers the parent and all of its subcategories at once — spending in any child category automatically counts toward the parent's limit, even if the child itself was never budgeted. A subcategory can still have its own separate limit on top of that; when it does, its spending counts toward both its own limit and the parent's.
-
-The overall totals at the top of the screen — **Orçado** / **Gasto** / **Restante** (Budgeted / Spent / Remaining) — never count a child's spending twice: when both a parent and a child are budgeted in the same month, the child's amounts are already included in the parent's figures, so they're left out of the combined totals shown there.
+Budgeting a parent covers it and all its subcategories — a child's spending counts toward the parent's limit even if the child was never budgeted itself, and a child can still have its own limit on top. The totals at the top of the screen never double-count a budgeted child's spending.
 
 ## Spent, remaining, and progress
 
-Each budgeted category's row shows how much has been spent against its limit, with a progress bar and a percentage. Spending is net — an expense in the category minus any inflow back into it, such as a refund — and is never shown as a negative number. Once spending passes the limit, the row's "restam" (remaining) label switches to "excedeu" (exceeded), showing the amount over budget instead.
-
-Spending in categories that haven't been budgeted at all is shown separately, below the list, as **Fora do orçamento** (Outside the budget).
+Each row shows a progress bar and percentage against its limit. Spending is net (expenses minus refunds) and never negative; past the limit, the "restam" (remaining) label switches to "excedeu" (exceeded). Spending in unbudgeted categories appears separately as **Fora do orçamento** (Outside the budget).

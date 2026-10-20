@@ -5,31 +5,21 @@ description: How finangui tracks progress toward a savings target, either from a
 
 A **Meta** (goal) is a savings target: a name, a target amount, and optionally a target date. On the **Metas** (Goals) screen, **Nova meta** (New goal) opens a form to set one up.
 
+![The Metas screen](/screenshots/goals.png)
+
 ## Two ways to track progress
 
-A goal tracks progress one of two ways, and you pick which one when you create it:
+You pick one of two ways when you create the goal, and they're mutually exclusive:
 
-- **Linked to an account** — turning on **Acompanhar saldo de uma conta** (Track an account's balance) and choosing an [account](/docs/features/accounts) makes the goal's progress exactly that account's current balance. The form is explicit about the trade-off: progress replaces the sum of manual contributions.
-- **Unlinked, funded by contributions** — leave that switch off and progress is instead the running total of **aportes** (contributions) you log by hand, through **Novo aporte** (New contribution) on the goal's card. A contribution can be a deposit or, toggling **Retirada** (Withdrawal) in the same form, money taken back out.
+- **Linked to an account** — turning on **Acompanhar saldo de uma conta** (Track an account's balance) makes progress exactly that [account](/docs/features/accounts)'s balance, replacing manual contributions.
+- **Unlinked** — progress is instead the running total of **aportes** (contributions) you log by hand via **Novo aporte** (New contribution), each a deposit or, with **Retirada** (Withdrawal), money taken out.
 
-These two modes are mutually exclusive: a goal linked to an account never accepts a manual contribution.
+## Progress and pace
 
-## Percent and remaining
-
-Each goal shows progress as a percentage and as a remaining amount — progress so far against the target amount.
-
-<Callout type="info">
-  When a linked account's balance is negative, the percentage floors at 0% instead of going negative — but the remaining amount still reflects the real gap, including that negative balance. It is not clipped to match the 0% shown.
-</Callout>
-
-## Target date and monthly pace
-
-A goal can optionally carry a target date. When it does, and the goal isn't achieved yet, finangui shows how much to set aside each month to reach the target amount by that date.
+Each goal shows progress as a percentage and a remaining amount; a negative linked balance floors the percentage at 0% without clipping the remaining amount. An optional target date makes finangui show how much to set aside each month to reach it in time.
 
 ## Reaching the goal
 
 <Callout type="info">
-  A goal is marked achieved the first time its progress reaches the target amount — the card picks up an **Atingida** (Achieved) badge. That mark sticks: if progress later dips back below the target (an account balance drops, or a withdrawal is logged), the goal stays marked achieved. It isn't a status recalculated live on every view.
-
-  The only way to undo it is editing the goal and raising its target amount to a value current progress no longer reaches — at that point the goal goes back to not achieved.
+  A goal is marked **Atingida** (Achieved) the first time progress reaches the target amount, and that mark sticks even if progress later dips back below it. The only way to undo it is editing the goal and raising its target amount past current progress.
 </Callout>

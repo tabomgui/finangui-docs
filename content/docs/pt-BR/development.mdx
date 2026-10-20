@@ -3,7 +3,7 @@ title: Desenvolvimento
 description: Rode o finangui localmente com Docker para desenvolvimento, e os targets do make que cobrem o dia a dia.
 ---
 
-O finangui é uma API Laravel 13 com Postgres (`backend/`) e um frontend React/Vite/TypeScript (`frontend/`). Tudo — banco de dados, backend, frontend, worker de fila e scheduler — roda em Docker, orquestrado por um `Makefile` na raiz do repositório.
+O finangui é uma API Laravel 13 com Postgres (`backend/`) e um frontend React/Vite/TypeScript (`frontend/`). Tudo roda em Docker, orquestrado por um `Makefile` na raiz do repositório.
 
 ## Requisitos
 
@@ -28,7 +28,7 @@ cp backend/.env.example backend/.env
 make up
 ```
 
-Isso sobe o banco (`:5432`), o backend (`:8001`), o frontend (`:5174`), o worker de fila e o scheduler. As portas do backend e do frontend podem ser trocadas por `BACKEND_PORT` e `FRONTEND_PORT`.
+Sobe a stack nas portas padrão (troque com `BACKEND_PORT`/`FRONTEND_PORT`).
 </Step>
 
 <Step>
@@ -48,13 +48,11 @@ make art c="key:generate"
 make fresh
 ```
 
-Isso migra o banco do zero e cria um usuário de desenvolvimento: `dev@finangui.test` / `password`.
+Cria um usuário de desenvolvimento: `dev@finangui.test` / `password`.
 </Step>
 </Steps>
 
-<Callout type="info">
-  A documentação interativa da API (Scramble) fica em `http://localhost:8001/docs/api` — só disponível enquanto `APP_ENV=local`; em qualquer outro ambiente a rota fica bloqueada.
-</Callout>
+A documentação interativa da API (Scramble) fica em `http://localhost:8001/docs/api` enquanto `APP_ENV=local`.
 
 ## Targets do make no dia a dia
 
@@ -70,31 +68,11 @@ Isso migra o banco do zero e cria um usuário de desenvolvimento: `dev@finangui.
 | `make front-check` | Roda lint, typecheck e a suíte de testes do frontend. |
 
 <Callout type="warn">
-  `make test` roda contra um banco separado, `finangui_test`, criado por `docker/postgres/init.sql` na primeira vez que o volume `db-data` é inicializado. Se esse volume já existia antes do `init.sql` ganhar esse banco, ele não é criado automaticamente — recrie o volume (`make down && docker compose down -v`, que destrói dados de dev) ou crie-o à mão: `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` roda contra o banco `finangui_test`, criado por `docker/postgres/init.sql` na primeira inicialização do volume. Se seu volume for anterior a isso, crie o banco à mão: `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-## Reconstruindo containers
-
-O frontend também roda em container (já sobe com `make up`), mas o editor e as ferramentas de TypeScript (checagem de tipos, oxlint) precisam das dependências instaladas no host também:
-
-```bash
-cd frontend && npm install
-```
-
-Se `frontend/package.json` mudar, a imagem do frontend precisa ser reconstruída — só reiniciar o container não é suficiente:
-
-```bash
-docker compose build frontend && docker compose up -d -V frontend
-```
-
-O mesmo vale para o backend quando algo em `docker/php/**` muda (ex.: `uploads.ini`, o `Dockerfile`):
-
-```bash
-docker compose build backend && docker compose up -d -V backend
-```
+O frontend também precisa de `npm install` no host para o editor e as ferramentas de TS; reconstrua sua imagem (ou a do backend, após mudança em `docker/php/**`) quando as dependências mudarem — só reiniciar não basta.
 
 ## Contribuindo
 
-O finangui é um repositório público no GitHub. Contribuições seguem o fluxo padrão: fork, branch, pull request.
-
-Para as convenções reais do projeto — estrutura de pastas por domínio, a regra de dinheiro em centavos, TDD com Pest, e tudo mais que rege como o código é escrito aqui — veja o `CLAUDE.md` do próprio repositório, na raiz do projeto. Ele é a fonte da verdade dessas regras e é mantido atualizado conforme o código evolui; duplicá-lo aqui só ficaria desatualizado com o tempo.
+O finangui é um repositório público no GitHub; contribuições seguem o fluxo padrão de fork/branch/PR. As convenções reais do projeto vivem no `CLAUDE.md` do próprio repositório — a fonte da verdade, mantida atualizada conforme o código evolui.

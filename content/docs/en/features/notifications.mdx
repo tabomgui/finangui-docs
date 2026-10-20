@@ -3,23 +3,19 @@ title: Notifications
 description: How finangui alerts you about invoices, budgets, overdue recurrences, and bank connections that need attention.
 ---
 
-The bell icon keeps you aware of a handful of things finangui thinks you should know about, without you having to go check each screen yourself. On mobile it sits in the header and opens as a sheet from the bottom; on desktop it sits in the sidebar and opens as a popover. Either way, clicking a notification takes you straight to the relevant screen.
+The bell icon surfaces things finangui thinks you should know about — a sheet on mobile, a popover on desktop — and a click takes you to the relevant screen.
 
 ## The four kinds of alert
 
-- **Fatura vencendo** (Invoice due) — a credit card statement is approaching its due date. See [Cards](/docs/features/cards).
-- **Orçamento estourado** (Budget exceeded) — spending in a category has gone over its monthly limit. See [Budgets](/docs/features/budgets).
-- **Lançamentos pendentes** (Pending entries) — a recurring entry's projected occurrence is past its date and still hasn't been confirmed. See [Recurrences](/docs/features/recurrences).
-- **Reconexão necessária** (Reconnection needed) — finangui noticed a connection needs your credentials refreshed before it can keep syncing. See [Banking](/docs/features/banking).
+- **Fatura vencendo** (Invoice due) — a card statement nearing its due date. See [Cards](/docs/features/cards).
+- **Orçamento estourado** (Budget exceeded) — a category over its monthly limit. See [Budgets](/docs/features/budgets).
+- **Lançamentos pendentes** (Pending entries) — an overdue, unconfirmed recurring entry. See [Recurrences](/docs/features/recurrences).
+- **Reconexão necessária** (Reconnection needed) — a connection needs fresh credentials. See [Banking](/docs/features/banking).
 
 <Callout type="info">
-  The first three alerts are checked once a day and arrive as a single daily summary per kind — never one notification per invoice, per category, or per occurrence. The reconnection alert is different: it fires immediately, the moment finangui notices during a sync, rather than waiting for the next day's check.
+  The first three are checked once a day, one summary per kind. Reconnection fires immediately, during a sync.
 </Callout>
 
-## No duplicate alerts
+## Deduplication and cleanup
 
-finangui never sends the same alert twice for the same underlying thing. Once you've been notified about a given invoice, budget, overdue entry, or connection issue, you won't get a second, identical notification piling up about it.
-
-## Notifications don't pile up forever
-
-Read notifications older than 90 days are cleaned up automatically, so the list stays relevant instead of growing without limit.
+finangui never sends the same alert twice for the same thing. Read notifications older than 90 days are deleted automatically.

@@ -3,35 +3,37 @@ title: Transfers
 description: How finangui detects, suggests, links, and unlinks transfers between your own accounts.
 ---
 
-A transfer is money moving between two of your own accounts — an outflow from one account and an inflow into another, linked together as the two legs of the same movement. Once linked, both legs are treated as a transfer rather than as a regular expense and income: linked legs never get their own category, and are never touched by categorization rules or history.
+A transfer is money moving between two of your own accounts — an outflow from one and an inflow into another, linked as the two legs of the same movement. Linked legs never get their own category, and are never touched by categorization rules or history.
+
+![A transfer suggestion](/screenshots/transfers.png)
 
 ## Automatic detection
 
-finangui looks for transfers among just-added entries after every import and bank sync, comparing candidates within 2 days of each other. You can also ask it to look over the last 90 days at any time, from the **Transferências encontradas** (Transfers found) page (`/transferencias/sugestoes`), with the **Procurar agora** (Search now) button.
+finangui looks for transfers among just-added entries after every import and bank sync, comparing candidates within 2 days of each other. You can also search the last 90 days anytime from **Transferências encontradas** (Transfers found) (`/transferencias/sugestoes`), via **Procurar agora** (Search now).
 
-Each run scores candidate pairs by date proximity, a clue in the description or the other account's name, and whether the inflow landed on a credit card. A pair that matches uniquely and clearly gets linked right away, with no action needed from you. Anything less certain — more than one plausible match, or evidence that isn't quite strong enough — becomes a suggestion instead, waiting for you to confirm it, with at most two candidate suggestions kept per entry.
+Candidate pairs are scored by date proximity, a clue in the description or account name, and whether the inflow landed on a credit card. A uniquely clear match links automatically; anything less certain becomes a suggestion (at most two per entry) waiting for your confirmation.
 
 ## Reviewing suggestions
 
-Pending suggestions show up on the **Transferências encontradas** page, and the **Pendências** (Pending) card on Início links there with a count whenever at least one is waiting. Each suggestion shows both legs side by side — the outflow and the inflow, with their account, date, and amount — so you can check it's really the same movement before deciding.
+Pending suggestions show up on the **Transferências encontradas** page, linked from the **Pendências** (Pending) card on Início whenever one is waiting. Each shows both legs side by side.
 
-- **Juntar** (Join) accepts the suggestion and links the two legs as a transfer.
-- **Não é transferência** (Not a transfer) dismisses it; the two entries stay as they are, as regular entries.
+- **Juntar** (Join) accepts the suggestion and links the two legs.
+- **Não é transferência** (Not a transfer) dismisses it; both entries stay as regular entries.
 
 ## Linking two entries by hand
 
-If finangui didn't pick up on a transfer at all — nothing detected, nothing suggested — you can still link two existing entries yourself. Select both from the transactions list and use **Juntar como transferência** (Join as transfer); you don't need to work out which one is the outflow and which is the inflow first — finangui figures that out from each entry's own direction.
+If finangui didn't detect or suggest anything, select two entries from the transactions list and use **Juntar como transferência** (Join as transfer) — finangui figures out which is the outflow and which the inflow on its own.
 
 ## Unlinking a transfer
 
-Unlinking a transfer from either leg's detail screen (**Desfazer transferência**, Undo transfer) splits the two legs apart: both go back to being regular, uncategorized entries.
+**Desfazer transferência** (Undo transfer), from either leg's detail screen, splits the two legs apart into regular, uncategorized entries.
 
 <Callout type="info">
-  What happens next depends on how the transfer got unlinked. If you explicitly asked to undo it, finangui remembers that choice, so automatic detection won't link that same pair again on its own. If the unlink instead happened automatically — because an import that created one of the legs was reverted, or old pending bank entries were cleaned up — finangui tries to recategorize the leg that lost its category instead, the same way it would a newly imported entry: a matching rule first, then your categorization history.
+  An explicit undo is remembered, so detection won't re-link that pair. An automatic unlink (reverted import, cleaned-up pending bank entries) instead tries to recategorize the leg that lost its category, same as a newly imported entry.
 </Callout>
 
 ## Deleting a leg that came from your bank
 
-When one leg of a transfer was added by a bank sync and you delete the other leg, finangui doesn't delete both. It unlinks the pair first — the surviving leg goes back to being a regular entry — and only then deletes the one you asked to remove. The same protection applies when an import batch is reverted or old pending bank entries are cleaned up: a leg that's linked to another is never deleted outright without unlinking it first.
+Deleting one leg of a transfer never deletes both: finangui unlinks the pair first, so the surviving leg becomes a regular entry, then deletes the one you asked to remove. The same applies when reverting an import batch or cleaning up old pending bank entries.
 
-See also [Imports](/docs/features/imports), which triggers transfer detection on every confirmed batch, and [Banking](/docs/features/banking), which triggers it on every sync.
+See also [Imports](/docs/features/imports) and [Banking](/docs/features/banking), which both trigger transfer detection.
