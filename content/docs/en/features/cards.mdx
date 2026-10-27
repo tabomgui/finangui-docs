@@ -9,16 +9,15 @@ A **Cartão de crédito** (credit card) is an account — manual or [Banking](/d
 
 ## Statements manage their own dates
 
-- Every purchase gets a statement automatically — never picked by hand.
-- Connected: closing/due day rechecked each sync, from the 3 latest statements' most common day.
+- Every purchase lands on a statement automatically, never by hand.
+- Connected card: closing and due day are rechecked on each sync.
 - A recorded statement never has its dates rewritten.
-- **Editar datas** (edit dates): closing, due date and reported total, by hand — never moves a transaction.
+- **Editar datas** (edit dates): adjusts closing, due date and reported total by hand, without moving transactions.
 
 ## Reported total vs. computed total
 
 - **Total da fatura**, **Pago** (paid), **Restante** (remaining): always computed, never typed in.
-- Closed: bank's reported total, if any, is the headline number.
-- finangui's own total (outflows minus refunds, no payments) is kept for comparison.
+- Closed statement: the bank's reported total, if any, is the headline; finangui computes its own (outflows minus refunds, no payments) to compare.
 - Status: **Aberta** (open), **Fechada** (closed), **Paga em parte** (partial), **Paga** (paid), **Vencida** (overdue) — with a "Vence em 3 dias" countdown.
 
 <Callout type="info">
@@ -29,22 +28,20 @@ A **Cartão de crédito** (credit card) is an account — manual or [Banking](/d
 
 ![The pay-statement dialog](/screenshots/cards-pay.png)
 
-- **Pagar fatura**: always a transfer.
-- Recognized as a transfer leg, a bank-reported payment, or a known description match.
-- Never reduces the total — counts only under **Pago**, with its own icon and **Pagamento** label.
+- **Pagar fatura** always records a transfer.
+- Never reduces the total: counts only under **Pago**, with the **Pagamento** label.
 - Duplicate bank-reported payment: auto-marked **Ignorada** (ignored).
-- Any other credit (e.g. a refund): reduces the total normally.
-- A manual fix is never undone by a later sync.
+- Other credit (e.g. a refund): reduces the total normally.
+- A manual fix is never undone by a sync.
 
 ## Installment purchases
 
-- Account, amount, date and type lock once an installment exists.
-- Description and category: editable, only if not yet posted.
-- Deleting any installment deletes the whole plan.
-- Canceling removes only the still-projected installments.
+- Account, amount, date and type lock once the installment exists.
+- Description and category: editable only if not yet posted.
+- Deleting an installment deletes the whole plan; canceling removes only the still-projected ones.
 
 ## Limit used and available
 
-- Connected and synced: used/available limit come straight from the bank.
-- Otherwise: calculated from the registered limit and the card's transactions.
-- Future unposted installments: shown separately as **Parcelas futuras**, never counted as used.
+- Connected and synced: used and available come from the bank.
+- Otherwise: calculated from the registered limit and transactions.
+- Unposted future installments show separately as **Parcelas futuras**, outside the used limit.

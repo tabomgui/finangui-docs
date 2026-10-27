@@ -3,7 +3,7 @@ title: Importação
 description: Como enviar um arquivo de extrato bancário, revisar exatamente o que o finangui vai fazer com cada linha antes de qualquer gravação, e reverter uma importação se precisar.
 ---
 
-**Importar extrato** (import statement) (`/importar`) importa um arquivo de extrato. Nada é gravado até você confirmar uma prévia.
+**Importar extrato** (import statement) importa um arquivo de extrato. Nada é gravado até você confirmar uma prévia.
 
 ![Tela de importar extrato](/screenshots/imports.png)
 
@@ -26,10 +26,17 @@ Um arquivo OFX genérico, para outros bancos.
 
 ## Enviando um arquivo
 
-- Exporte o extrato; **Detectar automaticamente** (detect automatically) descobre o formato.
-- **Conta** (account) a que o extrato pertence.
-- Arquivo: `.csv`, `.ofx` ou `.txt`, até 2 MB.
-- Abre a tela **Prévia da importação** (import preview).
+<Steps>
+<Step>
+Exporte o extrato no seu banco (`.csv`, `.ofx` ou `.txt`, até 2 MB).
+</Step>
+<Step>
+Escolha a **Conta** (account) a que ele pertence. **Detectar automaticamente** (detect automatically) descobre o formato.
+</Step>
+<Step>
+Envie o arquivo: abre a **Prévia da importação** (import preview).
+</Step>
+</Steps>
 
 ## Prévia antes de qualquer gravação
 
@@ -41,14 +48,12 @@ Um arquivo OFX genérico, para outros bancos.
 - **Substitui parcela prevista** (replaces projected installment) — a real troca a prevista.
 - **Casa com lançamento manual** (matches manual entry) — adota seu lançamento manual.
 - **Confirma pendente** (confirms pending) — substitui um pendente não confirmado.
-- Caixa de marcação por linha, marcada por padrão.
-- Linhas não lidas aparecem separadamente, com o motivo.
+Cada linha vem marcada por padrão. Linhas não lidas aparecem à parte, com o motivo.
 
 ## Confirmando
 
-- Botão mostra quantos estão marcados.
-- Reavalia o casamento do zero.
-- Lote é gravado como uma única unidade — tudo ou nada.
+- O botão mostra quantas linhas estão marcadas.
+- O casamento é reavaliado do zero e o lote é gravado inteiro ou nada.
 - **Cancelar** (cancel) descarta o lote.
 
 ## Revertendo uma importação
