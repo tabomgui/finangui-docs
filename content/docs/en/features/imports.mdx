@@ -3,7 +3,7 @@ title: Imports
 description: How to upload a bank statement file, review exactly what finangui will do with each line before anything is saved, and revert an import if needed.
 ---
 
-**Importar extrato** (Import statement) (`/importar`) imports a statement file. Nothing saves until you confirm a preview.
+**Importar extrato** (Import statement) imports a statement file. Nothing saves until you confirm a preview.
 
 ![The import statement screen](/screenshots/imports.png)
 
@@ -26,10 +26,17 @@ A generic OFX file, for other banks.
 
 ## Uploading a file
 
-- Export the statement from your bank; **Detectar automaticamente** (detect automatically) picks the format.
-- **Conta** (Account) the statement belongs to.
-- File: `.csv`, `.ofx`, or `.txt`, up to 2 MB.
-- Opens the **Prévia da importação** (Import preview) screen.
+<Steps>
+<Step>
+Export the statement from your bank (`.csv`, `.ofx` or `.txt`, up to 2 MB).
+</Step>
+<Step>
+Pick the **Conta** (Account) it belongs to. **Detectar automaticamente** (detect automatically) picks the format.
+</Step>
+<Step>
+Upload the file: the **Prévia da importação** (Import preview) opens.
+</Step>
+</Steps>
 
 ## Preview before anything is saved
 
@@ -41,15 +48,13 @@ A generic OFX file, for other banks.
 - **Substitui parcela prevista** (Replaces projected installment) — real replaces projected.
 - **Casa com lançamento manual** (Matches manual entry) — adopts your manual entry.
 - **Confirma pendente** (Confirms pending) — replaces an unconfirmed entry.
-- Checkbox per row, checked by default.
-- Unparseable lines show separately, with reason.
+Each row is checked by default. Unparseable lines show separately, with the reason.
 
 ## Confirming
 
-- Button shows how many are checked.
-- Rechecks matching from scratch.
-- Batch commits as one unit — all or nothing.
-- **Cancelar** (Cancel) discards it.
+- The button shows how many rows are checked.
+- Matching is re-evaluated from scratch and the batch commits whole or not at all.
+- **Cancelar** (Cancel) discards the batch.
 
 ## Reverting an import
 

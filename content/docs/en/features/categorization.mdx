@@ -9,7 +9,7 @@ Every transaction gets a category. finangui tries, in order:
 2. A **history-based suggestion**, when no rule matches.
 3. The bank's reported category, matched by name — only for [Banking](/docs/features/banking)-synced transactions.
 
-Recorded in `categorized_by`: `manual`, `history`, `pluggy`, or `rule:{id}`. Transfer legs: never touched.
+Transfer legs are never touched.
 
 Unresolved entries land on **Categorizar** (Categorize) — linked from **Pendências** on Início and from Transações.
 
@@ -17,42 +17,39 @@ Unresolved entries land on **Categorizar** (Categorize) — linked from **Pendê
 
 ## What lands here
 
-- Already-posted, uncategorized entries from every account, cards included.
+- Posted, uncategorized entries from every account, cards included.
 - Never: projected, transfers, ignored entries, statement payments, archived-account entries.
 
-## Grouped by counterparty
-
-- Strips the bank's transaction-type prefix (e.g. "Pix enviado") and trailing city/country suffix.
-- Groups by what's left — a Pix sent and received from the same person land together.
-- Each group card shows outflow/inflow counts and net total.
+Entries are grouped by counterparty, without the transaction-type prefix ("Pix enviado") or the city/country suffix. A Pix sent and received from the same person land together. Each card shows outflow/inflow counts and net total.
 
 ## Selecting and applying
 
-- Header checkbox selects the whole group; open it to check entries individually.
-- Mixed-direction group: **só saídas**/**só entradas** select just one side.
-- Multiple groups selectable at once.
-- Strong-enough history on a same-direction group: one-click suggestion.
+- The header checkbox selects the group; open it to check entries individually.
+- Mixed-direction group: **só saídas**/**só entradas** select one side.
+- You can select several groups at once.
+- Same-direction group with strong history: one-click suggestion.
 
 ![The footer action bar after selecting a group](/screenshots/categorize-apply.png)
 
 <Steps>
 <Step>
-Footer bar shows a category selector matching your direction.
+In the footer action bar, pick the category.
 </Step>
 <Step>
-To create a category: type a name, choose **Criar…** (Create…), optionally **Dentro de** (Inside) an existing one.
+For a new category: type a name and choose **Criar…** (Create…); optionally **Dentro de** (Inside) an existing one.
 </Step>
 <Step>
-Confirm — selected entries get the category right away.
+Confirm: the entries get the category right away.
 </Step>
 </Steps>
 
 ## The rule created
 
-- Applying a category creates a rule by default, for similar future entries.
-- One alternative per checked group: "description contains `<group name>`" AND "type equals" your direction.
+Applying a category also creates, by default, a rule for similar future entries.
+
+- Condition: "description contains `<group name>`" AND "type equals" the direction, one alternative per checked group.
 - Named "`<group>` → `<category>`"; shows up on **Regras** (Rules).
-- Shows how many pending entries it matches, with a checkbox to apply there too, same transaction.
+- Shows how many pending entries it matches, with a checkbox to apply to them too.
 
 ![The Regras screen](/screenshots/rules.png)
 
