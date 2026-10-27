@@ -3,39 +3,39 @@ title: Conexão bancária
 description: Como conectar uma conta pelo Pluggy, o que uma sincronização faz e nunca toca, e como ler o histórico de sincronização.
 ---
 
-A **conexão bancária** liga uma conta real ao finangui pelo [Pluggy](https://pluggy.ai), um agregador de Open Finance. Uma conta conectada funciona como qualquer outra [conta](/docs/features/accounts), só que se atualiza sozinha.
+A **conexão bancária** liga uma conta ao finangui pelo [Pluggy](https://pluggy.ai), um agregador de Open Finance — ela passa a funcionar como qualquer [conta](/docs/features/accounts), só que se atualiza sozinha.
 
 ## Cadastrando suas próprias credenciais do Pluggy
 
-- Cadastre suas credenciais de aplicação do Pluggy em **Configurações** (settings) → **Integração bancária (Pluggy)** (bank integration).
-- Sem provedor compartilhado: cada usuário cria sua própria aplicação no painel do Pluggy.
-- Informe o Client ID e o Client Secret; o secret nunca é mostrado de novo.
-- Salvar já testa as credenciais. Sem elas, o banco fica desligado em todo o app.
+- Cadastre credenciais de aplicação do Pluggy em **Configurações** (settings) → **Integração bancária (Pluggy)** (bank integration).
+- Sem provedor compartilhado: cada usuário cria sua própria aplicação no Pluggy.
+- Client ID e Client Secret; o secret nunca é mostrado de novo.
+- Salvar já testa. Sem credenciais válidas, o banco fica desligado em todo o app.
 
 ## Conectando uma conta
 
 - A partir de **Contas** (accounts), **Conectar banco** (connect bank) abre o widget do Pluggy.
-- Faça login e escolha as contas; cada uma vincula a uma conta nova ou a uma manual correspondente.
+- Faça login, escolha as contas; cada uma vincula a uma nova ou a uma manual correspondente.
 
 ## O que uma sincronização faz
 
-Traz lançamentos pelo mesmo caminho de uma [importação](/docs/features/imports) de arquivo — mesma deduplicação, casamento de parcela e categorização. A categoria do banco é só o último recurso.
+Mesmo caminho de uma [importação](/docs/features/imports) de arquivo: deduplicação, casamento de parcela, categorização. Categoria do banco é só o último recurso.
 
 <Callout type="info">
-  Toda sincronização também revisita os últimos ~40 dias, captando mudança de status, descrição ou fatura — nunca sobrescrevendo data, valor, categoria ou fatura escolhida à mão.
+  Toda sincronização revisita os últimos ~40 dias por mudança de status, descrição ou fatura — nunca sobrescrevendo data, valor, categoria ou fatura escolhida à mão.
 </Callout>
 
 ## Precisando reconectar
 
-Uma conexão pode precisar que você faça login de novo no banco. O finangui chama isso de **Reconectar** (reconnect) e notifica na hora.
+Uma conexão pode precisar de login de novo. O finangui chama isso de **Reconectar** (reconnect) e notifica na hora.
 
 ## Histórico de sincronização
 
-Cada conexão tem uma tela de **Histórico** (history): toda sincronização, gatilho, resultado, contagens adicionado/atualizado, com detalhe. **Sincronizar agora** (sync now) dispara uma na hora.
+Cada conexão tem uma tela de **Histórico** (history): toda sincronização, gatilho, resultado, contagens adicionado/atualizado. **Sincronizar agora** (sync now) dispara uma na hora.
 
 ## Desconectando
 
-Não apaga nada: as contas voltam a ser manuais, mantendo o histórico, e deixam de se atualizar sozinhas.
+Não apaga nada: as contas voltam a ser manuais, mantendo o histórico, e param de se atualizar.
 
 ## A direção sempre vem do banco
 

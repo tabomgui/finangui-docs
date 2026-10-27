@@ -7,14 +7,14 @@ A **Cartão de crédito** (credit card) is an account — manual or [Banking](/d
 
 ![A card statement](/screenshots/cards.png)
 
-## Statements open, close and come due on their own
+## Statements manage their own dates
 
 - Every purchase gets a statement automatically — never picked by hand.
-- Connected card: closing/due day rechecked each sync, using the 3 latest statements' most common day.
+- Connected: closing/due day rechecked each sync, from the 3 latest statements' most common day.
 - A recorded statement never has its dates rewritten.
 - **Editar datas** (edit dates): closing, due date and reported total, by hand — never moves a transaction.
 
-## Total, reported total and computed total
+## Reported total vs. computed total
 
 - **Total da fatura**, **Pago** (paid), **Restante** (remaining): always computed, never typed in.
 - Closed: bank's reported total, if any, is the headline number.
@@ -25,23 +25,23 @@ A **Cartão de crédito** (credit card) is an account — manual or [Banking](/d
   Totals disagree: a divergence warning. Cycle starts before the oldest synced transaction: a neutral "incomplete" note instead.
 </Callout>
 
-## Paying a statement is a transfer, never an expense
+## Paying is a transfer, never an expense
 
 ![The pay-statement dialog](/screenshots/cards-pay.png)
 
 - **Pagar fatura**: always a transfer.
-- Recognized when it's a transfer leg, matches a bank-reported payment, or matches a known description.
+- Recognized as a transfer leg, a bank-reported payment, or a known description match.
 - Never reduces the total — counts only under **Pago**, with its own icon and **Pagamento** label.
 - Duplicate bank-reported payment: auto-marked **Ignorada** (ignored).
-- Any other credit (e.g. a refund) reduces the total normally.
+- Any other credit (e.g. a refund): reduces the total normally.
 - A manual fix is never undone by a later sync.
 
 ## Installment purchases
 
 - Account, amount, date and type lock once an installment exists.
-- Description and category can still change, only if not yet posted.
+- Description and category: editable, only if not yet posted.
 - Deleting any installment deletes the whole plan.
-- Canceling a plan removes only the still-projected installments.
+- Canceling removes only the still-projected installments.
 
 ## Limit used and available
 

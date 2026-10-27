@@ -3,7 +3,7 @@ title: Development
 description: Run finangui locally with Docker for development, and the make targets that cover the day-to-day workflow.
 ---
 
-finangui runs entirely in Docker, via a `Makefile` at the repo root.
+finangui runs in Docker, via a `Makefile` at the repo root.
 
 ## Requirements
 
@@ -28,7 +28,7 @@ cp backend/.env.example backend/.env
 make up
 ```
 
-Override ports with `BACKEND_PORT`/`FRONTEND_PORT`.
+Ports: `BACKEND_PORT`/`FRONTEND_PORT`.
 </Step>
 
 <Step>
@@ -64,11 +64,11 @@ API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_ENV=local`.
 | `make front-check` | Runs the frontend's lint, typecheck and test suite. |
 
 <Callout type="warn">
-  `make test` needs `finangui_test`, auto-created by `docker/postgres/init.sql`; older volume: `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` needs `finangui_test`. Missing (older volume): `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-- `npm install` on the host for editor/TS tooling; rebuild images after a dependency change — a restart isn't enough.
+- `npm install` on the host for editor/TS; rebuild images on a dependency change — restart alone isn't enough.
 
 ## Contributing
 
-Public GitHub repo, fork/branch/PR flow. Conventions live in the repo's `CLAUDE.md`.
+Public GitHub repo, fork/branch/PR. Conventions live in `CLAUDE.md`.

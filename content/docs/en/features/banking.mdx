@@ -3,40 +3,40 @@ title: Banking
 description: Connecting a bank account through Pluggy, what a sync does and doesn't touch, and how to read sync history.
 ---
 
-**Banking** connects a real bank account to finangui through [Pluggy](https://pluggy.ai), an Open Finance aggregator. A connected account works like any other [account](/docs/features/accounts), just self-updating.
+**Banking** links a bank account via [Pluggy](https://pluggy.ai), an Open Finance aggregator — it then works like any other [account](/docs/features/accounts), self-updating.
 
 ## Registering your own Pluggy credentials
 
-- Register your own Pluggy app credentials in **Configurações** (Settings) → **Integração bancária (Pluggy)** (Bank integration).
-- No shared provider: each user creates their own app on Pluggy's dashboard.
-- Enter the Client ID and Client Secret; the secret is never shown again.
+- Register Pluggy app credentials in **Configurações** (Settings) → **Integração bancária (Pluggy)** (Bank integration).
+- No shared provider: each user creates their own Pluggy app.
+- Client ID and Client Secret; the secret is never shown again.
 - Saving tests the credentials. Without them, banking stays off everywhere.
 
 ## Connecting an account
 
 - From **Contas** (Accounts), **Conectar banco** (Connect bank) opens Pluggy's widget.
-- Log in and pick accounts; each links to a new or matching manual account.
+- Log in, pick accounts; each links to a new or matching manual one.
 
 ## What a sync does
 
-Brings in transactions through the same pipeline as a file [import](/docs/features/imports) — same dedup, installment matching, categorization. A provider category is only a last resort.
+Same pipeline as a file [import](/docs/features/imports): dedup, installment matching, categorization. Provider category is only a last resort.
 
 <Callout type="info">
-  Every sync also revisits the last ~40 days, catching status, description, or invoice changes — never overwriting date, amount, category, or a hand-picked invoice.
+  Every sync revisits the last ~40 days for status, description, or invoice changes — never overwriting date, amount, category, or a chosen invoice.
 </Callout>
 
 ## Needing reauthorization
 
-A connection can need you to log in again at the bank. finangui calls this **Reconectar** (Reconnect) and notifies you right away.
+A connection can need re-login at the bank. finangui calls this **Reconectar** (Reconnect) and notifies you right away.
 
 ## Sync history
 
-Each connection has a **Histórico** (History) screen: every sync, trigger, outcome, counts added/updated, with detail. **Sincronizar agora** (Sync now) triggers one on demand.
+Each connection has a **Histórico** (History) screen: every sync, trigger, outcome, counts added/updated. **Sincronizar agora** (Sync now) triggers one on demand.
 
 ## Disconnecting
 
-Deletes nothing: accounts become manual again, keep their history, and stop self-updating.
+Deletes nothing: accounts go manual again, keep their history, stop self-updating.
 
 ## Direction is always read from the bank
 
-Direction (in or out) comes from the bank's reported type, never the amount's sign — a credit card's sign can be inverted.
+Direction (in or out) comes from the bank's type, never the amount's sign — a credit card's sign can invert.
