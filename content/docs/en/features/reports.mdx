@@ -3,28 +3,32 @@ title: Reports
 description: How finangui's Relatórios screen shows monthly income-versus-expense evolution and spending compared between two periods.
 ---
 
-**Relatórios** (Reports) has two reports: **Evolução mensal** (Monthly evolution), income versus expense over time, and **Comparação por categoria** (Category comparison), spending by category between two periods you pick. Both exclude transfers between your own accounts and use your main currency.
+**Relatórios** (Reports): two reports, excluding transfers between your accounts, in your main currency.
+
+- **Evolução mensal** (Monthly evolution) — income vs. expense over time.
+- **Comparação por categoria** (Category comparison) — spending by category, two periods.
 
 ![The Relatórios screen](/screenshots/reports.png)
 
 ## Monthly evolution
 
-Plots income and expense side by side for each month in the range. A dropdown picks the range: **Últimos 6 meses** (Last 6 months), **Últimos 12 meses** (Last 12 months), or **Ano atual** (Current year).
+- Income and expense, side by side, per month.
+- Range: **Últimos 6 meses**, **Últimos 12 meses**, or **Ano atual**.
 
 ## Category comparison
 
-Compares spending per category across two independently-steppable months, **Período A** and **Período B**, plus a total row. The difference (always B minus A) is highlighted — a bigger spend in B in expense tone, a smaller one in income tone.
-
-A subcategory's spending rolls up into its root category; anything uncategorized gets its own **Sem categoria** (No category) row.
+- **Período A** vs. **Período B** (each steppable), plus a total row.
+- Difference (B minus A) highlighted — expense tone if bigger, income tone if smaller.
+- A subcategory rolls into its root; uncategorized gets its own **Sem categoria** row.
 
 ## Purchase date or statement due date
 
-A toggle above both reports controls which date a transaction is grouped by: **Data da compra** (Purchase date) or **Vencimento da fatura** (Statement due date).
+A toggle groups by **Data da compra** (Purchase date) or **Vencimento da fatura** (Statement due date).
 
 <Callout type="info">
-  Only credit card purchases are affected. **Vencimento da fatura** moves a card purchase to the month its linked statement is due, which can differ from the purchase month. Every other transaction stays on its own date. See [Cards](/docs/features/cards) for how a purchase gets attached to a statement.
+  Card purchases only — due date moves them to the statement's month. See [Cards](/docs/features/cards).
 </Callout>
 
 ## Related to the Início spending breakdown
 
-The **Distribuição de gastos** (Spending breakdown) card on **Início** (Home) is built on the same logic: one entry per subcategory with spending, plus a combined entry when the parent category also has direct spending. It's a more compact view of the current month, but the numbers match Relatórios.
+**Distribuição de gastos** (Spending breakdown), on **Início**, uses the same logic: one entry per subcategory, plus a combined entry if the parent also spends directly. Same numbers, more compact, current month only.

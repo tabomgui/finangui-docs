@@ -3,30 +3,44 @@ title: Categorização
 description: Como um lançamento ganha categoria automaticamente, e como a tela Categorizar limpa em bloco o acúmulo de lançamentos sem categoria.
 ---
 
-Todo lançamento termina com uma categoria, mas a maioria nunca precisa que alguém escolha na mão. O finangui tenta, nesta ordem: uma **regra** que casa (uma condição sobre o valor sempre vê o valor da própria parcela, nunca o total da compra), depois uma **sugestão pelo histórico** quando nenhuma regra casa, e por fim a categoria informada pelo banco, casada por nome — só para lançamentos sincronizados por [Banking](/docs/features/banking). Qual dessas decidiu (ou uma escolha manual) fica gravado em `categorized_by`: `manual`, `history`, `pluggy` ou `rule:{id}`. Pernas de transferência nunca são tocadas por regra nem por histórico.
+Todo lançamento termina com uma categoria. O finangui tenta, nesta ordem:
 
-O que nenhuma das três resolve se acumula na tela **Categorizar** (Categorize) — com atalho pelo card **Pendências** (Pending items) da Início e pela tela Transações, sempre que há pendentes.
+1. Uma **regra** que casa — a condição sobre valor vê o valor da própria parcela, nunca o total da compra.
+2. Uma **sugestão pelo histórico**, quando nenhuma regra casa.
+3. A categoria informada pelo banco, casada por nome — só para lançamentos sincronizados por [Banking](/docs/features/banking).
+
+Gravado em `categorized_by`: `manual`, `history`, `pluggy` ou `rule:{id}`. Pernas de transferência nunca são tocadas por regra nem por histórico.
+
+O que nenhuma das três resolve se acumula em **Categorizar** (Categorize) — atalho pelo card **Pendências** da Início e pela tela Transações.
 
 ![A tela Categorizar](/screenshots/categorize.png)
 
 ## O que entra na tela Categorizar
 
-A tela `/categorizar` existe para resolver de uma vez o volume de lançamentos sem categoria que aparece depois de uma importação ou sync com o banco — lançamentos já efetivados de todas as contas, cartão de crédito incluído. Nunca entram lançamentos previstos, transferências, lançamentos ignorados, pagamentos de fatura ou lançamentos de contas arquivadas.
+- Lançamentos já efetivados e sem categoria, de todas as contas, cartão de crédito incluído.
+- Nunca entram: previstos, transferências, ignorados, pagamentos de fatura, lançamentos de contas arquivadas.
 
 ## Agrupados por contraparte
 
-Os lançamentos ficam agrupados por contraparte: o finangui tira o prefixo do tipo de transação no início da descrição do banco (ex.: "Pix enviado") e um sufixo de cidade e país no final, e agrupa pelo que resta — por isso um Pix enviado e um recebido da mesma pessoa caem no mesmo grupo. Cada grupo aparece como um card com a contagem de saídas/entradas e o total líquido.
+- Tira o prefixo do tipo de transação no início da descrição (ex.: "Pix enviado") e um sufixo de cidade e país no final.
+- Agrupa pelo que resta — um Pix enviado e um recebido da mesma pessoa caem no mesmo grupo.
+- Cada grupo aparece como um card com a contagem de saídas/entradas e o total líquido.
 
 ## Selecionando e aplicando
 
-O checkbox do cabeçalho seleciona o grupo inteiro; abrir o grupo permite marcar lançamentos individuais. Num grupo que mistura as duas direções, **só saídas**/**só entradas** selecionam só um lado, e vários grupos podem ser selecionados ao mesmo tempo. Um grupo de uma única direção com histórico forte o suficiente mostra uma sugestão aplicável num clique.
+- Checkbox do cabeçalho seleciona o grupo inteiro; abrir o grupo permite marcar lançamentos individuais.
+- Grupo com as duas direções: **só saídas**/**só entradas** selecionam só um lado.
+- Vários grupos podem ser selecionados ao mesmo tempo.
+- Grupo de uma única direção com histórico forte: sugestão aplicável num clique.
+
+![Barra de ação após selecionar um grupo](/screenshots/categorize-apply.png)
 
 <Steps>
 <Step>
-Com lançamentos selecionados, a barra de ação no rodapé mostra um seletor de categoria — só de entrada ou só de saída, de acordo com a direção da seleção.
+Com lançamentos selecionados, a barra de ação no rodapé mostra um seletor de categoria de acordo com a direção da seleção.
 </Step>
 <Step>
-Para criar uma categoria nova, digite o nome e escolha **Criar…** (Create…), opcionalmente **Dentro de** (Inside) uma já existente, como subcategoria.
+Para criar uma categoria nova, digite o nome e escolha **Criar…** (Create…), opcionalmente **Dentro de** (Inside) uma já existente.
 </Step>
 <Step>
 Confirme. Os lançamentos selecionados recebem a categoria na hora.
@@ -35,12 +49,17 @@ Confirme. Os lançamentos selecionados recebem a categoria na hora.
 
 ## A regra criada ao aplicar
 
-Por padrão, aplicar uma categoria também cria uma regra para que lançamentos parecidos futuros sejam categorizados do mesmo jeito — uma alternativa por grupo marcado, no formato "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção. A regra recebe o nome "`<grupo>` → `<categoria>`" e aparece depois na tela **Regras** (Rules). O bloco também mostra quantos outros pendentes a regra já casa, com um checkbox para aplicá-la a eles também, de forma síncrona na mesma transação da aplicação da categoria.
+- Aplicar uma categoria também cria uma regra por padrão, para lançamentos parecidos futuros.
+- Formato: uma alternativa por grupo marcado — "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção.
+- Recebe o nome "`<grupo>` → `<categoria>`"; aparece depois em **Regras** (Rules).
+- Mostra quantos outros pendentes a regra já casa, com um checkbox para aplicá-la também a eles — síncrono, na mesma transação.
 
 ![A tela Regras](/screenshots/rules.png)
 
 <Callout type="info">
-  O interruptor da regra vem desligado por padrão quando só parte de um grupo foi marcada, e fica indisponível acima de 19 grupos selecionados (o backend limita uma regra a 20 condições no total).
+  Vem desligado por padrão quando só parte de um grupo foi marcada; fica indisponível acima de 19 grupos (o backend limita a 20 condições).
 </Callout>
 
-Se o formato padrão não é o que você quer, **Personalizar** (Customize) abre um editor completo de regra; **Voltar ao padrão** (Back to default) descarta e volta para a regra gerada.
+**Personalizar** (Customize) abre um editor completo de regra; **Voltar ao padrão** (Back to default) descarta e volta para a regra gerada.
+
+![O editor de regra](/screenshots/rule-editor.png)

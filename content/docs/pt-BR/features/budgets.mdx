@@ -3,22 +3,30 @@ title: Orçamento
 description: Como o finangui acompanha um limite mensal de gasto por categoria de despesa, com exceções pontuais por mês e categorias pai e filha.
 ---
 
-Um orçamento é um limite mensal de gasto que você define numa categoria, para ver de uma olhada o quanto já gastou dele. Na tela **Orçamento** (budget), **Orçar categoria** (budget a category) abre um formulário para cadastrar um — só para uma categoria de despesa não arquivada, nunca receita ou transferência.
+Um orçamento é um limite mensal de gasto numa categoria. **Orçar categoria** (budget a category) abre o formulário — só despesa, nunca receita, transferência ou arquivada.
 
 ![A tela Orçamento](/screenshots/budgets.png)
 
-## Padrão e exceções mensais
+## Padrão e exceções
 
-O valor informado se torna o padrão, valendo para todo mês a menos que aquele mês tenha sua própria exceção. O interruptor **Vale para** (applies to) deixa sobrescrever o padrão só no mês que você está vendo (por exemplo, **Só outubro**); uma categoria com exceção ativa mostra o selo **Só este mês** (only this month).
+- O valor informado é o padrão para todo mês.
+- **Vale para** (applies to) sobrescreve só o mês visto.
+- Exceção ativa mostra o selo **Só este mês** (only this month).
 
 <Callout type="info">
-  Ativar **Sem orçamento só neste mês** (no budget just this month) em vez de informar um valor cancela o orçamento daquele mês específico só nele, sem apagar o padrão nem a própria exceção.
+  **Sem orçamento só neste mês** cancela só aquele mês — o padrão e a exceção continuam.
 </Callout>
 
 ## Categorias pai e filha
 
-Orçar uma categoria pai cobre ela e todas as subcategorias — o gasto de uma filha conta para o limite do pai mesmo sem ela própria estar orçada, e uma filha ainda pode ter seu próprio limite além disso. Os totais no topo da tela nunca contam o gasto de uma filha orçada em dobro.
+- Orçar o pai cobre ele e todas as subcategorias.
+- Gasto de filha conta para o pai mesmo sem estar orçada.
+- Uma filha ainda pode ter limite próprio.
+- Totais nunca contam o gasto de uma filha em dobro.
 
-## Gasto, restante e progresso
+## Gasto, restante, progresso
 
-Cada linha mostra uma barra de progresso e um percentual do limite. O gasto é líquido (saída menos estorno) e nunca negativo; ao passar do limite, o rótulo "restam" muda para "excedeu". O gasto em categorias não orçadas aparece separado, como **Fora do orçamento** (outside the budget).
+- Cada linha: barra de progresso e percentual.
+- O gasto é líquido (saída menos estorno), nunca negativo.
+- Ao passar do limite, "restam" muda para "excedeu".
+- O gasto não orçado aparece separado, como **Fora do orçamento**.

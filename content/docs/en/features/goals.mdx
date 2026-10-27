@@ -3,23 +3,27 @@ title: Goals
 description: How finangui tracks progress toward a savings target, either from an account's balance or from manual contributions.
 ---
 
-A **Meta** (goal) is a savings target: a name, a target amount, and optionally a target date. On the **Metas** (Goals) screen, **Nova meta** (New goal) opens a form to set one up.
+A **Meta** (goal) is a savings target: name, target amount, optional target date. **Nova meta** (New goal) opens the form.
 
 ![The Metas screen](/screenshots/goals.png)
 
 ## Two ways to track progress
 
-You pick one of two ways when you create the goal, and they're mutually exclusive:
+![Creating a goal](/screenshots/goal-form.png)
 
-- **Linked to an account** — turning on **Acompanhar saldo de uma conta** (Track an account's balance) makes progress exactly that [account](/docs/features/accounts)'s balance, replacing manual contributions.
-- **Unlinked** — progress is instead the running total of **aportes** (contributions) you log by hand via **Novo aporte** (New contribution), each a deposit or, with **Retirada** (Withdrawal), money taken out.
+Pick one, mutually exclusive:
+
+- **Linked to an account** — **Acompanhar saldo de uma conta** (Track an account's balance) makes progress that [account](/docs/features/accounts)'s balance.
+- **Unlinked** — progress is the total of **aportes** (contributions) via **Novo aporte** (New contribution): deposits, or **Retirada** (Withdrawal) for money out.
 
 ## Progress and pace
 
-Each goal shows progress as a percentage and a remaining amount; a negative linked balance floors the percentage at 0% without clipping the remaining amount. An optional target date makes finangui show how much to set aside each month to reach it in time.
+- Percentage and remaining amount.
+- A negative linked balance floors the percentage at 0%, not the remaining amount.
+- An optional target date shows how much to set aside monthly.
 
 ## Reaching the goal
 
 <Callout type="info">
-  A goal is marked **Atingida** (Achieved) the first time progress reaches the target amount, and that mark sticks even if progress later dips back below it. The only way to undo it is editing the goal and raising its target amount past current progress.
+  **Atingida** (Achieved) marks the first time progress reaches the target, and sticks even after it dips. Only raising the target past current progress undoes it.
 </Callout>

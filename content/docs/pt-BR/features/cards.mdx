@@ -3,30 +3,48 @@ title: Cartões
 description: Como o finangui acompanha faturas de cartão de crédito, pagamentos, compras parceladas e o limite disponível.
 ---
 
-Um **Cartão de crédito** (credit card) é uma conta como qualquer outra — manual ou vinculada por [Banking](/docs/features/banking) — e segue a mesma regra de saldo de [Contas](/docs/features/accounts): sempre o razão completo, sem corte "até hoje". Esta página cobre o que é específico do cartão: fatura, pagamentos, compras parceladas e uso do limite.
+Um **Cartão de crédito** (credit card) é uma conta como qualquer outra — manual ou vinculada por [Banking](/docs/features/banking) — e segue a mesma regra de saldo de [Contas](/docs/features/accounts): sempre o razão completo, sem corte "até hoje".
 
 ![Fatura de um cartão](/screenshots/cards.png)
 
 ## A fatura abre, fecha e vence por conta própria
 
-Toda compra no cartão é atribuída a uma fatura automaticamente, no momento em que você cria ou edita a transação — você nunca escolhe uma fatura à mão. Para um cartão conectado por **Banking**, o finangui reconfere o dia de fechamento e vencimento a cada sincronização, com base no dia mais comum entre as três faturas mais recentes do banco; uma fatura já gravada nunca tem suas próprias datas reescritas. Você também pode editar à mão a data de fechamento, o vencimento e o total informado pelo banco em **Editar datas** (edit dates); isso nunca move uma transação para outra fatura.
+- Toda compra é atribuída a uma fatura automaticamente, ao criar ou editar a transação — nunca à mão.
+- Cartão conectado: o finangui reconfere fechamento/vencimento a cada sincronização, pelo dia mais comum entre as 3 faturas mais recentes do banco.
+- Fatura já gravada: nunca tem suas datas reescritas.
+- **Editar datas** (edit dates): edite fechamento, vencimento e total informado pelo banco à mão — nunca move a transação para outra fatura.
 
 ## Total, total informado pelo banco e total calculado
 
-O **Total da fatura**, o **Pago** (paid) e o **Restante** (remaining) são sempre calculados, nunca digitados diretamente. Depois que a fatura fecha, se o banco informa um total, esse é o número em destaque; o finangui também mantém seu próprio total calculado (saídas menos estornos, sem pagamento) para comparar. O status aparece como **Aberta** (ainda recebendo compras), **Fechada** (aguardando pagamento), **Paga em parte** ou **Paga** — ou **Vencida** quando o vencimento passa sem a fatura estar totalmente paga, com uma contagem como "Vence em 3 dias" ao lado.
+- **Total da fatura**, **Pago** (paid), **Restante** (remaining): sempre calculados, nunca digitados.
+- Fatura fechada: o total informado pelo banco (quando existe) é o número em destaque.
+- O finangui também calcula seu próprio total (saídas menos estornos, sem pagamento) para comparar.
+- Status: **Aberta**, **Fechada**, **Paga em parte** ou **Paga** — ou **Vencida** quando o vencimento passa sem pagar, com contagem como "Vence em 3 dias".
 
 <Callout type="info">
-  Quando os dois totais não coincidem, aparece um aviso de divergência comparando os dois. Se o ciclo da fatura começa antes do lançamento mais antigo que o finangui já sincronizou daquela conta, esse aviso é substituído por uma nota neutra de total incompleto — o Open Finance costuma compartilhar só os últimos 12 meses de histórico.
+  Totais não coincidem: aviso de divergência. Ciclo começa antes do lançamento mais antigo sincronizado: nota neutra de total incompleto no lugar — o Open Finance costuma compartilhar só uns 12 meses de histórico.
 </Callout>
 
 ## Pagar a fatura é uma transferência, nunca uma despesa
 
-Pagar uma fatura (**Pagar fatura**) sempre é registrado como transferência, nunca como despesa. O finangui reconhece um crédito como pagamento quando é uma perna de transferência, casa com um pagamento que o banco informou, ou a descrição bate com um padrão conhecido — nunca reduz o total, contando só em **Pago** (paid), com ícone próprio e o rótulo **Pagamento**. Um pagamento duplicado informado pelo banco é marcado automaticamente **Ignorada** (ignored). Qualquer outro crédito, como um estorno, reduz o total normalmente. Um pagamento reconhecido ou corrigido à mão nunca é desfeito por uma sincronização seguinte.
+![O diálogo de pagar fatura](/screenshots/cards-pay.png)
+
+- **Pagar fatura**: sempre registrado como transferência.
+- Reconhecido como pagamento quando é uma perna de transferência, casa com um pagamento informado pelo banco, ou casa com uma descrição conhecida.
+- Nunca reduz o total — conta só em **Pago** (paid), com ícone próprio e o rótulo **Pagamento**.
+- Pagamento duplicado informado pelo banco: marcado automaticamente **Ignorada** (ignored).
+- Qualquer outro crédito, como um estorno, reduz o total normalmente.
+- Pagamento reconhecido ou corrigido à mão: nunca desfeito por uma sincronização seguinte.
 
 ## Compras parceladas
 
-A conta, o valor, a data e o tipo de cada parcela ficam travados depois que ela existe; descrição e categoria ainda podem mudar, mas só nas parcelas ainda não lançadas. Excluir qualquer parcela individual exclui o parcelamento inteiro; cancelar um parcelamento remove só as parcelas ainda projetadas.
+- Conta, valor, data e tipo de cada parcela ficam travados depois que ela existe.
+- Descrição e categoria ainda podem mudar, só nas parcelas ainda não lançadas.
+- Excluir qualquer parcela individual exclui o parcelamento inteiro.
+- Cancelar um parcelamento remove só as parcelas ainda projetadas.
 
 ## Limite usado e disponível
 
-O limite usado e disponível vêm direto do banco quando o cartão está conectado e sincronizado; caso contrário, o finangui calcula os dois localmente a partir do limite cadastrado e dos lançamentos do cartão. Parcelas futuras ainda não lançadas aparecem separadas como **Parcelas futuras** (future installments), sem entrar no limite usado.
+- Cartão conectado e sincronizado: usado e disponível vêm direto do banco.
+- Caso contrário: calculados localmente, a partir do limite cadastrado e dos lançamentos do cartão.
+- Parcelas futuras ainda não lançadas: aparecem separadas como **Parcelas futuras**, sem entrar no limite usado.

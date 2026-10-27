@@ -3,26 +3,43 @@ title: Contas
 description: Conta corrente, poupança, dinheiro e cartão de crédito, e como o finangui calcula o saldo que você vê em cada uma.
 ---
 
-Uma conta no finangui é qualquer lugar onde o dinheiro fica ou passa: uma **Conta corrente** (checking account), uma **Poupança** (savings account), **Dinheiro** (cash) ou um **Cartão de crédito** (credit card). Todo lançamento pertence a uma conta, e o saldo de toda conta é sempre calculado pelo backend a partir do saldo inicial mais os lançamentos — nunca digitado à mão, nunca calculado no frontend.
+Uma conta guarda ou faz passar dinheiro:
 
-As contas ficam em **Contas** (Accounts). Uma conta manual pode ser criada, editada, arquivada ou excluída ali; uma conta vinculada por [Banking](/docs/features/banking) aparece agrupada sob a sua conexão, e também pode ser editada (nome, cor, ícone, campos de cartão), só não desconectada por essa tela.
+- **Conta corrente** (checking account)
+- **Poupança** (savings account)
+- **Dinheiro** (cash)
+- **Cartão de crédito** (credit card)
+
+Todo lançamento pertence a uma conta. Saldo: sempre calculado pelo backend, nunca digitado à mão ou calculado no frontend.
+
+As contas ficam em **Contas** (Accounts).
+
+- Conta manual: criar, editar, arquivar ou excluir ali.
+- Conta vinculada por Banking: agrupada sob a conexão; nome, cor, ícone e campos de cartão ainda editáveis ali; desconectar só por [Banking](/docs/features/banking).
 
 ## Como o saldo é calculado
 
-O saldo de uma conta é o saldo inicial mais todo lançamento lançado (`posted`) não ignorado até hoje (fuso do app) — usado em todo lugar onde um saldo aparece: Início, lista de contas, progresso das metas e cartões de conexão. Um lançamento com data futura já aparece no histórico da conta, mas não entra no saldo até aquela data chegar.
+Saldo = saldo inicial + todo lançamento lançado (`posted`) não ignorado até hoje (fuso do app).
+
+- Aparece em todo lugar onde um saldo é mostrado: Início, lista de contas, progresso das metas, cartões de conexão.
+- Lançamento com data futura: aparece no histórico, não entra no saldo ainda.
 
 <Callout type="info">
-  Uma conta conectada a um banco segue uma regra diferente — veja abaixo.
+  Uma conta conectada a um banco segue uma regra diferente abaixo.
 </Callout>
 
 ## Conta conectada a um banco ancora no saldo do banco
 
-Para uma conta vinculada por **Banking** (que não seja cartão), o saldo ancora no saldo que o banco informou na última sincronização, somando só os lançamentos datados depois daquele dia. Um lançamento manual com data no dia da última sincronização ou antes não move o saldo até a próxima sincronização. O finangui também mostra **Pelos lançamentos** (By the entries) ao lado — o saldo calculado puramente pelo seu próprio razão, referente a hoje — só para comparação; nunca é o número usado como saldo real da conta.
+Para uma conta vinculada por **Banking** (que não seja cartão):
+
+- Ancora no saldo informado pelo banco na última sincronização, mais os lançamentos datados depois daquele dia.
+- Lançamento manual no dia da última sincronização ou antes: espera a próxima sincronização.
+- **Pelos lançamentos** (By the entries): saldo calculado só pelo razão próprio, referente a hoje, só para comparação — nunca o saldo real.
 
 ## Conta de cartão de crédito sempre usa o razão completo
 
-Uma conta de **Cartão de crédito** não tem corte "até hoje": o saldo dela é sempre o razão histórico completo, já que o saldo de um cartão é uma dívida em andamento, não uma fotografia de um momento. Totais de fatura, vencimento, pagamentos e uso do limite são cobertos na página [Cartões](/docs/features/cards).
+Uma conta de **Cartão de crédito** não tem corte "até hoje" — o saldo é sempre o razão histórico completo, uma dívida em andamento, não uma fotografia de um momento. Detalhes de fatura: [Cartões](/docs/features/cards).
 
 ## A dívida de cartão não entra no total da Início
 
-O saldo total da Início soma todas as contas que não são de cartão; a dívida de cartão aparece separadamente, no card de Cartões ("Faturas"), em vez de ser abatida dele.
+O saldo total da Início soma só as contas que não são de cartão. A dívida de cartão aparece separadamente, no card de Cartões ("Faturas").

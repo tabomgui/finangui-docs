@@ -3,7 +3,7 @@ title: Desenvolvimento
 description: Rode o finangui localmente com Docker para desenvolvimento, e os targets do make que cobrem o dia a dia.
 ---
 
-O finangui é uma API Laravel 13 com Postgres (`backend/`) e um frontend React/Vite/TypeScript (`frontend/`). Tudo roda em Docker, orquestrado por um `Makefile` na raiz do repositório.
+O finangui roda inteiro em Docker, orquestrado por um `Makefile` na raiz do repositório.
 
 ## Requisitos
 
@@ -52,7 +52,7 @@ Cria um usuário de desenvolvimento: `dev@finangui.test` / `password`.
 </Step>
 </Steps>
 
-A documentação interativa da API (Scramble) fica em `http://localhost:8001/docs/api` enquanto `APP_ENV=local`.
+Documentação interativa da API (Scramble): `http://localhost:8001/docs/api`, enquanto `APP_ENV=local`.
 
 ## Targets do make no dia a dia
 
@@ -68,11 +68,12 @@ A documentação interativa da API (Scramble) fica em `http://localhost:8001/doc
 | `make front-check` | Roda lint, typecheck e a suíte de testes do frontend. |
 
 <Callout type="warn">
-  `make test` roda contra o banco `finangui_test`, criado por `docker/postgres/init.sql` na primeira inicialização do volume. Se seu volume for anterior a isso, crie o banco à mão: `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` precisa do banco `finangui_test`, criado por `docker/postgres/init.sql` na primeira inicialização do volume. Volume mais antigo: crie à mão com `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-O frontend também precisa de `npm install` no host para o editor e as ferramentas de TS; reconstrua sua imagem (ou a do backend, após mudança em `docker/php/**`) quando as dependências mudarem — só reiniciar não basta.
+- `npm install` no host mantém o editor e as ferramentas de TS em dia.
+- Reconstrua a imagem do frontend (ou a do backend, após mudança em `docker/php/**`) quando as dependências mudarem — só reiniciar não basta.
 
 ## Contribuindo
 
-O finangui é um repositório público no GitHub; contribuições seguem o fluxo padrão de fork/branch/PR. As convenções reais do projeto vivem no `CLAUDE.md` do próprio repositório — a fonte da verdade, mantida atualizada conforme o código evolui.
+Repositório público no GitHub, fluxo padrão de fork/branch/PR. As convenções vivem no `CLAUDE.md` do próprio repositório — a fonte da verdade.

@@ -3,23 +3,27 @@ title: Metas
 description: Como o finangui acompanha o progresso de uma meta de economia, a partir do saldo de uma conta ou de aportes manuais.
 ---
 
-Uma **Meta** (goal) é um objetivo de economia: um nome, um valor alvo e, opcionalmente, uma data-limite. Na tela **Metas** (goals), **Nova meta** (new goal) abre um formulário para cadastrar uma.
+Uma **Meta** (goal) é um objetivo de economia: nome, valor alvo, data-limite opcional. **Nova meta** (new goal) abre o formulário.
 
 ![A tela Metas](/screenshots/goals.png)
 
 ## Duas formas de acompanhar o progresso
 
-Você escolhe uma das duas formas na criação, e elas são mutuamente exclusivas:
+![Criando uma meta](/screenshots/goal-form.png)
 
-- **Vinculada a uma conta** — ativar **Acompanhar saldo de uma conta** (track an account's balance) faz o progresso ser exatamente o saldo dessa [conta](/docs/features/accounts), em vez da soma de aportes manuais.
-- **Sem vínculo** — o progresso passa a ser o total acumulado de **aportes** (contributions) registrados à mão pelo botão **Novo aporte** (new contribution), cada um um depósito ou, ativando **Retirada** (withdrawal), um valor retirado.
+Mutuamente exclusivas:
+
+- **Vinculada a uma conta** — **Acompanhar saldo de uma conta** (track an account's balance) faz o progresso ser o saldo dessa [conta](/docs/features/accounts).
+- **Sem vínculo** — o progresso é o total de **aportes** (contributions) via **Novo aporte** (new contribution): depósitos, ou **Retirada** (withdrawal) para saída.
 
 ## Progresso e ritmo
 
-Cada meta mostra o progresso como percentual e como valor restante; um saldo vinculado negativo trava o percentual em 0% sem limitar o valor restante. Uma data-limite opcional faz o finangui mostrar quanto guardar por mês para alcançá-la a tempo.
+- Percentual e valor restante.
+- Saldo vinculado negativo trava o percentual em 0%, não o valor restante.
+- Data-limite opcional mostra quanto guardar por mês.
 
 ## Atingindo a meta
 
 <Callout type="info">
-  Uma meta é marcada como **Atingida** (achieved) na primeira vez que o progresso alcança o valor alvo, e essa marca permanece mesmo que o progresso caia depois. A única forma de desfazer é editar a meta e aumentar o valor alvo além do progresso atual.
+  **Atingida** (achieved) marca a primeira vez que o progresso alcança o alvo, e permanece mesmo depois de cair. Só aumentar o alvo além do progresso atual desfaz.
 </Callout>

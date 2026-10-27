@@ -3,36 +3,40 @@ title: Banking
 description: Connecting a bank account through Pluggy, what a sync does and doesn't touch, and how to read sync history.
 ---
 
-**Banking** connects a real bank account to finangui through [Pluggy](https://pluggy.ai), an Open Finance aggregator, so transactions show up automatically instead of being imported by hand. Once connected, an account works like any other [account](/docs/features/accounts) — it just stays up to date on its own.
+**Banking** connects a real bank account to finangui through [Pluggy](https://pluggy.ai), an Open Finance aggregator. A connected account works like any other [account](/docs/features/accounts), just self-updating.
 
 ## Registering your own Pluggy credentials
 
-Before connecting a bank, register your own Pluggy application credentials in **Configurações** (Settings), under **Integração bancária (Pluggy)** (Bank integration). finangui doesn't ship a shared provider — each user creates their own application on Pluggy's dashboard and enters its Client ID and Client Secret here; the secret is never shown again. Saving tests the credentials first. Without working credentials, banking features are turned off everywhere else in the app.
+- Register your own Pluggy app credentials in **Configurações** (Settings) → **Integração bancária (Pluggy)** (Bank integration).
+- No shared provider: each user creates their own app on Pluggy's dashboard.
+- Enter the Client ID and Client Secret; the secret is never shown again.
+- Saving tests the credentials. Without them, banking stays off everywhere.
 
 ## Connecting an account
 
-From **Contas** (Accounts), **Conectar banco** (Connect bank) opens Pluggy's widget to log in and pick which accounts to bring in. Each account is linked to a new account or, if it matches, to an existing manual one — so history isn't lost or duplicated.
+- From **Contas** (Accounts), **Conectar banco** (Connect bank) opens Pluggy's widget.
+- Log in and pick accounts; each links to a new or matching manual account.
 
 ## What a sync does
 
-A sync brings in new transactions through the same pipeline as a file [import](/docs/features/imports) — same duplicate detection, installment matching, and automatic categorization; a provider-supplied category is only used as a last resort.
+Brings in transactions through the same pipeline as a file [import](/docs/features/imports) — same dedup, installment matching, categorization. A provider category is only a last resort.
 
 <Callout type="info">
-  Every sync also revisits roughly the last 40 days already fetched, to catch a status change, a description update, or an invoice reassignment — never overwriting date, amount, category, or an invoice you picked by hand.
+  Every sync also revisits the last ~40 days, catching status, description, or invoice changes — never overwriting date, amount, category, or a hand-picked invoice.
 </Callout>
 
 ## Needing reauthorization
 
-A connection can occasionally need you to log in again at the bank's side. finangui calls this status **Reconectar** (Reconnect) and surfaces an actionable banner, notifying you right away rather than waiting for the daily digest.
+A connection can need you to log in again at the bank. finangui calls this **Reconectar** (Reconnect) and notifies you right away.
 
 ## Sync history
 
-Each connection has a **Histórico** (History) screen listing every sync — trigger, outcome, and how many transactions were added or updated — with a detail view of the transactions added. **Sincronizar agora** (Sync now) triggers a sync on demand.
+Each connection has a **Histórico** (History) screen: every sync, trigger, outcome, counts added/updated, with detail. **Sincronizar agora** (Sync now) triggers one on demand.
 
 ## Disconnecting
 
-Disconnecting doesn't delete anything: accounts become manual again, keeping their full history, and just stop updating on their own.
+Deletes nothing: accounts become manual again, keep their history, and stop self-updating.
 
 ## Direction is always read from the bank
 
-A transaction's direction (in or out) comes from the type the bank reports, never from the sign of the amount — important because a credit card's amounts can be inverted.
+Direction (in or out) comes from the bank's reported type, never the amount's sign — a credit card's sign can be inverted.

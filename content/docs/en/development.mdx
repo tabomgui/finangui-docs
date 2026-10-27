@@ -3,7 +3,7 @@ title: Development
 description: Run finangui locally with Docker for development, and the make targets that cover the day-to-day workflow.
 ---
 
-finangui is a Laravel 13 API backend with Postgres (`backend/`) and a React/Vite/TypeScript frontend (`frontend/`). Everything runs in Docker, driven through a `Makefile` at the repository root.
+finangui runs entirely in Docker, driven through a `Makefile` at the repository root.
 
 ## Requirements
 
@@ -52,7 +52,7 @@ Creates a dev user: `dev@finangui.test` / `password`.
 </Step>
 </Steps>
 
-Interactive API docs (Scramble) are served at `http://localhost:8001/docs/api` while `APP_ENV=local`.
+Interactive API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_ENV=local`.
 
 ## Day-to-day make targets
 
@@ -68,11 +68,12 @@ Interactive API docs (Scramble) are served at `http://localhost:8001/docs/api` w
 | `make front-check` | Runs the frontend's lint, typecheck and test suite. |
 
 <Callout type="warn">
-  `make test` runs against `finangui_test`, created by `docker/postgres/init.sql` on first volume init. If your volume predates it, create it by hand: `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` needs the `finangui_test` database, created by `docker/postgres/init.sql` on first volume init. Older volume: create it by hand with `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-The frontend also needs `npm install` on the host for editor/TS tooling; rebuild its image (or the backend's, after a `docker/php/**` change) when dependencies change — a restart alone won't do it.
+- `npm install` on the host keeps editor/TS tooling in sync.
+- Rebuild the frontend's image (or the backend's, after a `docker/php/**` change) when dependencies change — a restart alone won't do it.
 
 ## Contributing
 
-finangui is a public GitHub repository; contributions follow the standard fork/branch/PR flow. The project's actual conventions live in the repository's own `CLAUDE.md` — the source of truth, kept up to date as the code evolves.
+Public GitHub repository, standard fork/branch/PR flow. Conventions live in the repository's own `CLAUDE.md` — the source of truth.

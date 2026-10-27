@@ -3,30 +3,48 @@ title: Cards
 description: How finangui tracks credit card statements, payments, installment purchases and the limit you have left to spend.
 ---
 
-A **Cartão de crédito** (credit card) is an account like any other — manual or linked through [Banking](/docs/features/banking) — using the same full-ledger balance rule from [Accounts](/docs/features/accounts): no "as of today" cutoff. This page covers what's specific to cards: statements, payments, installments and limit usage.
+A **Cartão de crédito** (credit card) is an account like any other — manual or linked through [Banking](/docs/features/banking) — with the same full-ledger balance rule as [Accounts](/docs/features/accounts): no "as of today" cutoff.
 
 ![A card statement](/screenshots/cards.png)
 
 ## Statements open, close and come due on their own
 
-Every card purchase is assigned to a statement automatically when you create or edit the transaction — you never pick one by hand. For a card connected through **Banking**, finangui re-checks the closing and due day on every sync, based on whichever day is most common among the bank's three most recent statements; a statement already recorded never gets its own dates rewritten. You can also edit a statement's closing date, due date and reported total by hand from **Editar datas** (edit dates); this never moves a transaction to a different statement.
+- Every purchase is assigned to a statement automatically, on create or edit — never picked by hand.
+- Connected card: finangui rechecks the closing/due day on every sync, using the most common day among the bank's 3 latest statements.
+- A statement already recorded keeps its own dates.
+- **Editar datas** (edit dates): edit closing date, due date and reported total by hand — never moves a transaction to another statement.
 
 ## Total, reported total and computed total
 
-A statement's **Total da fatura**, **Pago** (paid) and **Restante** (remaining) are always computed, never typed in directly. Once closed, if the bank reports a total, that's the headline number; finangui also keeps its own computed total (outflows minus refunds, excluding payments) to compare against it. Status badges are **Aberta** (open), **Fechada** (closed), **Paga em parte** (partial) and **Paga** (paid) — or **Vencida** (overdue) once the due date passes unpaid, with a countdown like "Vence em 3 dias" next to it.
+- **Total da fatura**, **Pago** (paid), **Restante** (remaining): always computed, never typed in.
+- Once closed, the bank's reported total (when there is one) is the headline number.
+- finangui also computes its own total (outflows minus refunds, excluding payments) to compare.
+- Status: **Aberta** (open), **Fechada** (closed), **Paga em parte** (partial), **Paga** (paid), or **Vencida** (overdue) past due, with a countdown like "Vence em 3 dias".
 
 <Callout type="info">
-  When the two totals disagree, a divergence warning compares them. If the statement's cycle starts before the oldest transaction finangui has synced for that account, that warning is replaced by a neutral "incomplete" note instead — Open Finance typically shares only about 12 months of history.
+  Totals disagree: a divergence warning. Cycle starts before the oldest synced transaction: a neutral "incomplete" note instead — Open Finance shares only ~12 months of history.
 </Callout>
 
 ## Paying a statement is a transfer, never an expense
 
-Paying a card statement (**Pagar fatura**) always registers as a transfer, never an expense. finangui recognizes a credit as a payment when it's one leg of a transfer, matches a payment the bank reported, or matches a known bank payment description — it never reduces the total, counting only under **Pago**, with its own icon and the **Pagamento** label. A duplicate bank-reported payment is auto-marked **Ignorada** (ignored). Any other credit, like a refund, reduces the total normally. A manually recognized or corrected payment is never undone by a later sync.
+![The pay-statement dialog](/screenshots/cards-pay.png)
+
+- **Pagar fatura**: always a transfer.
+- Recognized as a payment when it's one leg of a transfer, matches a bank-reported payment, or matches a known payment description.
+- Never reduces the total — counts only under **Pago**, with its own icon and **Pagamento** label.
+- Duplicate bank-reported payment: auto-marked **Ignorada** (ignored).
+- Any other credit, like a refund, reduces the total normally.
+- Manually recognized or corrected payment: never undone by a later sync.
 
 ## Installment purchases
 
-Each installment's account, amount, date and type lock once it exists; description and category can still change, but only on installments not yet posted. Deleting any single installment deletes the whole plan; canceling a plan only removes the still-projected installments.
+- Account, amount, date and type lock once an installment exists.
+- Description and category can still change, only on installments not yet posted.
+- Deleting any installment deletes the whole plan.
+- Canceling a plan removes only the still-projected installments.
 
 ## Limit used and available
 
-Used and available limit come straight from the bank when the card is connected and synced; otherwise finangui calculates them locally from the registered limit and the card's transactions. Future installments not yet posted show separately as **Parcelas futuras**, never counted into the used limit.
+- Connected and synced: used/available limit come straight from the bank.
+- Otherwise: calculated locally, from the registered limit and the card's transactions.
+- Future installments not yet posted: shown separately as **Parcelas futuras**, never counted into used limit.

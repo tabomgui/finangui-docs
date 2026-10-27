@@ -3,12 +3,18 @@ title: Introduction
 description: finangui is a self-hosted personal finance manager with a Laravel + Postgres backend and a React frontend.
 ---
 
-finangui is a self-hosted personal finance manager. The backend is a Laravel 13 API backed by Postgres, the frontend is React/Vite/TS, and everything runs in Docker. Money is always stored as integer cents, never as a float, and derived values such as balances and totals are always computed on the backend — never stored, never computed on the frontend.
+finangui is a self-hosted personal finance manager.
+
+- Backend: Laravel 13 API + Postgres.
+- Frontend: React/Vite/TS.
+- Everything runs in Docker.
+- Money: integer cents, never float.
+- Balances and totals: always computed on the backend, never the frontend.
 
 ![finangui dashboard](/screenshots/dashboard.png)
 
 <Callout type="info">
-  The app interface is in Brazilian Portuguese. These docs keep the interface labels in their original form, in bold, with the English meaning in parentheses on first use. For example: **Configurações** (Settings).
+  The app UI is in Brazilian Portuguese. Labels stay in their original form, in bold, with the English meaning in parentheses on first use — e.g. **Configurações** (Settings).
 </Callout>
 
 ## Features

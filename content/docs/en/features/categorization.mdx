@@ -3,44 +3,63 @@ title: Categorization
 description: How transactions get a category automatically, and how the Categorizar screen clears a backlog of uncategorized entries in bulk.
 ---
 
-Every transaction ends up with a category, but most never need a human to pick one by hand. finangui tries, in order: a matching **rule** (a condition on amount always looks at the installment's own amount, never the purchase total), then a **history-based suggestion** when no rule matches, then the bank's own reported category, matched by name — only for transactions synced through [Banking](/docs/features/banking). Whichever source decides it (or a manual choice) is recorded in `categorized_by`: `manual`, `history`, `pluggy`, or `rule:{id}`. Transfer legs are never touched by rules or history.
+Every transaction ends up with a category. finangui tries, in order:
 
-Whatever none of these resolve piles up on the **Categorizar** (Categorize) screen — linked from the **Pendências** (Pending items) card on Início and from Transações whenever there are pending entries.
+1. A matching **rule** — an amount condition looks at the installment's own amount, never the purchase total.
+2. A **history-based suggestion**, when no rule matches.
+3. The bank's reported category, matched by name — only for [Banking](/docs/features/banking)-synced transactions.
+
+Recorded in `categorized_by`: `manual`, `history`, `pluggy`, or `rule:{id}`. Transfer legs are never touched by rules or history.
+
+Unresolved entries land on **Categorizar** (Categorize) — linked from the **Pendências** card on Início and from Transações.
 
 ![The Categorizar screen](/screenshots/categorize.png)
 
 ## What lands on Categorizar
 
-`/categorizar` clears, all at once, the uncategorized entries left after an import or bank sync — already-posted entries from every account, credit cards included. It never includes projected entries, transfers, ignored entries, statement payments, or entries on archived accounts.
+- Already-posted, uncategorized entries from every account, cards included.
+- Never: projected entries, transfers, ignored entries, statement payments, archived-account entries.
 
 ## Grouped by counterparty
 
-Entries are grouped by counterparty: finangui strips the bank description's leading transaction-type prefix (e.g. "Pix enviado") and a trailing city-and-country suffix, and groups by what's left — so a Pix sent and one received from the same person land in the same group. Each group shows as a card with its outflow/inflow counts and net total.
+- Strips the bank's leading transaction-type prefix (e.g. "Pix enviado") and a trailing city/country suffix.
+- Groups by what's left — a Pix sent and one received from the same person land together.
+- Each group card shows outflow/inflow counts and net total.
 
 ## Selecting and applying
 
-A group's header checkbox selects everything in it; opening a group lets you check entries individually. On a group mixing both directions, **só saídas**/**só entradas** select just one way, and several groups can be selected at once. A same-direction group with strong-enough history shows a one-click suggestion.
+- Header checkbox selects the whole group; opening it lets you check entries individually.
+- Mixed-direction group: **só saídas**/**só entradas** select just one side.
+- Multiple groups selectable at once.
+- Strong-enough history on a same-direction group: one-click suggestion.
+
+![The footer action bar after selecting a group](/screenshots/categorize-apply.png)
 
 <Steps>
 <Step>
-With entries selected, the footer action bar shows a category selector — inflow or outflow only, matching the direction of your selection.
+Footer action bar shows a category selector matching your selection's direction.
 </Step>
 <Step>
-To create a new category, type its name and choose **Criar…** (Create…), optionally **Dentro de** (Inside) an existing one as a subcategory.
+To create a category: type a name, choose **Criar…** (Create…), optionally **Dentro de** (Inside) an existing one.
 </Step>
 <Step>
-Confirm. The selected entries get the category right away.
+Confirm — selected entries get the category right away.
 </Step>
 </Steps>
 
 ## The rule created on apply
 
-By default, applying a category also creates a rule so future similar entries get categorized the same way — one alternative per checked group, shaped as "original description contains `<group name>`" AND "type equals" your selection's direction. The rule is named "`<group>` → `<category>`" and shows up afterward on **Regras** (Rules). The block also shows how many other pending entries the rule already matches, with a checkbox to apply it to those too, synchronously in the same transaction as the category apply.
+- Applying a category creates a rule by default, for future similar entries.
+- Shape: one alternative per checked group — "original description contains `<group name>`" AND "type equals" your selection's direction.
+- Named "`<group>` → `<category>`"; shows up on **Regras** (Rules).
+- Shows how many other pending entries it already matches, with a checkbox to apply it there too — synchronous, same transaction.
 
 ![The Regras screen](/screenshots/rules.png)
 
 <Callout type="info">
-  The rule toggle defaults off when you only checked part of a group, and becomes unavailable past 19 selected groups (the backend caps a rule at 20 conditions total).
+  Defaults off for a partially checked group; disables past 19 selected groups (backend caps a rule at 20 conditions).
 </Callout>
 
-If the default shape isn't what you want, **Personalizar** (Customize) opens a full rule editor instead; **Voltar ao padrão** (Back to default) discards it.
+**Personalizar** (Customize) opens a full rule editor instead; **Voltar ao padrão** (Back to default) discards it.
+
+![The rule editor](/screenshots/rule-editor.png)

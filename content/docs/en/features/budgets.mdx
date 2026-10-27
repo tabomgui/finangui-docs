@@ -3,22 +3,30 @@ title: Budgets
 description: How finangui tracks a monthly spending limit per expense category, with one-off monthly exceptions and parent/child categories.
 ---
 
-A budget is a monthly spending limit you set on a category, so you can see at a glance how much you've already spent against it. On the **Orçamento** (Budget) screen, **Orçar categoria** (Budget a category) opens a form to set one up — only for a non-archived expense category, never income or transfer.
+A budget is a monthly spending limit on a category. **Orçar categoria** (Budget a category), on **Orçamento** (Budget), opens the setup form — expense categories only, never income or transfer, never archived.
 
 ![The Orçamento screen](/screenshots/budgets.png)
 
-## Default and monthly exceptions
+## Default and exceptions
 
-The amount you set becomes the default, applying to every month unless that month has its own exception. The **Vale para** (Applies to) toggle lets you override the default for just the month you're viewing (e.g. **Só outubro**); a category with an active exception shows a **Só este mês** (Only this month) badge.
+- The set amount is the default for every month.
+- **Vale para** (Applies to) overrides just the month you're viewing.
+- An active exception shows a **Só este mês** (Only this month) badge.
 
 <Callout type="info">
-  Choosing **Sem orçamento só neste mês** (No budget just this month) instead of an amount cancels the budget for that one month only, without deleting the default or the exception itself.
+  **Sem orçamento só neste mês** cancels one month only — the default and exception stay.
 </Callout>
 
 ## Parent and child categories
 
-Budgeting a parent covers it and all its subcategories — a child's spending counts toward the parent's limit even if the child was never budgeted itself, and a child can still have its own limit on top. The totals at the top of the screen never double-count a budgeted child's spending.
+- A parent's budget covers it and all subcategories.
+- A child's spending counts toward the parent even if unbudgeted.
+- A child can still have its own limit too.
+- Totals never double-count a budgeted child.
 
-## Spent, remaining, and progress
+## Spent, remaining, progress
 
-Each row shows a progress bar and percentage against its limit. Spending is net (expenses minus refunds) and never negative; past the limit, the "restam" (remaining) label switches to "excedeu" (exceeded). Spending in unbudgeted categories appears separately as **Fora do orçamento** (Outside the budget).
+- Each row: a progress bar and percentage.
+- Spending is net (expenses minus refunds), never negative.
+- Past the limit, "restam" switches to "excedeu".
+- Unbudgeted spending shows separately as **Fora do orçamento**.

@@ -3,7 +3,7 @@ title: Imports
 description: How to upload a bank statement file, review exactly what finangui will do with each line before anything is saved, and revert an import if needed.
 ---
 
-The **Importar extrato** (Import statement) screen (`/importar`) brings a bank statement file into finangui. Nothing is saved until you review a preview of what each line will do and confirm.
+The **Importar extrato** (Import statement) screen (`/importar`) brings a bank statement file into finangui. Nothing is saved until you review and confirm a preview.
 
 ![The import statement screen](/screenshots/imports.png)
 
@@ -14,7 +14,7 @@ The **Importar extrato** (Import statement) screen (`/importar`) brings a bank s
 CSV export of an Inter checking account statement.
 </Tab>
 <Tab value="Nubank">
-Two separate CSV formats: **Nubank (conta)** for checking, **Nubank (cartão)** (Nubank card) for credit card.
+Two CSV formats: **Nubank (conta)** for checking, **Nubank (cartão)** (Nubank card) for credit card.
 </Tab>
 <Tab value="C6">
 CSV export of a C6 checking account statement.
@@ -24,37 +24,46 @@ A generic OFX file, for banks without a dedicated CSV format above.
 </Tab>
 </Tabs>
 
-Export the statement from your bank's app or site, then upload it here. Leave the selector on **Detectar automaticamente** (detect automatically) to let finangui figure out the format on its own.
+Export the statement from your bank, then upload it. **Detectar automaticamente** (detect automatically) picks the format for you.
 
 ## Uploading a file
 
-Choose the **Conta** (Account) the statement belongs to and the file (`.csv`, `.ofx`, or `.txt`, up to 2 MB). Submitting opens the **Prévia da importação** (Import preview) screen; nothing is saved yet.
+- **Conta** (Account) the statement belongs to.
+- File: `.csv`, `.ofx`, or `.txt`, up to 2 MB.
+- Submitting opens the **Prévia da importação** (Import preview) screen.
 
 ## Preview before anything is saved
 
-Each line gets a label showing what finangui will do with it:
+![Preview with imported rows](/screenshots/imports-preview.png)
 
-- **Nova** (New) — an entry finangui doesn't have yet.
-- **Já importada** (Already imported) — already brought in before; can't be deselected.
-- **Atualiza** (Updates) — updates an existing entry with newer details instead of duplicating it.
-- **Substitui parcela prevista** (Replaces projected installment) — replaces a projected installment with the real one from the statement.
-- **Casa com lançamento manual** (Matches manual entry) — adopts an entry you already created by hand instead of duplicating it.
-- **Confirma pendente** (Confirms pending) — takes the place of an existing unconfirmed entry.
+Each line gets a label:
 
-Every actionable row has a checkbox, checked by default. Lines the file couldn't parse show up separately with the reason.
+- **Nova** (New) — not seen before.
+- **Já importada** (Already imported) — locked in, can't deselect.
+- **Atualiza** (Updates) — refreshes an existing entry.
+- **Substitui parcela prevista** (Replaces projected installment) — real replaces projected.
+- **Casa com lançamento manual** (Matches manual entry) — adopts your manual entry.
+- **Confirma pendente** (Confirms pending) — replaces an unconfirmed entry.
+
+Every actionable row has a checkbox, checked by default. Unparseable lines show up separately, with the reason.
 
 ## Confirming
 
-The button is labeled with how many entries are checked. Confirming re-checks the matching from scratch, and the whole batch is committed as a single unit — all or nothing. **Cancelar** (Cancel) discards the batch.
+- Button label shows how many entries are checked.
+- Confirming re-checks the matching from scratch.
+- The whole batch commits as one unit — all or nothing.
+- **Cancelar** (Cancel) discards the batch.
 
 ## Reverting an import
 
-Only the most recently completed import for a given account can be reverted. **Reverter** (Revert), from the **Importações recentes** (Recent imports) card, deletes every entry it created and restores anything it matched or updated to its prior state.
+- Only the most recently completed import per account can be reverted.
+- **Reverter** (Revert), on the **Importações recentes** (Recent imports) card, deletes what it created and restores what it matched or updated.
 
 <Callout type="warn">
-  A manual edit made after the import (to a field the import touched) is overwritten too — revert restores the original snapshot, it doesn't merge your later change.
+  A manual edit made after the import, to a field the import touched, gets overwritten too.
 </Callout>
 
 ## Categorization and transfers
 
-Imported entries go through the same automatic categorization as any manual entry (rule, then history); see [Categorization](/docs/features/categorization). Transfer detection also runs right after confirmation; see [Transfers](/docs/features/transfers).
+- Imported entries get the same automatic categorization as manual ones (rule, then history). See [Categorization](/docs/features/categorization).
+- Transfer detection runs right after confirmation. See [Transfers](/docs/features/transfers).

@@ -3,37 +3,38 @@ title: Transferências
 description: Como o finangui detecta, sugere, liga e desliga transferências entre as suas próprias contas.
 ---
 
-Uma transferência é dinheiro que se move entre duas contas suas — uma saída de uma conta e uma entrada em outra, ligadas como as duas pernas do mesmo movimento. Pernas ligadas nunca recebem categoria própria, e nunca são tocadas por regras de categorização nem pelo histórico.
+Uma transferência é dinheiro que se move entre duas contas suas — uma saída e uma entrada ligadas como um só movimento. Pernas ligadas nunca recebem categoria, regra ou histórico.
 
 ![Uma sugestão de transferência](/screenshots/transfers.png)
 
 ## Detecção automática
 
-O finangui procura transferências entre os lançamentos recém-adicionados ao final de cada importação e sincronização bancária, comparando candidatos com até 2 dias de diferença. Também é possível buscar nos últimos 90 dias a qualquer momento em **Transferências encontradas** (transfers found) (`/transferencias/sugestoes`), pelo **Procurar agora** (search now).
-
-Pares candidatos são pontuados pela proximidade de data, por uma pista na descrição ou no nome da conta, e por a entrada ter caído num cartão de crédito. Um par único e claro é ligado na hora; o resto vira sugestão (no máximo duas por lançamento) esperando sua confirmação.
+- Roda depois de cada importação e sincronização, nos lançamentos com até 2 dias de diferença.
+- Também roda a qualquer momento, nos últimos 90 dias, em **Transferências encontradas** (transfers found) (`/transferencias/sugestoes`) pelo **Procurar agora** (search now).
+- Pontuada pela proximidade de data, uma pista na descrição/nome da conta, e entrada num cartão de crédito.
+- Um par único e claro liga na hora; os demais viram sugestão (no máximo duas por lançamento).
 
 ## Revisando sugestões
 
-Sugestões pendentes aparecem na tela **Transferências encontradas**, linkada pelo card **Pendências** (pending) da Início sempre que há alguma esperando. Cada sugestão mostra as duas pernas lado a lado.
+Sugestões aparecem em **Transferências encontradas**, linkada pelo card **Pendências** (pending) da Início.
 
-- **Juntar** (join) aceita a sugestão e liga as duas pernas.
-- **Não é transferência** (not a transfer) descarta a sugestão; os dois lançamentos continuam comuns.
+- **Juntar** (join) — liga as duas pernas.
+- **Não é transferência** (not a transfer) — descarta; os dois continuam comuns.
 
 ## Ligando dois lançamentos à mão
 
-Se o finangui não detectou nem sugeriu nada, selecione dois lançamentos na lista e use **Juntar como transferência** (join as transfer) — o finangui resolve sozinho qual é a saída e qual é a entrada.
+Selecione dois lançamentos e use **Juntar como transferência** (join as transfer) — o finangui resolve a saída e a entrada.
 
 ## Desligando uma transferência
 
-**Desfazer transferência** (undo transfer), pela tela de detalhe de qualquer uma das pernas, separa as duas pernas em lançamentos comuns, sem categoria.
+**Desfazer transferência** (undo transfer), na tela de detalhe de qualquer perna, separa as pernas em lançamentos comuns, sem categoria.
 
 <Callout type="info">
-  Um desfazer explícito é lembrado, para a detecção não ligar esse par de novo. Um desligamento automático (importação revertida, pendentes antigos do banco limpos) tenta recategorizar a perna que ficou sem categoria, como faria com um lançamento recém-importado.
+  Um desfazer explícito é lembrado, para a detecção não ligar o par de novo. Um desligamento automático tenta recategorizar a perna que ficou sem categoria.
 </Callout>
 
 ## Excluindo uma perna que veio do banco
 
-Excluir uma perna de uma transferência nunca exclui as duas: o finangui desliga o par primeiro — a perna que sobra volta a ser um lançamento comum — e só então exclui a que você pediu. O mesmo vale ao reverter um lote de importação ou limpar pendentes antigos do banco.
+Excluir uma perna nunca exclui as duas: o finangui desliga o par primeiro, e só então exclui a pedida. O mesmo vale ao reverter uma importação ou limpar pendentes do banco.
 
-Veja também [Importação](/docs/features/imports) e [Conexão bancária](/docs/features/banking), que disparam a detecção de transferências.
+Veja também [Importação](/docs/features/imports) e [Conexão bancária](/docs/features/banking).

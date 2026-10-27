@@ -3,7 +3,7 @@ title: Recurrences
 description: How finangui models a bill or income that repeats, and keeps upcoming occurrences in sync with what actually posts.
 ---
 
-A recurrence is a bill or income that repeats on a schedule — rent, a salary, a subscription. Set it up once and finangui projects upcoming occurrences on the calendar automatically.
+A recurrence is a bill or income that repeats — rent, a salary, a subscription. Set it up once; finangui projects it on the calendar.
 
 ![The Recorrências screen](/screenshots/recurrences.png)
 
@@ -11,29 +11,36 @@ A recurrence is a bill or income that repeats on a schedule — rent, a salary, 
 
 <Tabs items={['From scratch', 'From a transaction']}>
 <Tab value="From scratch">
-On the **Recorrências** (Recurrences) screen, **Nova recorrência** (New recurrence) opens a form for account, description, amount, category, direction, and schedule. An optional matching-text field helps finangui recognize the real bank entry later.
+**Recorrências** (Recurrences) → **Nova recorrência** (New recurrence): account, description, amount, category, direction, schedule. An optional matching-text field helps recognize the real entry later.
 </Tab>
 <Tab value="From a transaction">
-The **Repetir** (Repeat) toggle, while logging a brand-new entry, creates a recurrence from it, asking only for the frequency.
+The **Repetir** (Repeat) toggle, when logging a new entry, creates a recurrence from it — just asks the frequency.
 </Tab>
 </Tabs>
 
 ## Projected occurrences and matching
 
-finangui generates upcoming projected occurrences automatically — daily, and right away on create/edit — never duplicating a date, and never projecting far into the past (or, on a credit card, before today). When the real entry shows up — typed, imported, or synced — finangui matches it to a projected occurrence by amount and by a nearby date, and confirms that occurrence instead of creating a separate one.
+- Generated automatically, daily and right on create/edit.
+- Never duplicates a date or projects far into the past (or, on a credit card, before today).
+- A real entry matches a projected one by amount and nearby date, confirming it instead of duplicating.
 
 ## Overdue occurrences
 
-A projected occurrence whose date has passed with no match shows up as overdue. The **Pendências** (Pending items) card on Início surfaces these, letting you mark each as **Aconteceu** (It happened — confirms it, details adjustable) or **Não aconteceu** (Didn't happen — skips it).
+A projected occurrence past due with no match shows as overdue, on the **Pendências** (Pending items) card on Início:
+
+- **Aconteceu** (It happened) — confirms it, details adjustable.
+- **Não aconteceu** (Didn't happen) — skips it.
 
 ## Editing and skipping
 
-Simple field changes only apply to occurrences dated today or later. Changing the schedule itself, or pausing the recurrence, is more disruptive: it clears recent projected occurrences and regenerates them. Marking an occurrence **Não aconteceu** skips that date.
+- Simple field changes apply only to occurrences dated today or later.
+- Changing the schedule, or pausing, clears recent occurrences and regenerates them.
+- Marking **Não aconteceu** skips that date.
 
 <Callout type="info">
-  A skipped date is remembered forever — even after a later schedule change, pause, or reactivation, it's never generated again.
+  A skipped date is remembered forever, even through a later schedule change, pause, or reactivation.
 </Callout>
 
 ## Categorization
 
-Projected occurrences are excluded from automatic categorization. One only picks up a category once confirmed as a real entry, through the same sources described in [Categorization](/docs/features/categorization).
+Excluded from automatic categorization until confirmed as a real entry — see [Categorization](/docs/features/categorization).
