@@ -22,8 +22,8 @@ Unresolved entries land on **Categorizar** (Categorize) — linked from **Pendê
 
 ## Grouped by counterparty
 
-- Strips the bank's leading transaction-type prefix (e.g. "Pix enviado") and a trailing city/country suffix.
-- Groups by what's left — a Pix sent and one received from the same person land together.
+- Strips the bank's transaction-type prefix (e.g. "Pix enviado") and trailing city/country suffix.
+- Groups by what's left — a Pix sent and received from the same person land together.
 - Each group card shows outflow/inflow counts and net total.
 
 ## Selecting and applying
@@ -37,7 +37,7 @@ Unresolved entries land on **Categorizar** (Categorize) — linked from **Pendê
 
 <Steps>
 <Step>
-Footer action bar shows a category selector matching your selection's direction.
+Footer bar shows a category selector matching your direction.
 </Step>
 <Step>
 To create a category: type a name, choose **Criar…** (Create…), optionally **Dentro de** (Inside) an existing one.
@@ -50,14 +50,14 @@ Confirm — selected entries get the category right away.
 ## The rule created
 
 - Applying a category creates a rule by default, for similar future entries.
-- Shape: one alternative per checked group — "original description contains `<group name>`" AND "type equals" your selection's direction.
+- One alternative per checked group: "description contains `<group name>`" AND "type equals" your direction.
 - Named "`<group>` → `<category>`"; shows up on **Regras** (Rules).
-- Shows how many pending entries it already matches, with a checkbox to apply it there too, same transaction.
+- Shows how many pending entries it matches, with a checkbox to apply there too, same transaction.
 
 ![The Regras screen](/screenshots/rules.png)
 
 <Callout type="info">
-  Defaults off for a partially checked group; disables past 19 selected groups (backend caps a rule at 20 conditions).
+  Off by default for a partial group; disabled past 19 groups (rule cap: 20 conditions).
 </Callout>
 
 **Personalizar** (Customize) opens a full rule editor instead; **Voltar ao padrão** (Back to default) discards it.

@@ -3,7 +3,7 @@ title: Recurrences
 description: How finangui models a bill or income that repeats, and keeps upcoming occurrences in sync with what actually posts.
 ---
 
-A recurrence is a bill or income that repeats — rent, a salary, a subscription. Set it up once; finangui projects it on the calendar.
+A recurrence is a repeating bill or income — rent, salary, subscription. Set up once; finangui projects it on the calendar.
 
 ![The Recorrências screen](/screenshots/recurrences.png)
 
@@ -11,36 +11,36 @@ A recurrence is a bill or income that repeats — rent, a salary, a subscription
 
 <Tabs items={['From scratch', 'From a transaction']}>
 <Tab value="From scratch">
-**Recorrências** (Recurrences) → **Nova recorrência** (New recurrence): account, description, amount, category, direction, schedule. An optional matching-text field helps recognize the real entry later.
+**Recorrências** (Recurrences) → **Nova recorrência** (New recurrence): account, description, amount, category, direction, schedule. Optional matching text helps recognize it later.
 </Tab>
 <Tab value="From a transaction">
-The **Repetir** (Repeat) toggle, when logging a new entry, creates a recurrence from it — just asks the frequency.
+**Repetir** (Repeat), on a new entry, creates one — just asks the frequency.
 </Tab>
 </Tabs>
 
 ## Projected occurrences and matching
 
-- Generated automatically, daily and right on create/edit.
-- Never duplicates a date or projects far into the past (or, on a credit card, before today).
-- A real entry matches a projected one by amount and nearby date, confirming it instead of duplicating.
+- Generated daily, and right on create/edit.
+- Never duplicates a date, nor projects far past (or, on a card, before today).
+- A real entry matches a projected one by amount and date, confirming it instead of duplicating.
 
 ## Overdue occurrences
 
-A projected occurrence past due with no match shows as overdue, on the **Pendências** (Pending items) card on Início:
+An unmatched, past-due occurrence is overdue — see **Pendências** (Pending items) at Início:
 
 - **Aconteceu** (It happened) — confirms it, details adjustable.
 - **Não aconteceu** (Didn't happen) — skips it.
 
 ## Editing and skipping
 
-- Simple field changes apply only to occurrences dated today or later.
-- Changing the schedule, or pausing, clears recent occurrences and regenerates them.
+- Simple field changes apply only to today-or-later occurrences.
+- Changing the schedule, or pausing, regenerates recent occurrences.
 - Marking **Não aconteceu** skips that date.
 
 <Callout type="info">
-  A skipped date is remembered forever, even through a later schedule change, pause, or reactivation.
+  A skipped date is remembered forever — through a later schedule change, pause, or reactivation.
 </Callout>
 
 ## Categorization
 
-Excluded from automatic categorization until confirmed as a real entry — see [Categorization](/docs/features/categorization).
+Excluded from categorization until confirmed as a real entry — see [Categorization](/docs/features/categorization).

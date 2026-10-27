@@ -3,7 +3,7 @@ title: Recorrências
 description: Como o finangui modela uma despesa ou receita que se repete, e mantém os lançamentos previstos alinhados com o que de fato é lançado.
 ---
 
-Uma recorrência é uma despesa ou receita que se repete — aluguel, salário, uma assinatura. Cadastre uma vez; o finangui projeta no calendário.
+Uma recorrência é uma despesa ou receita recorrente — aluguel, salário, assinatura. Cadastre uma vez; finangui projeta no calendário.
 
 ![A tela Recorrências](/screenshots/recurrences.png)
 
@@ -11,36 +11,36 @@ Uma recorrência é uma despesa ou receita que se repete — aluguel, salário, 
 
 <Tabs items={['Do zero', 'A partir de um lançamento']}>
 <Tab value="Do zero">
-**Recorrências** (recurrences) → **Nova recorrência** (new recurrence): conta, descrição, valor, categoria, direção, periodicidade. Um campo opcional de texto de identificação ajuda a reconhecer o lançamento real depois.
+**Recorrências** (recurrences) → **Nova recorrência** (new recurrence): conta, descrição, valor, categoria, direção, periodicidade. Texto de identificação (opcional) ajuda a reconhecer o lançamento.
 </Tab>
 <Tab value="A partir de um lançamento">
-O interruptor **Repetir** (repeat), ao lançar um lançamento novo, cria uma recorrência a partir dele — pede só a frequência.
+**Repetir** (repeat), ao lançar um lançamento, cria uma recorrência — pede só a frequência.
 </Tab>
 </Tabs>
 
 ## Lançamentos previstos e casamento
 
-- Gerados automaticamente, todo dia e também na hora ao criar/editar.
-- Nunca duplica data nem projeta muito no passado (ou, num cartão de crédito, antes de hoje).
-- Um lançamento real casa com um previsto pelo valor e data próxima, confirmando-o em vez de duplicar.
+- Gerados todo dia e também na hora ao criar/editar.
+- Nunca duplica data nem projeta muito no passado (num cartão, antes de hoje).
+- Um lançamento real casa com um previsto por valor e data, confirmando-o em vez de duplicar.
 
 ## Previstos atrasados
 
-Um previsto com data passada e sem casamento aparece como atrasado, no card **Pendências** (pending items) da Início:
+Um previsto sem casamento e data passada fica atrasado — veja **Pendências** (pending items) na Início:
 
 - **Aconteceu** (it happened) — confirma, com dados ajustáveis.
 - **Não aconteceu** (didn't happen) — pula.
 
 ## Editando e pulando
 
-- Mudanças simples de campo só valem para previstos de hoje em diante.
-- Mudar a periodicidade, ou pausar, exclui os previstos recentes e regera.
+- Mudanças simples valem só para previstos de hoje em diante.
+- Mudar a periodicidade, ou pausar, regera os previstos recentes.
 - Marcar **Não aconteceu** pula aquela data.
 
 <Callout type="info">
-  Uma data pulada é lembrada para sempre, mesmo depois de mudar a periodicidade, pausar ou reativar.
+  Uma data pulada é lembrada para sempre — após mudar a periodicidade, pausar ou reativar.
 </Callout>
 
 ## Categorização
 
-Fora da categorização automática até ser confirmado como lançamento real — veja [Categorização](/docs/features/categorization).
+Fora da categorização até ser confirmado como lançamento real — veja [Categorização](/docs/features/categorization).

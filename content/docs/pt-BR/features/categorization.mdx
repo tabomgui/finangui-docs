@@ -3,32 +3,32 @@ title: Categorização
 description: Como um lançamento ganha categoria automaticamente, e como a tela Categorizar limpa em bloco o acúmulo de lançamentos sem categoria.
 ---
 
-Todo lançamento termina com uma categoria. O finangui tenta, nesta ordem:
+Todo lançamento ganha uma categoria. O finangui tenta, nesta ordem:
 
-1. Uma **regra** que casa — a condição sobre valor vê o valor da própria parcela, nunca o total da compra.
+1. Uma **regra** que casa — a condição sobre valor vê o valor da parcela, nunca o total da compra.
 2. Uma **sugestão pelo histórico**, quando nenhuma regra casa.
 3. A categoria informada pelo banco, casada por nome — só para lançamentos sincronizados por [Banking](/docs/features/banking).
 
-Gravado em `categorized_by`: `manual`, `history`, `pluggy` ou `rule:{id}`. Pernas de transferência nunca são tocadas por regra nem por histórico.
+Gravado em `categorized_by`: `manual`, `history`, `pluggy` ou `rule:{id}`. Pernas de transferência: nunca tocadas.
 
-O que nenhuma das três resolve se acumula em **Categorizar** (Categorize) — atalho pelo card **Pendências** da Início e pela tela Transações.
+O que nenhuma resolve se acumula em **Categorizar** (Categorize) — atalho pelo card **Pendências** da Início e por Transações.
 
 ![A tela Categorizar](/screenshots/categorize.png)
 
-## O que entra na tela Categorizar
+## O que entra aqui
 
 - Lançamentos já efetivados e sem categoria, de todas as contas, cartão de crédito incluído.
-- Nunca entram: previstos, transferências, ignorados, pagamentos de fatura, lançamentos de contas arquivadas.
+- Nunca entram: previstos, transferências, ignorados, pagamentos de fatura, contas arquivadas.
 
 ## Agrupados por contraparte
 
-- Tira o prefixo do tipo de transação no início da descrição (ex.: "Pix enviado") e um sufixo de cidade e país no final.
-- Agrupa pelo que resta — um Pix enviado e um recebido da mesma pessoa caem no mesmo grupo.
+- Tira o prefixo do tipo de transação na descrição (ex.: "Pix enviado") e o sufixo de cidade e país.
+- Agrupa pelo que resta — um Pix enviado e recebido da mesma pessoa caem no mesmo grupo.
 - Cada grupo aparece como um card com a contagem de saídas/entradas e o total líquido.
 
 ## Selecionando e aplicando
 
-- Checkbox do cabeçalho seleciona o grupo inteiro; abrir o grupo permite marcar lançamentos individuais.
+- Checkbox do cabeçalho seleciona o grupo inteiro; abra para marcar lançamentos individuais.
 - Grupo com as duas direções: **só saídas**/**só entradas** selecionam só um lado.
 - Vários grupos podem ser selecionados ao mesmo tempo.
 - Grupo de uma única direção com histórico forte: sugestão aplicável num clique.
@@ -37,7 +37,7 @@ O que nenhuma das três resolve se acumula em **Categorizar** (Categorize) — a
 
 <Steps>
 <Step>
-Com lançamentos selecionados, a barra de ação no rodapé mostra um seletor de categoria de acordo com a direção da seleção.
+A barra de ação no rodapé mostra um seletor de categoria de acordo com a direção selecionada.
 </Step>
 <Step>
 Para criar uma categoria nova, digite o nome e escolha **Criar…** (Create…), opcionalmente **Dentro de** (Inside) uma já existente.
@@ -47,19 +47,19 @@ Confirme. Os lançamentos selecionados recebem a categoria na hora.
 </Step>
 </Steps>
 
-## A regra criada ao aplicar
+## A regra criada
 
 - Aplicar uma categoria também cria uma regra por padrão, para lançamentos parecidos futuros.
-- Formato: uma alternativa por grupo marcado — "descrição original contém `<nome do grupo>`" E "tipo é igual a" a direção da sua seleção.
-- Recebe o nome "`<grupo>` → `<categoria>`"; aparece depois em **Regras** (Rules).
-- Mostra quantos outros pendentes a regra já casa, com um checkbox para aplicá-la também a eles — síncrono, na mesma transação.
+- Uma alternativa por grupo marcado: "descrição contém `<nome do grupo>`" E "tipo é igual a" sua direção.
+- Nome "`<grupo>` → `<categoria>`"; aparece em **Regras** (Rules).
+- Mostra quantos pendentes a regra já casa, com um checkbox para aplicar ali também, mesma transação.
 
 ![A tela Regras](/screenshots/rules.png)
 
 <Callout type="info">
-  Vem desligado por padrão quando só parte de um grupo foi marcada; fica indisponível acima de 19 grupos (o backend limita a 20 condições).
+  Desligado por padrão para grupo parcial; indisponível acima de 19 grupos (limite: 20 condições).
 </Callout>
 
-**Personalizar** (Customize) abre um editor completo de regra; **Voltar ao padrão** (Back to default) descarta e volta para a regra gerada.
+**Personalizar** (Customize) abre um editor completo de regra; **Voltar ao padrão** (Back to default) descarta.
 
 ![O editor de regra](/screenshots/rule-editor.png)
