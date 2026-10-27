@@ -5,12 +5,10 @@ description: Como o finangui detecta, sugere, liga e desliga transferências ent
 
 Uma transferência é dinheiro que se move entre contas suas — pernas de saída e entrada ligadas. Pernas ligadas nunca recebem categoria, regra ou histórico.
 
-![Uma sugestão de transferência](/screenshots/transfers.png)
-
 ## Detecção automática
 
 - Roda depois de cada importação e sincronização, nos lançamentos com até 2 dias entre si.
-- Também roda a qualquer momento, nos últimos 90 dias, em **Transferências encontradas** (transfers found) (`/transferencias/sugestoes`) pelo **Procurar agora** (search now).
+- Também roda a qualquer momento, nos últimos 90 dias, em **Transferências encontradas** (transfers found) pelo **Procurar agora** (search now).
 - Pontuada pela proximidade de data, uma pista na descrição/nome da conta, e entrada num cartão de crédito.
 - Um par único e claro liga na hora; os demais viram sugestão (no máximo duas por lançamento).
 
@@ -21,9 +19,20 @@ Sugestões aparecem em **Transferências encontradas**, via o card **Pendências
 - **Juntar** (join) — liga as duas pernas.
 - **Não é transferência** (not a transfer) — descarta; os dois continuam comuns.
 
+![Uma sugestão de transferência](/screenshots/transfers.png)
+
 ## Ligando dois lançamentos à mão
 
-Selecione dois lançamentos e use **Juntar como transferência** (join as transfer) — o finangui resolve a saída e a entrada.
+<Steps>
+<Step>
+Em **Transações**, clique em **Selecionar** (select) e marque os dois lançamentos.
+</Step>
+<Step>
+Clique em **Juntar como transferência** (join as transfer): o finangui resolve a saída e a entrada.
+
+![Dois lançamentos selecionados](/screenshots/transfers-join.png)
+</Step>
+</Steps>
 
 ## Desligando uma transferência
 
