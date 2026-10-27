@@ -14,34 +14,34 @@ Um **Cartão de crédito** (credit card) é uma conta — manual ou vinculada po
 - Fatura já gravada: nunca tem suas datas reescritas.
 - **Editar datas** (edit dates): fechamento, vencimento e total do banco, à mão — nunca move a transação.
 
-## Total, total informado pelo banco e total calculado
+## Total informado vs. total calculado
 
 - **Total da fatura**, **Pago** (paid), **Restante** (remaining): sempre calculados, nunca digitados.
-- Fatura fechada: o total informado pelo banco (quando existe) é o número em destaque.
-- O finangui também calcula seu próprio total (saídas menos estornos, sem pagamento) para comparar.
-- Status: **Aberta**, **Fechada**, **Paga em parte** ou **Paga** — ou **Vencida** quando o vencimento passa sem pagar, com contagem como "Vence em 3 dias".
+- Fechada: o total do banco, quando existe, é o número em destaque.
+- O finangui calcula o próprio total (saídas menos estornos, sem pagamento) para comparar.
+- Status: **Aberta**, **Fechada**, **Paga em parte**, **Paga** ou **Vencida** — com contagem "Vence em 3 dias".
 
 <Callout type="info">
-  Totais não coincidem: aviso de divergência. Ciclo começa antes do lançamento mais antigo sincronizado: nota neutra de total incompleto no lugar — o Open Finance costuma compartilhar só uns 12 meses de histórico.
+  Totais não coincidem: aviso de divergência. Ciclo começa antes do lançamento mais antigo sincronizado: nota neutra de total incompleto no lugar.
 </Callout>
 
-## Pagar a fatura é uma transferência, nunca uma despesa
+## Pagar é transferência, nunca despesa
 
 ![O diálogo de pagar fatura](/screenshots/cards-pay.png)
 
 - **Pagar fatura**: sempre registrado como transferência.
-- Reconhecido como pagamento quando é uma perna de transferência, casa com um pagamento informado pelo banco, ou casa com uma descrição conhecida.
+- Reconhecido como perna de transferência, pagamento informado pelo banco, ou descrição conhecida.
 - Nunca reduz o total — conta só em **Pago** (paid), com ícone próprio e o rótulo **Pagamento**.
-- Pagamento duplicado informado pelo banco: marcado automaticamente **Ignorada** (ignored).
-- Qualquer outro crédito, como um estorno, reduz o total normalmente.
-- Pagamento reconhecido ou corrigido à mão: nunca desfeito por uma sincronização seguinte.
+- Pagamento duplicado do banco: marcado automaticamente **Ignorada** (ignored).
+- Qualquer outro crédito (ex.: estorno): reduz o total normalmente.
+- Correção manual: nunca desfeita por uma sincronização seguinte.
 
 ## Compras parceladas
 
 - Conta, valor, data e tipo de cada parcela ficam travados depois que ela existe.
-- Descrição e categoria ainda podem mudar, só nas parcelas ainda não lançadas.
-- Excluir qualquer parcela individual exclui o parcelamento inteiro.
-- Cancelar um parcelamento remove só as parcelas ainda projetadas.
+- Descrição e categoria: editáveis, só nas ainda não lançadas.
+- Excluir qualquer parcela exclui o parcelamento inteiro.
+- Cancelar remove só as parcelas ainda projetadas.
 
 ## Limite usado e disponível
 
