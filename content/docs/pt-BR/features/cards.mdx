@@ -9,16 +9,15 @@ Um **Cartão de crédito** (credit card) é uma conta — manual ou vinculada po
 
 ## A fatura cuida das próprias datas
 
-- Toda compra é atribuída a uma fatura automaticamente — nunca à mão.
-- Conectado: fechamento/vencimento reconferidos a cada sincronização, pelo dia mais comum entre as 3 faturas mais recentes.
-- Fatura já gravada: nunca tem suas datas reescritas.
-- **Editar datas** (edit dates): fechamento, vencimento e total do banco, à mão — nunca move a transação.
+- Toda compra entra numa fatura automaticamente, nunca à mão.
+- Cartão conectado: fechamento e vencimento são reconferidos a cada sincronização.
+- Fatura já gravada nunca tem as datas reescritas.
+- **Editar datas** (edit dates): ajusta à mão fechamento, vencimento e total do banco, sem mover transações.
 
 ## Total informado vs. total calculado
 
 - **Total da fatura**, **Pago** (paid), **Restante** (remaining): sempre calculados, nunca digitados.
-- Fechada: o total do banco, quando existe, é o número em destaque.
-- O finangui calcula o próprio total (saídas menos estornos, sem pagamento) para comparar.
+- Fatura fechada: o total do banco, quando existe, é o destaque; o finangui calcula o próprio (saídas menos estornos, sem pagamento) para comparar.
 - Status: **Aberta**, **Fechada**, **Paga em parte**, **Paga** ou **Vencida** — com contagem "Vence em 3 dias".
 
 <Callout type="info">
@@ -29,22 +28,20 @@ Um **Cartão de crédito** (credit card) é uma conta — manual ou vinculada po
 
 ![O diálogo de pagar fatura](/screenshots/cards-pay.png)
 
-- **Pagar fatura**: sempre registrado como transferência.
-- Reconhecido como perna de transferência, pagamento informado pelo banco, ou descrição conhecida.
-- Nunca reduz o total — conta só em **Pago** (paid), com ícone próprio e o rótulo **Pagamento**.
-- Pagamento duplicado do banco: marcado automaticamente **Ignorada** (ignored).
-- Qualquer outro crédito (ex.: estorno): reduz o total normalmente.
-- Correção manual: nunca desfeita por uma sincronização seguinte.
+- **Pagar fatura** sempre registra uma transferência.
+- Nunca reduz o total: conta só em **Pago**, com o rótulo **Pagamento**.
+- Pagamento duplicado do banco: marcado **Ignorada** (ignored) automaticamente.
+- Outro crédito (ex.: estorno): reduz o total normalmente.
+- Correção manual nunca é desfeita por uma sincronização.
 
 ## Compras parceladas
 
-- Conta, valor, data e tipo de cada parcela ficam travados depois que ela existe.
-- Descrição e categoria: editáveis, só nas ainda não lançadas.
-- Excluir qualquer parcela exclui o parcelamento inteiro.
-- Cancelar remove só as parcelas ainda projetadas.
+- Conta, valor, data e tipo da parcela ficam travados depois de criada.
+- Descrição e categoria: editáveis só nas ainda não lançadas.
+- Excluir uma parcela exclui o parcelamento inteiro; cancelar remove só as ainda projetadas.
 
 ## Limite usado e disponível
 
-- Cartão conectado e sincronizado: usado e disponível vêm direto do banco.
-- Caso contrário: calculados localmente, a partir do limite cadastrado e dos lançamentos do cartão.
-- Parcelas futuras ainda não lançadas: aparecem separadas como **Parcelas futuras**, sem entrar no limite usado.
+- Cartão conectado e sincronizado: usado e disponível vêm do banco.
+- Senão: calculados do limite cadastrado e dos lançamentos.
+- **Parcelas futuras** ainda não lançadas aparecem separadas, fora do limite usado.
