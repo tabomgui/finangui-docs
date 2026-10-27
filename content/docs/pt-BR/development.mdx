@@ -3,18 +3,18 @@ title: Desenvolvimento
 description: Rode o finangui localmente com Docker para desenvolvimento, e os targets do make que cobrem o dia a dia.
 ---
 
-O finangui roda inteiro em Docker, orquestrado por um `Makefile` na raiz do repositório.
+O finangui roda em Docker, via um `Makefile`.
 
 ## Requisitos
 
 - Docker
 - Make
 
-## Subindo a stack
+## Configuração
 
 <Steps>
 <Step>
-### Crie o arquivo de ambiente do backend
+### Crie o env do backend
 
 ```bash
 cp backend/.env.example backend/.env
@@ -28,7 +28,7 @@ cp backend/.env.example backend/.env
 make up
 ```
 
-Sobe a stack nas portas padrão (troque com `BACKEND_PORT`/`FRONTEND_PORT`).
+Portas: `BACKEND_PORT`/`FRONTEND_PORT`.
 </Step>
 
 <Step>
@@ -37,24 +37,20 @@ Sobe a stack nas portas padrão (troque com `BACKEND_PORT`/`FRONTEND_PORT`).
 ```bash
 make art c="key:generate"
 ```
-
-`make art` roda qualquer comando `php artisan` dentro do container do backend.
 </Step>
 
 <Step>
-### Migre e crie um usuário de desenvolvimento
+### Migre e crie usuário de dev
 
 ```bash
 make fresh
 ```
-
-Cria um usuário de desenvolvimento: `dev@finangui.test` / `password`.
 </Step>
 </Steps>
 
-Documentação interativa da API (Scramble): `http://localhost:8001/docs/api`, enquanto `APP_ENV=local`.
+Docs da API (Scramble): `http://localhost:8001/docs/api` (`APP_ENV=local`).
 
-## Targets do make no dia a dia
+## Targets do make
 
 | Target | O que faz |
 | --- | --- |
@@ -68,12 +64,11 @@ Documentação interativa da API (Scramble): `http://localhost:8001/docs/api`, e
 | `make front-check` | Roda lint, typecheck e a suíte de testes do frontend. |
 
 <Callout type="warn">
-  `make test` precisa do banco `finangui_test`, criado por `docker/postgres/init.sql` na primeira inicialização do volume. Volume mais antigo: crie à mão com `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` precisa do banco `finangui_test`. Senão: `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-- `npm install` no host mantém o editor e as ferramentas de TS em dia.
-- Reconstrua a imagem do frontend (ou a do backend, após mudança em `docker/php/**`) quando as dependências mudarem — só reiniciar não basta.
+- `npm install` no host para o editor/TS; reconstrua as imagens a cada mudança de dependência — reiniciar não basta.
 
 ## Contribuindo
 
-Repositório público no GitHub, fluxo padrão de fork/branch/PR. As convenções vivem no `CLAUDE.md` do próprio repositório — a fonte da verdade.
+Repositório no GitHub, fork/branch/PR. As convenções vivem no `CLAUDE.md`.

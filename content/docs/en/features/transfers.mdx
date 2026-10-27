@@ -3,20 +3,20 @@ title: Transfers
 description: How finangui detects, suggests, links, and unlinks transfers between your own accounts.
 ---
 
-A transfer is money moving between two of your own accounts — an outflow and an inflow linked as one movement. Linked legs never get a category, rule, or history match.
+A transfer is money moving between your own accounts — linked outflow and inflow legs. Linked legs never get a category, rule, or history match.
 
 ![A transfer suggestion](/screenshots/transfers.png)
 
 ## Automatic detection
 
-- Runs after every import and bank sync, on entries within 2 days of each other.
+- Runs after every import and sync, on entries within 2 days of each other.
 - Also runs on demand, over the last 90 days, from **Transferências encontradas** (Transfers found) (`/transferencias/sugestoes`) via **Procurar agora** (Search now).
 - Scored by date proximity, a clue in description/account name, and a credit-card inflow.
 - A uniquely clear match links automatically; weaker ones become a suggestion (max two per entry).
 
 ## Reviewing suggestions
 
-Suggestions show on **Transferências encontradas**, linked from the **Pendências** (Pending) card on Início.
+Suggestions show on **Transferências encontradas**, via the **Pendências** (Pending) card on Início.
 
 - **Juntar** (Join) — links the two legs.
 - **Não é transferência** (Not a transfer) — dismisses it; both stay regular.
@@ -27,14 +27,14 @@ Select two entries and use **Juntar como transferência** (Join as transfer) —
 
 ## Unlinking a transfer
 
-**Desfazer transferência** (Undo transfer), from either leg's detail screen, splits the legs back into regular, uncategorized entries.
+**Desfazer transferência** (Undo transfer), from either leg's detail, splits the legs into regular, uncategorized entries.
 
 <Callout type="info">
-  An explicit undo is remembered, so detection won't re-link that pair. An automatic unlink instead tries to recategorize the leg that lost its category.
+  An explicit undo blocks re-detection of that pair. An automatic unlink instead tries to recategorize the leg that lost its category.
 </Callout>
 
 ## Deleting a leg that came from your bank
 
-Deleting one leg never deletes both: finangui unlinks the pair first, then deletes the one you asked for. Same when reverting an import or cleaning up pending bank entries.
+Deleting a leg never deletes both: finangui unlinks the pair, then deletes the one you asked for — same for reverting an import or clearing pending bank entries.
 
 See also [Imports](/docs/features/imports) and [Banking](/docs/features/banking).

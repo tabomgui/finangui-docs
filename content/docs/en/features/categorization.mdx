@@ -3,22 +3,22 @@ title: Categorization
 description: How transactions get a category automatically, and how the Categorizar screen clears a backlog of uncategorized entries in bulk.
 ---
 
-Every transaction ends up with a category. finangui tries, in order:
+Every transaction gets a category. finangui tries, in order:
 
-1. A matching **rule** — an amount condition looks at the installment's own amount, never the purchase total.
+1. A matching **rule** — an amount condition looks at the installment amount, never the purchase total.
 2. A **history-based suggestion**, when no rule matches.
 3. The bank's reported category, matched by name — only for [Banking](/docs/features/banking)-synced transactions.
 
-Recorded in `categorized_by`: `manual`, `history`, `pluggy`, or `rule:{id}`. Transfer legs are never touched by rules or history.
+Recorded in `categorized_by`: `manual`, `history`, `pluggy`, or `rule:{id}`. Transfer legs: never touched.
 
-Unresolved entries land on **Categorizar** (Categorize) — linked from the **Pendências** card on Início and from Transações.
+Unresolved entries land on **Categorizar** (Categorize) — linked from **Pendências** on Início and from Transações.
 
 ![The Categorizar screen](/screenshots/categorize.png)
 
-## What lands on Categorizar
+## What lands here
 
 - Already-posted, uncategorized entries from every account, cards included.
-- Never: projected entries, transfers, ignored entries, statement payments, archived-account entries.
+- Never: projected, transfers, ignored entries, statement payments, archived-account entries.
 
 ## Grouped by counterparty
 
@@ -28,7 +28,7 @@ Unresolved entries land on **Categorizar** (Categorize) — linked from the **Pe
 
 ## Selecting and applying
 
-- Header checkbox selects the whole group; opening it lets you check entries individually.
+- Header checkbox selects the whole group; open it to check entries individually.
 - Mixed-direction group: **só saídas**/**só entradas** select just one side.
 - Multiple groups selectable at once.
 - Strong-enough history on a same-direction group: one-click suggestion.
@@ -47,12 +47,12 @@ Confirm — selected entries get the category right away.
 </Step>
 </Steps>
 
-## The rule created on apply
+## The rule created
 
-- Applying a category creates a rule by default, for future similar entries.
+- Applying a category creates a rule by default, for similar future entries.
 - Shape: one alternative per checked group — "original description contains `<group name>`" AND "type equals" your selection's direction.
 - Named "`<group>` → `<category>`"; shows up on **Regras** (Rules).
-- Shows how many other pending entries it already matches, with a checkbox to apply it there too — synchronous, same transaction.
+- Shows how many pending entries it already matches, with a checkbox to apply it there too, same transaction.
 
 ![The Regras screen](/screenshots/rules.png)
 

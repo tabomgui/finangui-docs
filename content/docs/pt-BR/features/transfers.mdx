@@ -3,20 +3,20 @@ title: Transferências
 description: Como o finangui detecta, sugere, liga e desliga transferências entre as suas próprias contas.
 ---
 
-Uma transferência é dinheiro que se move entre duas contas suas — uma saída e uma entrada ligadas como um só movimento. Pernas ligadas nunca recebem categoria, regra ou histórico.
+Uma transferência é dinheiro que se move entre contas suas — pernas de saída e entrada ligadas. Pernas ligadas nunca recebem categoria, regra ou histórico.
 
 ![Uma sugestão de transferência](/screenshots/transfers.png)
 
 ## Detecção automática
 
-- Roda depois de cada importação e sincronização, nos lançamentos com até 2 dias de diferença.
+- Roda depois de cada importação e sincronização, nos lançamentos com até 2 dias entre si.
 - Também roda a qualquer momento, nos últimos 90 dias, em **Transferências encontradas** (transfers found) (`/transferencias/sugestoes`) pelo **Procurar agora** (search now).
 - Pontuada pela proximidade de data, uma pista na descrição/nome da conta, e entrada num cartão de crédito.
 - Um par único e claro liga na hora; os demais viram sugestão (no máximo duas por lançamento).
 
 ## Revisando sugestões
 
-Sugestões aparecem em **Transferências encontradas**, linkada pelo card **Pendências** (pending) da Início.
+Sugestões aparecem em **Transferências encontradas**, via o card **Pendências** (pending) da Início.
 
 - **Juntar** (join) — liga as duas pernas.
 - **Não é transferência** (not a transfer) — descarta; os dois continuam comuns.
@@ -30,11 +30,11 @@ Selecione dois lançamentos e use **Juntar como transferência** (join as transf
 **Desfazer transferência** (undo transfer), na tela de detalhe de qualquer perna, separa as pernas em lançamentos comuns, sem categoria.
 
 <Callout type="info">
-  Um desfazer explícito é lembrado, para a detecção não ligar o par de novo. Um desligamento automático tenta recategorizar a perna que ficou sem categoria.
+  Um desfazer explícito bloqueia a detecção ligar o par de novo. Um desligamento automático tenta recategorizar a perna que ficou sem categoria.
 </Callout>
 
 ## Excluindo uma perna que veio do banco
 
-Excluir uma perna nunca exclui as duas: o finangui desliga o par primeiro, e só então exclui a pedida. O mesmo vale ao reverter uma importação ou limpar pendentes do banco.
+Excluir uma perna nunca exclui as duas: o finangui desliga o par, depois exclui a pedida — vale também ao reverter uma importação ou limpar pendentes do banco.
 
 Veja também [Importação](/docs/features/imports) e [Conexão bancária](/docs/features/banking).

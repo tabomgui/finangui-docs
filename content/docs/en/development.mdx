@@ -3,18 +3,18 @@ title: Development
 description: Run finangui locally with Docker for development, and the make targets that cover the day-to-day workflow.
 ---
 
-finangui runs in Docker, via a `Makefile` at the repo root.
+finangui runs in Docker, via a `Makefile`.
 
 ## Requirements
 
 - Docker
 - Make
 
-## Starting the stack
+## Setup
 
 <Steps>
 <Step>
-### Create the backend env file
+### Create backend env file
 
 ```bash
 cp backend/.env.example backend/.env
@@ -22,7 +22,7 @@ cp backend/.env.example backend/.env
 </Step>
 
 <Step>
-### Start the containers
+### Start containers
 
 ```bash
 make up
@@ -32,7 +32,7 @@ Ports: `BACKEND_PORT`/`FRONTEND_PORT`.
 </Step>
 
 <Step>
-### Generate the app key
+### Generate app key
 
 ```bash
 make art c="key:generate"
@@ -40,7 +40,7 @@ make art c="key:generate"
 </Step>
 
 <Step>
-### Migrate and seed a dev user
+### Migrate and seed dev user
 
 ```bash
 make fresh
@@ -48,9 +48,9 @@ make fresh
 </Step>
 </Steps>
 
-API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_ENV=local`.
+API docs (Scramble): `http://localhost:8001/docs/api` (`APP_ENV=local`).
 
-## Day-to-day make targets
+## Make targets
 
 | Target | What it does |
 | --- | --- |
@@ -64,11 +64,11 @@ API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_ENV=local`.
 | `make front-check` | Runs the frontend's lint, typecheck and test suite. |
 
 <Callout type="warn">
-  `make test` needs `finangui_test`. Missing (older volume): `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` needs `finangui_test`. Otherwise: `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-- `npm install` on the host for editor/TS; rebuild images on a dependency change — restart alone isn't enough.
+- `npm install` on the host for editor/TS; rebuild images on dependency change — restart isn't enough.
 
 ## Contributing
 
-Public GitHub repo, fork/branch/PR. Conventions live in `CLAUDE.md`.
+GitHub repo, fork/branch/PR. Conventions live in `CLAUDE.md`.
