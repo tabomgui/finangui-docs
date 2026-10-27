@@ -3,7 +3,7 @@ title: Imports
 description: How to upload a bank statement file, review exactly what finangui will do with each line before anything is saved, and revert an import if needed.
 ---
 
-The **Importar extrato** (Import statement) screen (`/importar`) brings a bank statement file into finangui. Nothing is saved until you review and confirm a preview.
+**Importar extrato** (Import statement) (`/importar`) imports a statement file. Nothing saves until you confirm a preview.
 
 ![The import statement screen](/screenshots/imports.png)
 
@@ -11,32 +11,29 @@ The **Importar extrato** (Import statement) screen (`/importar`) brings a bank s
 
 <Tabs items={['Inter', 'Nubank', 'C6', 'OFX']}>
 <Tab value="Inter">
-CSV export of an Inter checking account statement.
+CSV export of an Inter statement.
 </Tab>
 <Tab value="Nubank">
-Two CSV formats: **Nubank (conta)** for checking, **Nubank (cartão)** (Nubank card) for credit card.
+Two formats: **Nubank (conta)** (checking) and **Nubank (cartão)** (card).
 </Tab>
 <Tab value="C6">
-CSV export of a C6 checking account statement.
+CSV export of a C6 statement.
 </Tab>
 <Tab value="OFX">
-A generic OFX file, for banks without a dedicated CSV format above.
+A generic OFX file, for other banks.
 </Tab>
 </Tabs>
 
-Export the statement from your bank, then upload it. **Detectar automaticamente** (detect automatically) picks the format for you.
-
 ## Uploading a file
 
+- Export the statement from your bank; **Detectar automaticamente** (detect automatically) picks the format.
 - **Conta** (Account) the statement belongs to.
 - File: `.csv`, `.ofx`, or `.txt`, up to 2 MB.
-- Submitting opens the **Prévia da importação** (Import preview) screen.
+- Opens the **Prévia da importação** (Import preview) screen.
 
 ## Preview before anything is saved
 
 ![Preview with imported rows](/screenshots/imports-preview.png)
-
-Each line gets a label:
 
 - **Nova** (New) — not seen before.
 - **Já importada** (Already imported) — locked in, can't deselect.
@@ -44,26 +41,26 @@ Each line gets a label:
 - **Substitui parcela prevista** (Replaces projected installment) — real replaces projected.
 - **Casa com lançamento manual** (Matches manual entry) — adopts your manual entry.
 - **Confirma pendente** (Confirms pending) — replaces an unconfirmed entry.
-
-Every actionable row has a checkbox, checked by default. Unparseable lines show up separately, with the reason.
+- Checkbox per row, checked by default.
+- Unparseable lines show separately, with reason.
 
 ## Confirming
 
-- Button label shows how many entries are checked.
-- Confirming re-checks the matching from scratch.
-- The whole batch commits as one unit — all or nothing.
-- **Cancelar** (Cancel) discards the batch.
+- Button shows how many are checked.
+- Rechecks matching from scratch.
+- Batch commits as one unit — all or nothing.
+- **Cancelar** (Cancel) discards it.
 
 ## Reverting an import
 
-- Only the most recently completed import per account can be reverted.
-- **Reverter** (Revert), on the **Importações recentes** (Recent imports) card, deletes what it created and restores what it matched or updated.
+- Only the latest completed import per account can be reverted.
+- **Reverter** (Revert), on **Importações recentes** (Recent imports), deletes created entries and restores matched ones.
 
 <Callout type="warn">
-  A manual edit made after the import, to a field the import touched, gets overwritten too.
+  A manual edit to a touched field is overwritten too.
 </Callout>
 
 ## Categorization and transfers
 
-- Imported entries get the same automatic categorization as manual ones (rule, then history). See [Categorization](/docs/features/categorization).
-- Transfer detection runs right after confirmation. See [Transfers](/docs/features/transfers).
+- Same automatic categorization as manual entries (rule, then history). See [Categorization](/docs/features/categorization).
+- Transfer detection runs after confirmation. See [Transfers](/docs/features/transfers).

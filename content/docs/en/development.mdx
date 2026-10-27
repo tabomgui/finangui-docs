@@ -3,7 +3,7 @@ title: Development
 description: Run finangui locally with Docker for development, and the make targets that cover the day-to-day workflow.
 ---
 
-finangui runs entirely in Docker, driven through a `Makefile` at the repository root.
+finangui runs entirely in Docker, via a `Makefile` at the repo root.
 
 ## Requirements
 
@@ -28,7 +28,7 @@ cp backend/.env.example backend/.env
 make up
 ```
 
-Starts the stack on its default ports (override with `BACKEND_PORT`/`FRONTEND_PORT`).
+Override ports with `BACKEND_PORT`/`FRONTEND_PORT`.
 </Step>
 
 <Step>
@@ -37,8 +37,6 @@ Starts the stack on its default ports (override with `BACKEND_PORT`/`FRONTEND_PO
 ```bash
 make art c="key:generate"
 ```
-
-`make art` runs any `php artisan` command inside the backend container.
 </Step>
 
 <Step>
@@ -47,12 +45,10 @@ make art c="key:generate"
 ```bash
 make fresh
 ```
-
-Creates a dev user: `dev@finangui.test` / `password`.
 </Step>
 </Steps>
 
-Interactive API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_ENV=local`.
+API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_ENV=local`.
 
 ## Day-to-day make targets
 
@@ -68,12 +64,11 @@ Interactive API docs (Scramble): `http://localhost:8001/docs/api`, while `APP_EN
 | `make front-check` | Runs the frontend's lint, typecheck and test suite. |
 
 <Callout type="warn">
-  `make test` needs the `finangui_test` database, created by `docker/postgres/init.sql` on first volume init. Older volume: create it by hand with `docker compose exec db createdb -U finangui finangui_test`.
+  `make test` needs `finangui_test`, auto-created by `docker/postgres/init.sql`; older volume: `docker compose exec db createdb -U finangui finangui_test`.
 </Callout>
 
-- `npm install` on the host keeps editor/TS tooling in sync.
-- Rebuild the frontend's image (or the backend's, after a `docker/php/**` change) when dependencies change — a restart alone won't do it.
+- `npm install` on the host for editor/TS tooling; rebuild images after a dependency change — a restart isn't enough.
 
 ## Contributing
 
-Public GitHub repository, standard fork/branch/PR flow. Conventions live in the repository's own `CLAUDE.md` — the source of truth.
+Public GitHub repo, fork/branch/PR flow. Conventions live in the repo's `CLAUDE.md`.

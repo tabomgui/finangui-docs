@@ -10,18 +10,18 @@ Uma conta guarda ou faz passar dinheiro:
 - **Dinheiro** (cash)
 - **Cartão de crédito** (credit card)
 
-Todo lançamento pertence a uma conta. Saldo: sempre calculado pelo backend, nunca digitado à mão ou calculado no frontend.
+Todo lançamento pertence a uma conta. Saldo: sempre calculado pelo backend, nunca digitado à mão.
 
 As contas ficam em **Contas** (Accounts).
 
-- Conta manual: criar, editar, arquivar ou excluir ali.
-- Conta vinculada por Banking: agrupada sob a conexão; nome, cor, ícone e campos de cartão ainda editáveis ali; desconectar só por [Banking](/docs/features/banking).
+- Manual: criar, editar, arquivar ou excluir ali.
+- Vinculada por [Banking](/docs/features/banking): agrupada sob a conexão; nome/cor/ícone/campos de cartão editáveis; desconectar só por Banking.
 
 ## Como o saldo é calculado
 
 Saldo = saldo inicial + todo lançamento lançado (`posted`) não ignorado até hoje (fuso do app).
 
-- Aparece em todo lugar onde um saldo é mostrado: Início, lista de contas, progresso das metas, cartões de conexão.
+- Usado em todo lugar: Início, lista de contas, progresso das metas, cartões de conexão.
 - Lançamento com data futura: aparece no histórico, não entra no saldo ainda.
 
 <Callout type="info">
@@ -32,14 +32,14 @@ Saldo = saldo inicial + todo lançamento lançado (`posted`) não ignorado até 
 
 Para uma conta vinculada por **Banking** (que não seja cartão):
 
-- Ancora no saldo informado pelo banco na última sincronização, mais os lançamentos datados depois daquele dia.
-- Lançamento manual no dia da última sincronização ou antes: espera a próxima sincronização.
-- **Pelos lançamentos** (By the entries): saldo calculado só pelo razão próprio, referente a hoje, só para comparação — nunca o saldo real.
+- Ancora no saldo do banco na última sincronização, mais lançamentos datados depois daquele dia.
+- Lançamento manual no dia da sincronização ou antes: espera a próxima.
+- **Pelos lançamentos** (By the entries): saldo do razão próprio, hoje, só para comparação — nunca o real.
 
 ## Conta de cartão de crédito sempre usa o razão completo
 
-Uma conta de **Cartão de crédito** não tem corte "até hoje" — o saldo é sempre o razão histórico completo, uma dívida em andamento, não uma fotografia de um momento. Detalhes de fatura: [Cartões](/docs/features/cards).
+Uma conta de **Cartão de crédito** não tem corte "até hoje" — o saldo é sempre o razão histórico completo. Detalhes de fatura: [Cartões](/docs/features/cards).
 
 ## A dívida de cartão não entra no total da Início
 
-O saldo total da Início soma só as contas que não são de cartão. A dívida de cartão aparece separadamente, no card de Cartões ("Faturas").
+O saldo total da Início soma só contas que não são de cartão. A dívida de cartão aparece no card de Cartões ("Faturas").

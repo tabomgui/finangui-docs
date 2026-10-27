@@ -3,7 +3,7 @@ title: Importação
 description: Como enviar um arquivo de extrato bancário, revisar exatamente o que o finangui vai fazer com cada linha antes de qualquer gravação, e reverter uma importação se precisar.
 ---
 
-A tela **Importar extrato** (import statement) (`/importar`) traz um arquivo de extrato bancário para dentro do finangui. Nada é gravado até você revisar e confirmar uma prévia.
+**Importar extrato** (import statement) (`/importar`) importa um arquivo de extrato. Nada é gravado até você confirmar uma prévia.
 
 ![Tela de importar extrato](/screenshots/imports.png)
 
@@ -11,59 +11,56 @@ A tela **Importar extrato** (import statement) (`/importar`) traz um arquivo de 
 
 <Tabs items={['Inter', 'Nubank', 'C6', 'OFX']}>
 <Tab value="Inter">
-Exportação em CSV de um extrato de conta do Inter.
+Exportação em CSV de um extrato do Inter.
 </Tab>
 <Tab value="Nubank">
-Dois formatos de CSV: **Nubank (conta)** para a conta, **Nubank (cartão)** (Nubank card) para a fatura do cartão.
+Dois formatos: **Nubank (conta)** (checking) e **Nubank (cartão)** (card).
 </Tab>
 <Tab value="C6">
-Exportação em CSV de um extrato de conta do C6.
+Exportação em CSV de um extrato do C6.
 </Tab>
 <Tab value="OFX">
-Um arquivo OFX genérico, para bancos sem um formato de CSV dedicado como os acima.
+Um arquivo OFX genérico, para outros bancos.
 </Tab>
 </Tabs>
 
-Exporte o extrato no app do seu banco e envie aqui. **Detectar automaticamente** (detect automatically) descobre o formato por você.
-
 ## Enviando um arquivo
 
+- Exporte o extrato; **Detectar automaticamente** (detect automatically) descobre o formato.
 - **Conta** (account) a que o extrato pertence.
 - Arquivo: `.csv`, `.ofx` ou `.txt`, até 2 MB.
-- Enviar abre a tela **Prévia da importação** (import preview).
+- Abre a tela **Prévia da importação** (import preview).
 
 ## Prévia antes de qualquer gravação
 
 ![Prévia com linhas importadas](/screenshots/imports-preview.png)
-
-Cada linha recebe um rótulo:
 
 - **Nova** (new) — lançamento ainda não visto.
 - **Já importada** (already imported) — travada, não pode desmarcar.
 - **Atualiza** (updates) — atualiza um lançamento existente.
 - **Substitui parcela prevista** (replaces projected installment) — a real troca a prevista.
 - **Casa com lançamento manual** (matches manual entry) — adota seu lançamento manual.
-- **Confirma pendente** (confirms pending) — substitui um lançamento ainda não confirmado.
-
-Toda linha acionável tem uma caixa de marcação, marcada por padrão. Linhas que o arquivo não conseguiu ler aparecem separadamente, com o motivo.
+- **Confirma pendente** (confirms pending) — substitui um pendente não confirmado.
+- Caixa de marcação por linha, marcada por padrão.
+- Linhas não lidas aparecem separadamente, com o motivo.
 
 ## Confirmando
 
-- O botão mostra quantos lançamentos estão marcados.
-- Confirmar reavalia o casamento do zero.
-- O lote inteiro é gravado como uma única unidade — tudo ou nada.
+- Botão mostra quantos estão marcados.
+- Reavalia o casamento do zero.
+- Lote é gravado como uma única unidade — tudo ou nada.
 - **Cancelar** (cancel) descarta o lote.
 
 ## Revertendo uma importação
 
-- Só a importação mais recente de cada conta pode ser revertida.
-- **Reverter** (revert), no card **Importações recentes** (recent imports), exclui o que ela criou e restaura o que ela casou ou atualizou.
+- Só a importação mais recente de cada conta é revertível.
+- **Reverter** (revert), em **Importações recentes** (recent imports), exclui o que criou e restaura o que casou.
 
 <Callout type="warn">
-  Uma edição manual feita depois da importação, num campo que ela tocou, também é sobrescrita.
+  Uma edição manual num campo tocado pela importação também é sobrescrita.
 </Callout>
 
 ## Categorização e transferências
 
-- Lançamentos importados passam pela mesma categorização automática (regra, depois histórico). Veja [Categorização](/docs/features/categorization).
-- A detecção de transferências roda logo após a confirmação. Veja [Transferências](/docs/features/transfers).
+- Mesma categorização automática dos lançamentos manuais (regra, depois histórico). Veja [Categorização](/docs/features/categorization).
+- A detecção de transferências roda após a confirmação. Veja [Transferências](/docs/features/transfers).

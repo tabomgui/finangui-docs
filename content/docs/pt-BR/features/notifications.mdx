@@ -3,20 +3,20 @@ title: Notificações
 description: Como o finangui avisa sobre faturas, orçamentos, recorrências atrasadas e conexões bancárias que precisam de atenção.
 ---
 
-O ícone de sino mostra coisas que o finangui considera importante — uma folha (sheet) no celular, um popover no desktop. Clicar leva direto para a tela correspondente.
+Sino: o que precisa de atenção — folha (sheet) no celular, popover no desktop. Clicar abre a tela.
 
 ## Os quatro tipos de alerta
 
-- **Fatura vencendo** (invoice due) — uma fatura se aproximando do vencimento. Veja [Cartões](/docs/features/cards).
-- **Orçamento estourado** (budget exceeded) — uma categoria acima do limite mensal. Veja [Orçamento](/docs/features/budgets).
-- **Lançamentos pendentes** (pending entries) — uma recorrência atrasada e não confirmada. Veja [Recorrências](/docs/features/recurrences).
-- **Reconexão necessária** (reconnection needed) — uma conexão precisa de credenciais atualizadas. Veja [Integração bancária](/docs/features/banking).
+- **Fatura vencendo** (invoice due) — fatura perto do vencimento ([Cartões](/docs/features/cards)).
+- **Orçamento estourado** (budget exceeded) — categoria acima do limite ([Orçamento](/docs/features/budgets)).
+- **Lançamentos pendentes** (pending entries) — recorrência atrasada não confirmada ([Recorrências](/docs/features/recurrences)).
+- **Reconexão necessária** (reconnection needed) — precisa de credenciais novas ([Integração bancária](/docs/features/banking)).
 
 <Callout type="info">
-  Os três primeiros são checados uma vez por dia, um resumo por tipo. A reconexão dispara na hora, durante uma sincronização.
+  Três primeiros: uma vez por dia, um resumo cada. Reconexão dispara na hora, durante a sincronização.
 </Callout>
 
 ## Deduplicação e limpeza
 
-- O mesmo alerta nunca dispara duas vezes para a mesma coisa.
+- O mesmo alerta nunca se repete.
 - Notificações lidas com mais de 90 dias são apagadas automaticamente.

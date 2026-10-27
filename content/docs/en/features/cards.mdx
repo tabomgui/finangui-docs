@@ -3,26 +3,26 @@ title: Cards
 description: How finangui tracks credit card statements, payments, installment purchases and the limit you have left to spend.
 ---
 
-A **Cartão de crédito** (credit card) is an account like any other — manual or linked through [Banking](/docs/features/banking) — with the same full-ledger balance rule as [Accounts](/docs/features/accounts): no "as of today" cutoff.
+A **Cartão de crédito** (credit card) is an account — manual or [Banking](/docs/features/banking)-linked — with the full-ledger rule from [Accounts](/docs/features/accounts): no "as of today" cutoff.
 
 ![A card statement](/screenshots/cards.png)
 
 ## Statements open, close and come due on their own
 
-- Every purchase is assigned to a statement automatically, on create or edit — never picked by hand.
-- Connected card: finangui rechecks the closing/due day on every sync, using the most common day among the bank's 3 latest statements.
-- A statement already recorded keeps its own dates.
-- **Editar datas** (edit dates): edit closing date, due date and reported total by hand — never moves a transaction to another statement.
+- Every purchase gets a statement automatically — never picked by hand.
+- Connected card: closing/due day rechecked each sync, using the 3 latest statements' most common day.
+- A recorded statement never has its dates rewritten.
+- **Editar datas** (edit dates): closing, due date and reported total, by hand — never moves a transaction.
 
 ## Total, reported total and computed total
 
 - **Total da fatura**, **Pago** (paid), **Restante** (remaining): always computed, never typed in.
-- Once closed, the bank's reported total (when there is one) is the headline number.
-- finangui also computes its own total (outflows minus refunds, excluding payments) to compare.
-- Status: **Aberta** (open), **Fechada** (closed), **Paga em parte** (partial), **Paga** (paid), or **Vencida** (overdue) past due, with a countdown like "Vence em 3 dias".
+- Closed: bank's reported total, if any, is the headline number.
+- finangui's own total (outflows minus refunds, no payments) is kept for comparison.
+- Status: **Aberta** (open), **Fechada** (closed), **Paga em parte** (partial), **Paga** (paid), **Vencida** (overdue) — with a "Vence em 3 dias" countdown.
 
 <Callout type="info">
-  Totals disagree: a divergence warning. Cycle starts before the oldest synced transaction: a neutral "incomplete" note instead — Open Finance shares only ~12 months of history.
+  Totals disagree: a divergence warning. Cycle starts before the oldest synced transaction: a neutral "incomplete" note instead.
 </Callout>
 
 ## Paying a statement is a transfer, never an expense
@@ -30,21 +30,21 @@ A **Cartão de crédito** (credit card) is an account like any other — manual 
 ![The pay-statement dialog](/screenshots/cards-pay.png)
 
 - **Pagar fatura**: always a transfer.
-- Recognized as a payment when it's one leg of a transfer, matches a bank-reported payment, or matches a known payment description.
+- Recognized when it's a transfer leg, matches a bank-reported payment, or matches a known description.
 - Never reduces the total — counts only under **Pago**, with its own icon and **Pagamento** label.
 - Duplicate bank-reported payment: auto-marked **Ignorada** (ignored).
-- Any other credit, like a refund, reduces the total normally.
-- Manually recognized or corrected payment: never undone by a later sync.
+- Any other credit (e.g. a refund) reduces the total normally.
+- A manual fix is never undone by a later sync.
 
 ## Installment purchases
 
 - Account, amount, date and type lock once an installment exists.
-- Description and category can still change, only on installments not yet posted.
+- Description and category can still change, only if not yet posted.
 - Deleting any installment deletes the whole plan.
 - Canceling a plan removes only the still-projected installments.
 
 ## Limit used and available
 
 - Connected and synced: used/available limit come straight from the bank.
-- Otherwise: calculated locally, from the registered limit and the card's transactions.
-- Future installments not yet posted: shown separately as **Parcelas futuras**, never counted into used limit.
+- Otherwise: calculated from the registered limit and the card's transactions.
+- Future unposted installments: shown separately as **Parcelas futuras**, never counted as used.

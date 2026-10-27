@@ -3,20 +3,20 @@ title: Notifications
 description: How finangui alerts you about invoices, budgets, overdue recurrences, and bank connections that need attention.
 ---
 
-The bell icon surfaces things finangui thinks you should know — a sheet on mobile, a popover on desktop. Click takes you to the relevant screen.
+Bell icon: what needs attention — sheet on mobile, popover on desktop. Click opens the screen.
 
 ## The four kinds of alert
 
-- **Fatura vencendo** (Invoice due) — a statement nearing its due date. See [Cards](/docs/features/cards).
-- **Orçamento estourado** (Budget exceeded) — a category over its monthly limit. See [Budgets](/docs/features/budgets).
-- **Lançamentos pendentes** (Pending entries) — an overdue, unconfirmed recurring entry. See [Recurrences](/docs/features/recurrences).
-- **Reconexão necessária** (Reconnection needed) — a connection needs fresh credentials. See [Banking](/docs/features/banking).
+- **Fatura vencendo** (Invoice due) — statement due soon ([Cards](/docs/features/cards)).
+- **Orçamento estourado** (Budget exceeded) — category over its limit ([Budgets](/docs/features/budgets)).
+- **Lançamentos pendentes** (Pending entries) — overdue, unconfirmed recurrence ([Recurrences](/docs/features/recurrences)).
+- **Reconexão necessária** (Reconnection needed) — needs fresh credentials ([Banking](/docs/features/banking)).
 
 <Callout type="info">
-  The first three are checked once a day, one summary per kind. Reconnection fires immediately, during a sync.
+  First three: once daily, one summary each. Reconnection fires immediately, mid-sync.
 </Callout>
 
 ## Deduplication and cleanup
 
-- The same alert never fires twice for the same thing.
+- The same alert never repeats.
 - Read notifications older than 90 days are deleted automatically.

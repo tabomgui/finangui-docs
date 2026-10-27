@@ -10,18 +10,18 @@ An account holds or moves money:
 - **Dinheiro** (cash)
 - **Cartão de crédito** (credit card)
 
-Every entry belongs to one account. Balance: always computed by the backend, never typed in or computed in the frontend.
+Every entry belongs to one account. Balance: always computed by the backend, never typed in.
 
 Accounts live under **Contas** (Accounts).
 
-- Manual account: create, edit, archive or delete here.
-- Banking-linked account: grouped under its connection; name, color, icon, card fields still editable; disconnect only from [Banking](/docs/features/banking).
+- Manual: create, edit, archive or delete here.
+- [Banking](/docs/features/banking)-linked: grouped under its connection; name/color/icon/card fields editable; disconnect only from Banking.
 
 ## How the balance is computed
 
 Balance = opening balance + every non-ignored posted entry up to today (app timezone).
 
-- Shows everywhere a balance appears: Início, accounts list, goal progress, connection cards.
+- Used everywhere: Início, accounts list, goal progress, connection cards.
 - Future-dated entry: shows in history, doesn't move the balance yet.
 
 <Callout type="info">
@@ -38,7 +38,7 @@ For a non-card account linked through **Banking**:
 
 ## Credit card accounts always use the full ledger
 
-A **Cartão de crédito** has no "as of today" cutoff — balance is the full historical ledger, a running debt rather than a snapshot. Statement details: [Cards](/docs/features/cards).
+A **Cartão de crédito** has no "as of today" cutoff — balance is always the full historical ledger. Statement details: [Cards](/docs/features/cards).
 
 ## Credit card debt isn't in the Início total
 
